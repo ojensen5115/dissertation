@@ -1,0 +1,12 @@
+# Current CC Protocol
+msc {
+ arcgradient = 0;
+
+
+ a [label=""],b [label="Point of Sale"],c [label=""];
+
+ b=>c [label="solicitation"];
+ c=>b [label="card information\n(28 digits, bank name)"];
+ b=>a [label="charge request\n(28 digits, $)"];
+ a=>b [label="approve?\n(Y / N)"];
+}

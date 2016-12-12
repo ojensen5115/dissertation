@@ -1,0 +1,19 @@
+\section{Additional Goals}
+\label{sec:goals-other}
+
+In addition to the three primary goals of unlinkability, use of any card, and use of existing infrastructure,
+    two additional goals are desirable.
+
+\subsection{Offline Payments}
+\label{sec:goals-offline}
+Smart phones typically spend much of their time connected to the Internet.
+Indeed, the ability to communicate with hosts on the Internet will prove useful in our protocol construction.
+
+However, a customer may wish to perform payment transactions when a connection to the Internet is not available.
+For example, a data connection may not be available in an underground parking garage.
+As such, it is desirable for a payment protocol to support making payments when the Wallet Application has no access to the Internet.
+
+
+\subsection{Resilience to Loss of Synchronization}
+
+I don't think it makes sense to talk about this here.

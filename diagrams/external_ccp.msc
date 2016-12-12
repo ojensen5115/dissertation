@@ -1,0 +1,15 @@
+# Newer CC Protocol
+msc {
+ arcgradient = 0;
+
+ a [label="Bank"],b [label="Point of Sale"],c [label="Card"],d [label="Customer"];
+
+ b=>d [label="price display ($)"];
+ |||;
+ |||;
+ d>>c [label="enable device"];
+ b=>c [label="solicitation\n(ch)"];
+ c=>b [label="charge token\n(ID, T)"];
+ b=>a [label="charge request\n(ch, ID, T, $)"];
+ a=>b [label="approve?\n(Y / N)"];
+}

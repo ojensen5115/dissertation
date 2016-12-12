@@ -1,0 +1,52 @@
+\section{Basic Protocol}
+\label{unlinkable-design-1}
+
+When the Wallet Server receives a Registration message, it stores the card details and generates a random 93 bit \emph{token}.
+This token is sent to the Wallet Application, for use in its next transaction.
+
+When the customer wishes to make a purchase, the Wallet Application selects a registered card and begins listening for Solicitation messages.
+The protocol then operates as follows:
+\begin{enumerate}
+\item The Point of Sale sends a Solicitation message to the Wallet Application over the NFC channel.
+\item The Wallet Application looks up the \emph{token} which was issued for the card selected by the Customer.
+    It then converts the stored 93-bit token into a 28-digit number \emph{k}
+    (note that 28 digits is sufficient to store a 93 bit value: $log_{10}(2^{93}) \approx 27.995$).
+    Finally, it responds with an \emph{NFC} Card Information message.
+    This message has the following fields:
+    \begin{itemize}
+    \item \textbf{Card number:} the first 16 digits of \emph{k}
+    \item \textbf{Expiration date:} the subsequent 4 digits of \emph{k}
+    \item \textbf{iCVV:} the remaining 8 digits of \emph{k}
+    \item \textbf{Bank Name:} the Wallet Server
+   	\end{itemize}
+\item The Point of Sale constructs an \emph{NFC} Charge Request message from the (virtual) Card number, Expiration date, iCVV, and the price it wishes to charge.
+	This message is sent to the bank named in the Card Information message.
+    As a result, the Charge Request essage is directed to the Wallet Server and \emph{not} a bank.
+    Note that from the perspective of the Point of Sale, the Wallet Server appears to be a bank like any other.
+\item The Wallet Server reconstructs \emph{k} from the Carge Request message, and computes the 93-bit token it represents.
+    The Wallet Server then searches its database for this token, to identify the card used in this transaction.
+    If no result is found, the Wallet Server sends a ``declined'' Acceptance message to the Point of Sale, and aborts the protocol.
+	Otherwise, the stored card details are retrieved from the Wallet Server's database.
+    The Wallet Server then sends a \emph{visual} Charge Request to the card's bank, with the following fields:
+    \begin{itemize}
+    \item Cardholder name
+    \item Card number
+    \item Expiration date
+    \item Billing address
+    \end{itemize}
+    Note that unlike the information sent in the Card Information message, this data reflects the actual credit card information.
+\item The Bank receives the \emph{visual} Charge Request from the Wallet Server.
+    The Bank processes this transaction in the same was as it currently does in the Insecure CC Protocol described in Chapter \ref{cha:insecure}.
+    Finally, it responds to the Wallet Server with an Acceptance message indicating whether the charge has been accepted.
+\item The Wallet Server forwards the Bank's Acceptance message to the Point of Sale.
+\end{enumerate}
+
+Note that in this protocol, the Wallet Server has a dual role:
+to the Point of Sale, the Wallet Server appears to be a Bank, while to the Bank, the Wallet Server appears to be a Point of Sale.
+
+This protocol is unlinkable,
+    because the information received by the Point of Sale consists solely of a random value, accompanied by a bank name identifying the Wallet Server.
+Any credit card can be used in this protocol,
+    because the Bank receives \emph{visual} Charge Request messages, and all credit cards support the visual interface.
+Finally, this protocol uses existing infrastructure,
+    in that the behaviors of the Point of Sale and the Bank are unchanged from those of the Insecure CC Protocol.

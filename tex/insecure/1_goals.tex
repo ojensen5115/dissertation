@@ -1,0 +1,25 @@
+\section{Goals}
+\label{sec:insecure-goals}
+
+A credit card payment system has five fundamental principals:
+
+\begin{enumerate}
+\item A \textbf{Customer} who wants to make a purchase.
+\item A \textbf{Bank} at which the Customer has an account.
+\item A \textbf{Credit Card} issued by the Bank to the Customer.
+\item A \textbf{Retailer} from whom the Customer wishes to make the purchase.
+\item A \textbf{Point of Sale} controlled and initialized by the Retailer.
+	It displays the purchase price to the Customer, and communicates with both the Credit Card and its issuing Bank to coordinate the transaction.
+\end{enumerate}
+
+The underlying goal of any credit card payment protocol is to enable the Customer and the Retailer to negotiate a transaction,
+    after which the Customer's Bank debits the appropriate funds from the Customer's account and issues a payment to the Retailer.
+
+Traditional magnetic-stripe credit card systems have been in operation in this space for many years, but they face several important drawbacks:
+    it is easy to accidentally de-magnetize your credit card, and
+    dirty or corroded contacts on the Point of Sale can make even a well-magnetized card difficult to read.
+As a result, it is not at all uncommon for a Retailer to need to swipe a credit card multiple times before a successful read occurs.
+
+The primary goal of the Insecure CC Protocol is to solve these drawbacks by using a contactless (i.e. wireless) communication channel.
+However, due to the reduction of control that a contactless solution presents, this protocol has a secondary goal as well:
+    to prevent a malicious actor from cloning a Credit Card simply by querying its contents.

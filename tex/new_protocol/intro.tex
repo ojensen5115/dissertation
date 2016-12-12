@@ -1,0 +1,35 @@
+In this chapter, we construct the Unlinkable CC Protocol, achieving our three primary goals:
+supporting unlinkabile payments,
+allowing the use of any credit card,
+while using existing Point of Sale infrastructure.
+
+We begin by making several strong assumptions.
+In particular, we assume that:
+\begin{itemize}
+\item the Retailer is not malicious,
+\item the Customer's Wallet Application is constantly connected to the Internet,
+\item no messages between the Point of Sale and the Bank are lost.
+\end{itemize}
+As we refine the protocol, we will erode these assumptions away to yield a secure and resilient protocol.
+
+As foreshadowed in the previous chapter, this protocol will span multiple credit card interfaces.
+In particular, our protocol design will make use of both the \emph{NFC}\footnote{
+	When using the NFC interface, credit cards are authenticated via card number, expiration date, and iCVV.
+} and the \emph{visual}\footnote{
+	When using the visual interface, credit cards are authenticated via cardholder name, card number, and expiration date,
+	optionally accompanied by the CVV2 (the 3-digit number on the back of the card) and/or billing address.
+} interfaces.
+As a result, message names in this chapter will identify the relevant interface where appropriate.
+
+The Unlinkable CC Protocol will assume the exclusive use of Electronic Wallets.
+This is necessary because when using a physical credit card, the customer has no control over the messages sent,
+    and thus cannot alter the protocol.
+Thus, the first step for a customer is to download the Wallet Application and register a credit card.
+
+The card registration process is simple.
+The customer enters the credit card details for the card he wishes to add into the Wallet Application.
+These details consist of the cardholder name, card number, expiration date, and billing address.
+The Wallet Application then sends this data in a Registration message to a new principal: the Wallet Server.
+This Registration message is transmitted securely over the Internet.
+
+The customer may then use any card registered through the Wallet Application to make unlinkable transactions.

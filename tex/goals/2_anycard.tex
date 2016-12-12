@@ -1,0 +1,36 @@
+\section{Use of Any Credit Card}
+\label{sec:goals-anycard}
+
+Few credit cards today support NFC transactions natively.
+As a result, the majority of credit cards available to customers cannot generate valid iCVVs.
+The Unlinkable CC Protocol should allow the use of any credit card, including those for which no valid iCVVs exist.
+
+This matter is complicated by our goal of using existing Point of Sale infrastructure:
+    current Point of Sale devices require an iCVV as part of an NFC Card Information message.
+To get around this, we can leverage the architecture of credit cards themselves.
+
+Each credit card is a collection of independent interfaces.
+The common interfaces seen on credit cards today include:
+
+\begin{itemize}
+\item \textbf{visual}: the data which can be visually read from the card
+\item \textbf{embossed}: the data physically embossed on the card
+\item \textbf{magstripe}: the data encoded on the magnetic strip
+\item \textbf{NFC}: the data and computation involved in contactless payments
+\item \textbf{chip}: the data and computation involved in chip payments
+\end{itemize}
+
+These interfaces operate independently:
+    a transaction involves the use of a single interface, as negotiated by the customer and the retailer.
+The bank accepts a valid Charge Request over any interface supported by the credit card.
+While some cards support a different set of interfaces than others, an important observation is that \emph{every} credit card supports the visual interface.
+
+Making use of NFC communication is desirable for a new credit card protocol,
+    because a smart phone supporting NFC communication enables the customer to send and receive arbitrary messages.
+However, for a charge to be successful, the Bank must receive a Charge Request pertaining to a \emph{non-NFC} interface,
+    due to the lack of valid iCVVs associated with non-NFC credit cards.
+
+These two seemingly contradictory requirements suggest the construction of a tunneled protocol:
+    if we place an entity between the Point of Sale and the Bank, this entity may receive an NFC Charge Request from the Point of Sale,
+    convert it into a Charge Request of another interface (for example, the visual interface),
+    and send this converted Charge Request to the Bank.

@@ -1,0 +1,263 @@
+% TODOs:
+% Transparent  Bridge: rename "malicious device" to "special device"
+
+
+
+\documentclass[12pt]{report}
+\usepackage{utdiss2}
+
+
+%############
+%  PACKAGES
+%############
+
+\usepackage{amsmath,amsthm,amsfonts,amscd} % Math stuff
+\usepackage{boxedminipage}
+%\usepackage{citesort} % Better citations
+\usepackage{epsfig,endnotes} % Better figures?
+\usepackage{enumitem} % Better lists
+\usepackage{float} % Precise positioning of floats
+\restylefloat{table} % "
+\usepackage{graphicx} % Better graphics or something
+\usepackage[hyphens]{url}	% Fancy URLs
+\usepackage[hidelinks]{hyperref} % Better page numbering
+%\usepackage{latexsym} % More symbols
+\usepackage{makeidx} % Package to make an index.
+\usepackage{multirow}
+\usepackage{subcaption} % Captions to subfigures
+\usepackage{tabularx} % Custom table columns
+\usepackage{xcolor} % Color for grumbler
+%\usepackage{verbatim} % Allows quoting source with commands.
+%\usepackage{wrapfig} % Wraps figure
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+% Better URL line breaks...
+\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
+  \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
+  \do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t%
+  \do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D%
+  \do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
+  \do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
+  \do\Y\do\Z}
+
+%##################
+% CUSTOM COMMANDS
+%##################
+
+% User notes
+\newcommand{\grumbler}[2]{\textcolor{red}{\bf #1: #2}}
+\newcommand{\vs}[1]{\grumbler{Vitaly}{#1}}
+\newcommand{\rfm}[1]{\grumbler{Richard}{#1}}
+\newcommand{\jess}[1]{\grumbler{Jess}{#1}}
+\newcommand{\citeme}{\textcolor{blue}{$^{\text{[citation needed]}}$}}
+\newcommand{\todo}[1]{\textcolor{orange}{\large \bf TODO: #1}}
+
+% Bold paragraph headings
+\newcommand{\paragraphbe}[1]{\vspace{0.7ex}\noindent{\bf \em #1} }
+
+% Math
+\newcommand{\getsr}{{\;{\leftarrow{\hspace*{-2pt}\raisebox{.75pt}{$\scriptscriptstyle\$$}}}\;}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Colon}{:\:}
+\newcommand{\Ch}{\mathbf{Ch}}
+\newcommand{\Adv}{\mathcal{A}}
+\newcommand{\AdvB}{\mathcal{B}}
+\newcommand{\MKSetup}{\textnormal{MK.Setup}}
+\newcommand{\MKKeygen}{\textnormal{MK.Kg}}
+\newcommand{\MKEnc}{\textnormal{MK.Enc}}
+\newcommand{\MKDelta}{\textnormal{MK.Delta}}
+\newcommand{\MKToken}{\textnormal{MK.Token}}
+\newcommand{\MKAdjust}{\textnormal{MK.Adjust}}
+\newcommand{\MKMatch}{\textnormal{MK.Match}}
+\newcommand{\params}{\mathsf{pars}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\Ob}{\mathcal{O}}
+
+
+% Spacing
+\newenvironment{newitemize}{%
+\begin{list}{\mbox{}\hspace{0pt}$\bullet$\hfill}{\labelwidth=10pt%
+\labelsep=0pt \leftmargin=10pt \topsep=1pt%
+\setlength{\listparindent}{\saveparindent}%
+\setlength{\parsep}{\saveparskip}%
+\setlength{\itemsep}{1pt} }}{\end{list}}
+
+\newenvironment{newenum}{%
+\begin{list}{{\rm (\arabic{ctr})}\hfill}{\usecounter{ctr} \labelwidth=17pt%
+\labelsep=0pt \leftmargin=22pt \topsep=1pt%
+\setlength{\listparindent}{\saveparindent}%
+\setlength{\parsep}{\saveparskip}%
+\setlength{\itemsep}{1pt} }}{\end{list}}
+
+% Custom table columns
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1\textwidth}}
+\newcolumntype{L}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1\textwidth}}
+
+% custom hline width
+\makeatletter
+\def\hlinewd#1{%
+\noalign{\ifnum0=`}\fi\hrule \@height #1 %
+\futurelet\reserved@a\@xhline}
+\makeatother
+
+% Tighter bibliography without using natbib packages
+%% \let\oldthebibliography=\thebibliography
+%% \let\endoldthebibliography=\endthebibliography
+%% \renewenvironment{thebibliography}[1]{%
+%%   \begin{oldthebibliography}{#1}%
+%%     \setlength{\parskip}{0ex}%
+%%     \setlength{\itemsep}{0ex}%
+%% }%
+%% {%
+%%   \end{oldthebibliography}%
+%% }
+
+
+%############
+%  METADATA
+%############
+
+\author{Oliver Christopher Jensen}
+\address{\textit{ojensen@cs.utexas.edu}}
+\previousdegrees{B.A., M.S.Comp.Sci.}
+
+\title{A Secure Contactless Credit Card Protocol}
+
+
+\supervisor
+	[Mohamed G. Gouda]
+	{Lorenzo Alvisi}
+
+\committeemembers
+	[Lili Qiu]
+	{Vijay Garg}
+
+\graduationmonth{May}
+\graduationyear{2017}
+
+\typist{the author}
+
+%\singlespacing % COMMENT OUT BEFORE SUBMITING
+\oneandonehalfspacequote
+
+\topmargin 0.125in
+
+
+%################
+%  STYLE MACROS
+%################
+
+\newcommand{\latexe}{{\LaTeX\kern.125em2%
+                      \lower.5ex\hbox{$\varepsilon$}}}
+
+\newcommand{\amslatex}{\AmS-\LaTeX{}}
+
+\chardef\bslash=`\\	% \bslash makes a backslash (in tt fonts)
+			%	p. 424, TeXbook
+
+\newcommand{\cn}[1]{\texttt{\bslash #1}}
+
+\makeatletter		% Starts section where @ is considered a letter
+			% and thus may be used in commands.
+\def\square{\RIfM@\bgroup\else$\bgroup\aftergroup$\fi
+  \vcenter{\hrule\hbox{\vrule\@height.6em\kern.6em\vrule}%
+                                              \hrule}\egroup}
+\makeatother		% Ends sections where @ is considered a letter.
+			% Now @ cannot be used in commands.
+
+\makeindex    % Make the index
+
+%############
+%  DOCUMENT
+%############
+
+\begin{document}
+
+\copyrightpage
+\commcertpage
+\titlepage
+
+\begin{dedication}
+\index{Dedication@\emph{Dedication}}%
+This thesis is dedicated to blahblah.
+\end{dedication}
+
+\begin{acknowledgments}		% Optional
+\index{Acknowledgments@\emph{Acknowledgments}}%
+\input{./tex/acknowledgments}
+\end{acknowledgments}
+
+\utabstract
+\index{Abstract}
+\indent
+\input{./tex/abstract}
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\chapter{Introduction}
+\label{cha:intro}
+\section{Why NFC}
+\section{Related Works}
+
+\chapter{The Insecure CC Protocol}
+\label{cha:insecure}
+\input{./tex/insecure/0_intro}
+\input{./tex/insecure/1_goals}
+\input{./tex/insecure/2_design}
+\input{./tex/insecure/3_attacks}
+
+\chapter{The Externally Secure CC Protocol}
+\label{cha:external}
+\input{./tex/external/0_intro}
+\input{./tex/external/1_goals}
+\input{./tex/external/2_design}
+
+\chapter{The Secure CC Protocol}
+\label{cha:secure}
+\input{./tex/secure/0_intro}
+\input{./tex/secure/1_goals}
+\input{./tex/secure/2_design}
+
+\chapter{Electronic Wallets in the Secure CC Protocol}
+\label{cha:electronic}
+\input{./tex/electronic/main}
+
+\chapter{Protecting Customer Privacy: Unlinkability}
+\label{cha:unlinkability}
+\input{./tex/unlinkability/1_unlinkability}
+
+\chapter{Additional Goals for the Unlinkable CC Protocol}
+\label{cha:unlinkable_goals}
+
+\input{./tex/goals/0_intro}
+\input{./tex/goals/1_infrastructure}
+\input{./tex/goals/2_anycard}
+
+
+\chapter{Design of the Unlinkable CC Protocol}
+\label{cha:unlinkable_design}
+
+\input{./tex/new_protocol/intro}
+\input{./tex/new_protocol/p1}
+\input{./tex/new_protocol/p2}
+\input{./tex/new_protocol/p3}
+
+\chapter{Concluding Remarks and Future Work}
+\label{cha:conclusion}
+
+\bibliographystyle{plain}
+\bibliography{dissertation}
+\index{Bibliography@\emph{Bibliography}}
+
+\printindex
+
+\begin{vita}
+\input{./tex/vita}
+\end{vita}
+
+\end{document}

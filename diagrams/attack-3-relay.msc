@@ -1,0 +1,19 @@
+# Current CC Protocol
+msc {
+ arcgradient = 0;
+
+
+ a [label="Bank"],b [label="Point-of-Sale"],c [label="Proxy"], d [label="Relay"], e [label="Credit Card"];
+
+
+ b=>c [label="solicitation"];
+ c rbox d [label="request for card information"];
+
+ d=>e [label="solicitation"];
+ e=>d [label="card information"];
+ c rbox d [label="card information transmission"];
+ b=>c [label="solicitation"];
+ c=>b [label="card information\n(replay)"];
+ b=>a [label="charge request"];
+ a=>b [label="approve?\n(Y / N)"];
+}

@@ -1,0 +1,13 @@
+# Current CC Protocol
+msc {
+ arcgradient = 0;
+
+
+ a [label="Attacker"],b [label="Bank"],c [label="Compromised PoS"],d [label="Credit Card"];
+
+ c=>d [label="solicitation"];
+ d=>c [label="card information"];
+ c=>b [label="charge request"];
+ b=>c [label="approve?\n(Y / N)"];
+ c=>a [label="card information"];
+}

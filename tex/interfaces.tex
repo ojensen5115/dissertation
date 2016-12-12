@@ -1,0 +1,49 @@
+\section{Anatomy of a Credit Card}
+
+A credit card is a device composed of multiple interfaces, any of which may be used to authorize payments on behalf of the cardholder.
+The common interfaces seen on credit cards today are as follows:
+
+\begin{enumerate}
+\item \textbf{Embossed}
+
+The \emph{embossed} interface consists of all data which is embossed on the credit card.
+It was primarily used to transfer credit card information to carbon paper at retailers, before magnetic swiping became prevalent.
+While mostly obsolete, it is still used in some markets, when more conventional credit card processing is not convenient or available.
+For example, this interface is commonly used for taxi payments in countries where wireless infrastructure is scarce.
+The data transmitted through this interface consists of the credit card number, expiration date, and cardholder name.
+
+\item \textbf{Magstripe}
+
+The \emph{magstripe} interface consists of all data which can be read from the magnetic strip on the back of a credit card.
+The magstripe interface is commonly used at retailers, gas stations, and ATMs, when the card is swiped.
+The data transmitted through this interface consists primarily of the credit card number, expiration date, cardholder name, and \emph{CVV1}.
+The CVV1, known as the \emph{Card Verification Value 1}, is simply a number encoded on the magnetic strip that is not otherwise present on the card.
+It prevents a would-be fraudster from duplicating the magnetic strip of a credit card, provided that they are unable to read the magnetic stripe of the original.
+
+\item \textbf{Visual}
+
+The \emph{visual} interface consists of all data which can be read visually from the credit card.
+The visual interface is comonly used on the Internet or over the phone, when a customer is asked for credit card details.
+The data transmitted through this interface consists primarily of the credit card number, expiration date, cardholder name, and \emph{CVV2}.
+The CVV2, known as the \emph{Card Verification Value 2}, is the three-digit number on the back of the card.
+It combats fraud by requiring information from both sides of the credit card, thwarting would-be fraudsters armed with a photograph of the card.
+The CVV2 is also subject to regulation, in that no party is permitted to record it under any circumstances.
+As a result, its inclusion is also commonly used as ``proof of presence'' for the physical card itself.
+
+\item \textbf{NFC}
+
+The \emph{NFC} interface consists of the data and computation involved when reading the credit card via NFC reader.
+The NFC interface is commonly used in ``contactless'' transactions, when a Point of Sale supports tapping the credit card to a reader rather than swiping it.
+It is also emulated by mobile payment applications such as Google Wallet and Apple Pay, allowing an (authorized) smart phone to pose as a credit card.
+The data transmitted through this interface primarily consists of the credit card number, expiration date, issuing bank's name, and \emph{iCVV}.
+The iCVV, known as the \emph{integrated Card Verification Value}, is a dynamically generated element in a pseudorandom sequence.
+This sequence must be presented in order, is predictable only to the bank, and any individual value valid only for a single purchase.
+The iCVV combats fraud by standing in the way of anyone possessing an NFC reader (e.g. a smart phone) from duplicating an NFC credit card by simply being near enough to read it.
+
+\item \textbf{Chip}
+
+The \emph{chip} interface consists of the data and computation involved when inserting the card into a chip reader.
+The chip interface is commonly used at retailers and banks.
+It is a newer interface, and despite seeing widespread use in the European Union, it has only recently seen adoption in the United States.
+Businesses in the United States are now incentivized to support use of the chip interface (and when possible to require it over the magstripe interface), through differing fraud liability structures.
+\end{enumerate}

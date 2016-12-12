@@ -1,0 +1,20 @@
+# Newer CC Protocol
+msc {
+ arcgradient = 0,
+ hscale = "0.5";
+
+ a [label="Bank"],b [label="Victim\nPoint of Sale"],c [label="Malicious Device"],d [label="Malicious\nCustomer"],e [label="Malicious\nPoint of Sale"],f [label="Victim Card"],g [label="Victim\nCustomer"];
+
+ b=>d [label="price display\n($1000)"], e=>g [label="price display\n($10)"];
+ |||;
+ |||;
+ d>>c [label="enable device"], g>>f [label="enable device"];
+ b=>c [label="solicitation"];
+ c>>e [label="solicitation\n(out of band replay)"];
+ e=>f [label="solicitation\n(replay)"];
+ f=>e [label="card info"];
+ e>>c [label="card info\n(out of band replay)"];
+ c=>b [label="card info\n(replay)"];
+ b=>a [label="charge request\n($1000)"];
+ a=>b [label="approve?\n(Y / N)"];
+}

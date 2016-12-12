@@ -1,0 +1,48 @@
+1. Introduction
+  - Why NFC
+    - good for physical cards (less service, higher reliability)
+    - good for Electronic Wallets (supported by phones, which are selectively enabled)
+    - good for designing your own protocol
+  - Related works
+
+2. Insecure CC Protocol
+  - Goals
+    - payments via NFC
+  - Protocol Design
+
+3. Externally Secure CC Protocol
+  - Goals
+    - attacks (skimmer / eavesdropper)
+    - minimize computation on card
+  - Protocol Design
+  - Correctness
+
+4. Secure CC Protocol
+  - Goals
+    - attacks (malicious retailer)
+  - Protocol Design
+  - Correctness
+
+5. Electronic Wallets in the Secure CC Protocol
+
+6. Unlinkability
+
+7. Additional Goalsof the Unlinkable Protocol
+  - Use of any credit card
+  - Use of existing infrastructure
+  - Additional goals
+    - support of offline payments (app offline)
+    - resilience to loss of synchronization
+
+8. Design of the Unlinkable Protocol
+  - Protocol 1
+    - primary goals
+    - not secure against malicious retailers
+    - no offline payments
+  - Protocol 2
+    - primary goals
+    - limited offline payments
+  - Final Protocol
+    - all goals
+
+9. Concluding remarks / future work
