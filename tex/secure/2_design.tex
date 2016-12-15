@@ -36,8 +36,8 @@ The Secure CC Protocol, operating between a Point of Sale and a virtual Credit C
 	Rejecting the price aborts the protocol here.
 \item If the price is accepted by the Customer, the virtual Credit Card calculates
 	$$T = H(\text{INFO}, \text{ch}, \text{\$s}, \text{iCVV})$$
-	and responds to the Point of Sale with a Card Information message consisting of [\textbf{ID}, \textbf{T}, \textbf{B}].
-\item The Point of Sale sends a charge request message to the issuing Bank (identified by \textbf{B}) consisting of [\textbf{ID}, \textbf{T}, \textbf{ch}, \textbf{\$r}].
+	and responds to the Point of Sale with a Card Information message consisting of (\textbf{ID}, \textbf{T}, \textbf{B}).
+\item The Point of Sale sends a charge request message to the issuing Bank (identified by \textbf{B}) consisting of (\textbf{ID}, \textbf{T}, \textbf{ch}, \textbf{\$r}).
 	(Again, if the Point of Sale is honest, \textbf{\$r} = \textbf{\$d})
 \item The bank uses \textbf{ID} to look up INFO\textsubscript{bank} and then calculates iCVV\textsubscript{bank}.
 	It then uses the \textbf{ch} and \textbf{\$r} supplied in the charge request message to determine
@@ -53,7 +53,7 @@ The Secure CC Protocol, operating between a Point of Sale and a virtual Credit C
 \end{figure}
 
 When using a physical Credit Card instead of a virtual one, no communication channel exists between the Card and the Customer.
-As a result, the steps above in which the Card displays the charge price (\$s) to the Customer and waits for the customer to allow the protocol to proceed cannot occur.
+As a result, the steps above in which the Card displays the price sent with the Solicitation message (\$s) to the Customer and waits for the customer to allow the protocol to proceed cannot occur.
 Instead, a physical Credit Card must implicitly assume successful authorization from the Customer, effectively skipping step 3.
 As a result, while not providing protections from malicious Retailers to physical Credit Cards, the protocol maintains backwards compatibility with no loss of functionality or security against malicious third parties.
 
