@@ -5,8 +5,8 @@ Few credit cards today support NFC transactions natively.
 As a result, the majority of credit cards available to customers cannot generate valid iCVVs.
 The Unlinkable CC Protocol should allow the use of any credit card, including those for which no valid iCVVs exist.
 
-This matter is complicated by our goal of using existing Point of Sale infrastructure:
-    current Point of Sale devices require an iCVV as part of an NFC Card Information message.
+This matter is complicated by our goal of using existing point of sale infrastructure:
+    current point of sale devices require an iCVV as part of an NFC Card Information message.
 To get around this, we can leverage the architecture of credit cards themselves.
 
 Each credit card is a collection of independent interfaces.
@@ -27,10 +27,10 @@ While some cards support a different set of interfaces than others, an important
 
 Making use of NFC communication is desirable for a new credit card protocol,
     because a smart phone supporting NFC communication enables the customer to send and receive arbitrary messages.
-However, for a charge to be successful, the Bank must receive a Charge Request pertaining to a \emph{non-NFC} interface,
+However, for a charge to be successful, the bank must receive a Charge Request pertaining to a \emph{non-NFC} interface,
     due to the lack of valid iCVVs associated with non-NFC credit cards.
 
 These two seemingly contradictory requirements suggest the construction of a tunneled protocol:
-    if we place an entity between the Point of Sale and the Bank, this entity may receive an NFC Charge Request from the Point of Sale,
+    if we place an entity between the point of sale and the bank, this entity may receive an NFC Charge Request from the point of sale,
     convert it into a Charge Request of another interface (for example, the visual interface),
-    and send this converted Charge Request to the Bank.
+    and send this converted Charge Request to the bank.

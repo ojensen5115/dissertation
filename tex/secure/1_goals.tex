@@ -1,9 +1,9 @@
 \section{Goals of the Protocol}
 \label{sec:secure-goals}
 
-Recall that when making a payment, the Customer first views the price about to be charged on the screen of the Retailer's Point of Sale.
-Using this information, the Customer makes his one and only decision: whether to allow the payment protocol to occur, or not.
-The underlying assumption that the Customer makes is that the price displayed on the screen is equal to the price which will be charged to his Credit Card.
+Recall that when making a payment, the customer first views the price about to be charged on the screen of the retailer's point of sale.
+Using this information, the customer makes his one and only decision: whether to allow the payment protocol to occur, or not.
+The underlying assumption that the customer makes is that the price displayed on the screen is equal to the price which will be charged to his credit card.
 This need not be the case: the information displayed on a screen is merely an assurance in the informal sense:
 	the numbers displayed to the customer \emph{should} reflect the dollar amount which will subsequently be sent with the Charge Request message to the bank,
     but there is no mechanism in place to require this.
@@ -12,12 +12,12 @@ The goal of the Secure CC Protocol presented in this chapter is to extend the pr
 
 \subsection{The Over-charge Attack}
 
-An Over-charge attack, illustrated in Figure \ref{fig:attack_overcharge}, is characterized by the malicious Point of Sale displaying one price to the customer
-	and then sending a higher price to the Bank
+An Over-charge attack, illustrated in Figure \ref{fig:attack_overcharge}, is characterized by the malicious point of sale displaying one price to the customer
+	and then sending a higher price to the bank
 	(in the Charge Request message of the CC Protocols).
-As a result, the Customer believes himself to have been charged one amount, but is instead charged an arbitrarily higher amount.
-Since the Customer is uninvolved in the protocol besides the initial step of allowing the protocol to occur,
-	there is no mechanism ensuring that the price displayed to the Customer matches the price that the (malicious) Point of Sale sends to the Bank.
+As a result, the customer believes himself to have been charged one amount, but is instead charged an arbitrarily higher amount.
+Since the customer is uninvolved in the protocol besides the initial step of allowing the protocol to occur,
+	there is no mechanism ensuring that the price displayed to the customer matches the price that the (malicious) point of sale sends to the bank.
 
 \begin{figure}
   \caption{Over-charge Attack}
@@ -26,33 +26,33 @@ Since the Customer is uninvolved in the protocol besides the initial step of all
   \label{fig:attack_overcharge}
 \end{figure}
 
-Should a Customer become aware of an over-charge when reviewing his monthly statement, he may file a charge-back request with his Bank, nullifying the payment as fraudulent.
-As a result, while the amount by which the Customer may be overcharged is unconstrained by the protocol, it should be relatively small for the attack to ultimately be successful.
+Should a customer become aware of an over-charge when reviewing his monthly statement, he may file a charge-back request with his bank, nullifying the payment as fraudulent.
+As a result, while the amount by which the customer may be overcharged is unconstrained by the protocol, it should be relatively small for the attack to ultimately be successful.
 For example, it is easy to notice a gas station charge for \$500.00 instead of \$21.87 on a monthly statement, and the resulting investigation would be uncomplicated.
 However, should the struggling business choose to increase charges by 5\%, the resulting gas station charge of \$22.96 could very easily be overlooked.
-Even were it to be noticed, the victim Customer may have difficulty proving the discrepancy.
+Even were it to be noticed, the victim customer may have difficulty proving the discrepancy.
 
 
 \subsection{The Transparent Bridge Attack}
 
 A more interesting attack is described by Drimer and Murdoch \cite{Drimer:2007:KYE:1362903.1362910}.
-The authors consider a man-in-the-middle attack, perpetrated by a malicious Retailer and an accomplice with specialized equipment.
-This attack involves four parties: a victim Customer, a malicious Retailer, a malicious Customer, and a victim Retailer.
+The authors consider a man-in-the-middle attack, perpetrated by a malicious retailer and an accomplice with specialized equipment.
+This attack involves four parties: a victim customer, a malicious retailer, a malicious customer, and a victim retailer.
 The malicious retailer and the malicious customer collude to perform this attack.
 
-The malicious Customer is issued with a special device, capable of relaying all messages it receives from a Point of Sale to the malicious Retailer in real time.
-Similarly, it can relay any responses it receives from the malicious Retailer back to this Point of Sale.
-As a result, the malicious Customer and malicious Retailer can together form a bridge between the victim Credit Card and the victim Retailer's Point of Sale.
+The malicious customer is issued with a special device, capable of relaying all messages it receives from a point of sale to the malicious retailer in real time.
+Similarly, it can relay any responses it receives from the malicious retailer back to this point of sale.
+As a result, the malicious customer and malicious retailer can together form a bridge between the victim credit card and the victim retailer's point of sale.
 The attack is illustrated in Figure \ref{fig:attack_bridge} and runs as follows:
 
 \begin{enumerate}
-\item First, the victim Customer attempts to make a relatively inexpensive purchase from the malicious Retailer.
-Simultaneously, the malicious Customer prepares to make a relatively expensive purchase from a victim Retailer.
-\item The victim Retailer's Point of Sale issues a Solicitation message to the malicious Customer, who relays it to the malicious Retailer.
-\item The malicious Retailer then forwards this Solicitation message to the victim Credit Card.
-\item The victim Credit Card responds with a Card Information message to the malicious Point of Sale, who relays this message to the malicious Customer.
-\item The malicious Customer forwards this Card Information message to the victim Retailer's Point of Sale.
-\item The victim Retailer's Point of Sale issues a Charge Request message to the victim Credit Card's bank, charging the victim Customer for the expensive purchase.
+\item First, the victim customer attempts to make a relatively inexpensive purchase from the malicious retailer.
+Simultaneously, the malicious customer prepares to make a relatively expensive purchase from a victim retailer.
+\item The victim retailer's point of sale issues a Solicitation message to the malicious customer, who relays it to the malicious retailer.
+\item The malicious retailer then forwards this Solicitation message to the victim credit card.
+\item The victim credit card responds with a Card Information message to the malicious point of sale, who relays this message to the malicious customer.
+\item The malicious customer forwards this Card Information message to the victim retailer's point of sale.
+\item The victim retailer's point of sale issues a Charge Request message to the victim credit card's bank, charging the victim customer for the expensive purchase.
 \end{enumerate}
 
 \begin{figure}
@@ -63,14 +63,14 @@ Simultaneously, the malicious Customer prepares to make a relatively expensive p
   \label{fig:attack_bridge}
 \end{figure}
 
-In this attack, all messages are transparently relayed between the victim Retailer's Point of Sale and the victim Customer's Credit Card.
-As a result, the victim Customer believes himself to be making an inexpensive purchase at the malicious Retailer, while he is actually making an expensive purchase at the victim Retailer.
-The malicious Retailer loses the inexpensive sale, but acquires the merchandise from an expensive purchase in exchange.
+In this attack, all messages are transparently relayed between the victim retailer's point of sale and the victim customer's credit card.
+As a result, the victim customer believes himself to be making an inexpensive purchase at the malicious retailer, while he is actually making an expensive purchase at the victim retailer.
+The malicious retailer loses the inexpensive sale, but acquires the merchandise from an expensive purchase in exchange.
 
 This Transparent Bridge attack is particularly interesting, because the malicious parties leave no trace with either of the victims:
-to the victim Customer there is only a record of an expensive purchase at the victim Retailer, and to the victim Retailer there is only the customer record of the victim Customer.
-The amount which can be successfully stolen by the malicious Retailer is unconstrained, and needs not evade notice:
-	if the discrepancy is noticed and the victim Customer files a charge-back request, it will be against the victim Retailer (and not the malicious Retailer).
+to the victim customer there is only a record of an expensive purchase at the victim retailer, and to the victim retailer there is only the customer record of the victim customer.
+The amount which can be successfully stolen by the malicious retailer is unconstrained, and needs not evade notice:
+	if the discrepancy is noticed and the victim customer files a charge-back request, it will be against the victim retailer (and not the malicious retailer).
 As such, detected or not, it is one of the two victims that will be left facing the bill, making the Transparent Bridge attack significantly more dangerous than the Over-charge attack described earlier.
 
 Drimer et al. propose a defense against this attack in the context of EMV credit cards (colloquially known as ``chip and pin'').
