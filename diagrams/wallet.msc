@@ -1,0 +1,17 @@
+# Electrnoic Wallet
+msc {
+ arcgradient = 0;
+
+
+ a [label="Bank"],b [label="Point of Sale"],c [label="Card"],d [label="Customer"];
+
+ b=>d [label="price display ($)"];
+ |||;
+ |||;
+ d rbox d [label="select card"];
+ d>>c [label="enable device"];
+ b=>c [label="solicitation"];
+ c=>b [label="selected card information\n(CC#, exp, iCVV)"];
+ b=>a [label="charge request\n(CC#, exp, iCVV, $)"];
+ a=>b [label="approve?\n(Y / N)"];
+}
