@@ -3,7 +3,6 @@
 
 When the Wallet Server receives a Registration message, it stores the card details and generates a random 93 bit \emph{token}.
 This token is sent to the Wallet Application, for use in its next transaction.
-
 When the customer wishes to make a purchase, the Wallet Application selects a registered card and begins listening for Solicitation messages.
 The protocol then operates as follows:
 \begin{enumerate}
@@ -19,24 +18,24 @@ The protocol then operates as follows:
     \item \textbf{iCVV:} the remaining 8 digits of \emph{k}
     \item \textbf{Bank name:} the Wallet Server
    	\end{itemize}
-\item The point of sale constructs an \emph{NFC} Charge Request message from the (virtual) Card number, Expiration date, iCVV, and the price it wishes to charge.
-	This message is sent to the bank named in the Card Information message.
-    As a result, the Charge Request essage is directed to the Wallet Server and \emph{not} a bank.
+\item The point of sale constructs an \emph{NFC} Charge Request message from the (pseudo) Card number, Expiration date, iCVV, and the price it wishes to charge.
+    This message is sent to the bank named in the Card Information message.
+    As a result, the Charge Request essage is directed to the Wallet Server and \emph{not} an actual bank.
     Note that from the perspective of the point of sale, the Wallet Server appears to be a bank like any other.
-\item The Wallet Server reconstructs \emph{k} from the Carge Request message, and computes the 93-bit token it represents.
+\item The Wallet Server reconstructs \emph{k} from the Charge Request message, and computes the 93-bit token it represents.
     The Wallet Server then searches its database for this token, to identify the card used in this transaction.
     If no result is found, the Wallet Server sends a ``declined'' Acceptance message to the point of sale, and aborts the protocol.
-	Otherwise, the stored card details are retrieved from the Wallet Server's database.
-    The Wallet Server then sends a \emph{visual} Charge Request to the card's bank, with the following fields:
+    Otherwise, the stored card details are retrieved from the Wallet Server's database.
+    The Wallet Server then invalidates token \emph{k}, and sends a \emph{visual} Charge Request to the card's bank with the following fields:
     \begin{itemize}
     \item Cardholder name
     \item Card number
     \item Expiration date
     \item Billing address
     \end{itemize}
-    Note that unlike the information sent in the Card Information message, this data reflects the actual credit card information.
-\item The bank receives the \emph{visual} Charge Request from the Wallet Server.
-    The bank processes this transaction in the same was as it currently does in the Insecure CC Protocol described in Chapter \ref{cha:insecure}.
+    Note that unlike the Card Information message sent by the Wallet Application, this data reflects the actual credit card information.
+\item The bank receives the \emph{visual} Charge Request from the Wallet Server,
+    and processes this transaction as normal.
     Finally, it responds to the Wallet Server with an Acceptance message indicating whether the charge has been accepted.
 \item The Wallet Server forwards the bank's Acceptance message to the point of sale.
 \end{enumerate}

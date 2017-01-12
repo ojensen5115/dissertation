@@ -3,7 +3,7 @@ msc {
  arcgradient = 0;
 
 
- a [label="Bank"],b [label="Point of Sale"],c [label="Card"],d [label="Customer"];
+ a [label="Bank"],b [label="Point of Sale"],c [label="Virtual Card"],d [label="Customer with\nElectronic Wallet"];
 
  b=>d [label="price display ($)"];
  |||;
@@ -11,7 +11,7 @@ msc {
  d rbox d [label="select card"];
  d>>c [label="enable device"];
  b=>c [label="solicitation"];
- c=>b [label="selected card information\n(CC#, exp, iCVV)"];
- b=>a [label="charge request\n(CC#, exp, iCVV, $)"];
+ c=>b [label="card information\n(of selected card)"];
+ b=>a [label="charge request"];
  a=>b [label="approve?\n(Y / N)"];
 }

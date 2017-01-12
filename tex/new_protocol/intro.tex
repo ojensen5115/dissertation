@@ -1,4 +1,4 @@
-In this chapter, we construct the Unlinkable CC Protocol, achieving our three primary goals:
+In this chapter, we design the Unlinkable CC Protocol, achieving our three primary goals:
 supporting unlinkabile payments,
 allowing the use of any credit card,
 while using existing point of sale infrastructure.
@@ -6,9 +6,9 @@ while using existing point of sale infrastructure.
 We begin by making several strong assumptions.
 In particular, we assume that:
 \begin{itemize}
-\item the retailer is not malicious,
-\item the customer's Wallet Application is constantly connected to the Internet,
-\item no messages between the point of sale and the bank are lost.
+\item The retailer is not malicious
+\item The Wallet Application is connected to the Internet at all times
+\item The point of sale experiences no communication failures
 \end{itemize}
 As we refine the protocol, we will erode these assumptions away to yield a secure and resilient protocol.
 
@@ -21,13 +21,11 @@ In particular, our protocol design will make use of both the \emph{NFC}\footnote
 } interfaces.
 As a result, message names in this chapter will identify the relevant interface where appropriate.
 
-The Unlinkable CC Protocol will assume the exclusive use of Electronic Wallets.
-This is necessary because when using a physical credit card, the customer has no control over the messages sent,
-    and thus cannot alter the protocol.
+The Unlinkable CC Protocol is designed solely for use with Electronic Wallets, and cannot be used with physical credit cards.
 Thus, the first step for a customer is to download the Wallet Application and register a credit card.
 
 The card registration process is simple.
-The customer enters the credit card details for the card he wishes to add into the Wallet Application.
+The customer launches the Wallet Application enters the credit card details for the card he wishes to register.
 These details consist of the cardholder name, card number, expiration date, and billing address.
 The Wallet Application then sends this data in a Registration message to a new principal: the Wallet Server.
 This Registration message is transmitted securely over the Internet.
