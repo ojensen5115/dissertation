@@ -1,14 +1,14 @@
 \section{Basic Protocol}
 \label{unlinkable-design-1}
 
-When the Wallet Server receives a Registration message, it stores the card details and generates a random 93 bit \emph{token}.
-This token is sent to the Wallet Application, for use in its next transaction.
-When the customer wishes to make a purchase, the Wallet Application selects a registered card and begins listening for Solicitation messages.
+When the Wallet Server receives a Registration message, it stores the card details and generates a random 93 bit \emph{token} and associates it with this card.
+This token is then also sent to the Wallet Application, for use in its next transaction.
 The protocol then operates as follows:
 \begin{enumerate}
+\item The customer selects a credit card in the Wallet Application.
 \item The point of sale sends a Solicitation message to the Wallet Application over the NFC channel.
-\item The Wallet Application looks up the \emph{token} which was issued for the card selected by the customer.
-    It then converts the stored 93-bit token into a 28-digit number \emph{k}
+\item The Wallet Application looks up the 93-bit token which was issued for the card selected by the customer.
+    It then converts the stored token into a 28-digit number \emph{k}
     (note that 28 digits is sufficient to store a 93 bit value: $log_{10}(2^{93}) \approx 27.995$).
     Finally, it responds with an \emph{NFC} Card Information message.
     This message has the following fields:
@@ -20,7 +20,7 @@ The protocol then operates as follows:
    	\end{itemize}
 \item The point of sale constructs an \emph{NFC} Charge Request message from the (pseudo) Card number, Expiration date, iCVV, and the price it wishes to charge.
     This message is sent to the bank named in the Card Information message.
-    As a result, the Charge Request essage is directed to the Wallet Server and \emph{not} an actual bank.
+    As a result, the Charge Request message is directed to the Wallet Server and \emph{not} an actual bank.
     Note that from the perspective of the point of sale, the Wallet Server appears to be a bank like any other.
 \item The Wallet Server reconstructs \emph{k} from the Charge Request message, and computes the 93-bit token it represents.
     The Wallet Server then searches its database for this token, to identify the card used in this transaction.
@@ -42,6 +42,11 @@ The protocol then operates as follows:
 
 Note that in this protocol, the Wallet Server has a dual role:
 to the point of sale, the Wallet Server appears to be a bank, while to the bank, the Wallet Server appears to be a point of sale.
+
+Once the transaction is complete, the Wallet Application must now request a new token from the Wallet Server for that virtual credit card.
+This exchange happens securely over the Internet, and must occur each time the customer wishes to make a purchase.
+Should a connection to the Internet be unavailable to the Wallet Application,
+    the customer is unable to perform subsequent purchases with this virtual credit card until this exchange can take place.
 
 This protocol is unlinkable,
     because the information received by the point of sale consists solely of a random value, accompanied by a bank name identifying the Wallet Server.

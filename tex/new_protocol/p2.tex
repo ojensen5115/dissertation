@@ -1,2 +1,19 @@
 \section{Protecting against Malicious Retailers}
 \label{unlinkable-design-2}
+
+As before, upon card registration, the Wallet Server generates and stores a random token.
+In this version of the protocol, this token is only 80 bits long.
+The protocol then operates as follows:
+
+\begin{enumerate}
+    \item The point of sale displays the price to pay on its screen.
+    \item The customer selects a credit card in the Wallet Application, and keys in the price to pay.
+    \item The point of sale sends a Solicitation message to the Wallet Application over the NFC channel.
+    \item The Wallet Application looks up the 80-bit token which was issued for the card selected by the customer.
+        It then calculates a 13-bit price hash \emph{h\textsubscript{p} = H(token, price)}$|$\textsuperscript{13}.
+        The Wallet Application then concatenates the token and price hash into a 93-bit value,
+        and converts this value into an \emph{NFC} Card Information addressed to the point of sale using the same procedure as in the Basic Protocol.
+    \item The Point of Sale receives the Card Information message, and constructs an \emph{NFC} Charge Request from it and the price it wishes to charge.
+        This Charge Request message is sent to the Wallet Server as before.
+    \item The Wallet Server reconstructs the 93-bit value from the Charge Request message, and splits it into the 80-bit token and 13-bit price hash.
+\end{enumerate}
