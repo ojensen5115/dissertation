@@ -1,9 +1,15 @@
-\section{Protecting against Malicious Retailers}
-\label{unlinkable-design-2}
+\section{Augmented Unlinkable CC Protocol: Protecting against Malicious Retailers}
+\label{sec:unlinkable-design-2}
 
-As before, upon card registration, the Wallet Server generates and stores a random token.
-In this version of the protocol, this token is only 80 bits long.
-The protocol then operates as follows:
+This protocol is very similar to the Basic Unlinkable Protocol described in Section \ref{sec:unlinkable-design-1}.
+In the Basic protocol, a 93-bit token was used to identify a customer to the Wallet Server.
+In the Augmented protocol, the token consists of only 80 bits, leaving 13 bits left over to bind the price to the token.
+
+When the Wallet Server receives a Registration message, it stores the card information and associates a card identifier \emph{ID} with this record.
+It also generates a secret key \emph{K} associated with this card.
+In the Augmented protocol, the Wallet Server responds to the Registration message with this identifier \emph{ID} and the key \emph{D}.
+The Wallet Application stores these values securely, associating them with the credit card being registered.
+The protocol then operates as follows, and is illustrated in Figure \ref{fig:unlinkable-1}:
 
 \begin{enumerate}
     \item The point of sale displays the price to pay on its screen.

@@ -1,32 +1,23 @@
-In this chapter, we design the Unlinkable CC Protocol, achieving our three primary goals:
-supporting unlinkabile payments,
-allowing the use of any credit card,
-while using existing point of sale infrastructure.
+In this chapter, we present our design for the Unlinkable CC Protocol, which achieves our three primary goals, namely
+    (1) supporting unlinkabile payments,
+    (2) allowing the use of any credit card,
+    while (3) using existing point of sale infrastructure.
 
-We begin by making several strong assumptions.
-In particular, we assume that:
+First, we base our design of the Unlinkable CC Protocol on the following three assumptions:
 \begin{itemize}
 \item The retailer is not malicious
 \item The Wallet Application is connected to the Internet at all times
 \item The point of sale experiences no communication failures
 \end{itemize}
-As we refine the protocol, we will erode these assumptions away to yield a secure and resilient protocol.
-
-As foreshadowed in the previous chapter, this protocol will span multiple credit card interfaces.
-In particular, our protocol design will make use of both the \emph{NFC}\footnote{
-	When using the NFC interface, credit cards are authenticated via card number, expiration date, and iCVV.
-} and the \emph{visual}\footnote{
-	When using the visual interface, credit cards are authenticated via cardholder name, card number, and expiration date,
-	optionally accompanied by the CVV2 (the 3-digit number on the back of the card) and/or billing address.
-} interfaces.
-As a result, message names in this chapter will identify the relevant interface where appropriate.
+Later, as we refine the protocol, we erode these assumptions away to yield a secure and resilient protocol.
 
 The Unlinkable CC Protocol is designed solely for use with Electronic Wallets, and cannot be used with physical credit cards.
-Thus, the first step for a customer is to download the Wallet Application and register a credit card.
+Thus, the first step for a customer is to download the Wallet Application and initialize a virtual credit card,
+     by registering a physical card into the Wallet Application.
 
 The card registration process is simple.
-The customer launches the Wallet Application enters the credit card details for the card he wishes to register.
-These details consist of the cardholder name, card number, expiration date, and billing address.
+The customer launches the Wallet Application, and enters the credit card information for the card he wishes to register.
+This information consists of the cardholder name, card number, expiration date, and billing address.
 The Wallet Application then sends this data in a Registration message to a new principal: the Wallet Server.
 This Registration message is transmitted securely over the Internet.
 

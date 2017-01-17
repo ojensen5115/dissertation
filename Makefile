@@ -14,7 +14,7 @@ all:
 
 figs:
 	cd diagrams; bash _install.sh;
-	#cp img/modified/* img/
+	cp img/modified/* img/
 
 pdf:
 	pdflatex dissertation

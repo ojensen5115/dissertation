@@ -1,11 +1,26 @@
-\section{Basic Protocol}
-\label{unlinkable-design-1}
+\section{Basic Unlinkable CC Protocol}
+\label{sec:unlinkable-design-1}
 
-When the Wallet Server receives a Registration message, it stores the card details and generates a random 93 bit \emph{token} and associates it with this card.
-This token is then also sent to the Wallet Application, for use in its next transaction.
-The protocol then operates as follows:
+When the Wallet Server receives a Registration message, it stores the card information and associates a card identifier \emph{ID} with this record.
+In the basic protocol, the Wallet Server responds to the Registration message with this identifier \emph{ID}.
+The Wallet Application stores this value securely, associating it with the credit card being registered.
+The protocol then operates as follows, and is illustrated in Figure \ref{fig:unlinkable-1}:
+
+\begin{figure}[h!]
+  \caption{Basic Unlinkable CC Protocol}
+  \centering
+    \includegraphics{img/unlinkable-1.eps}
+  \label{fig:unlinkable-1}
+\end{figure}
+
 \begin{enumerate}
 \item The customer selects a credit card in the Wallet Application.
+\item The Wallet Application sends a Token Request message to the Wallet Server.
+    This message consists of the card identifier \emph{ID} associated with the selected card, and is sent securely over the Internet.
+    Note that this message must also be authenticated, to prevent a customer from requesting a token to a different customer's card.
+\item The Wallet Server then generates a random 93-bit token \emph{T}, and associates it with card \emph{ID}.
+    It responds to the Wallet Application with \emph{T}.
+\item The Wallet Application now begins listening for Solicitation messages.
 \item The point of sale sends a Solicitation message to the Wallet Application over the NFC channel.
 \item The Wallet Application looks up the 93-bit token which was issued for the card selected by the customer.
     It then converts the stored token into a 28-digit number \emph{k}
