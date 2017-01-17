@@ -18,17 +18,17 @@ With this in mind, we consider how to provide credit card payments with the conv
 Informally, if credit card purchases are unlinkable, then retailers cannot use them to construct purchasing profiles efficiently.
 
 While giving the retailer access to the card number is sufficient to undermine unlinkability, it is not necessary.
-For example, consider the Externally Secure CC Protocol, presented in Chapter \ref{cha:external} and shown in Figure \ref{fig:external_ccp_recall} for convenience.
+For example, consider the Secure CC Protocol, presented in Chapter \ref{cha:secure} and shown in Figure \ref{fig:secure_ccp_recall} for convenience.
 In this protocol, the credit card number is not disclosed, and all authentication data (contained within the value \emph{T}) is indistinguishable from random to the retailer.
 However, the charge token contains a constant card identifier \emph{ID}, required by the bank in order to identify the customer for which \emph{T} must be verified.
 No two credit cards have the same \emph{ID}, and \emph{ID} does not change, so the retailer can simply link purchases using \emph{ID} instead of the card number.
 More generally, if the protocol includes a message received by the retailer from which the customer's identity can be inferred, then the protocol cannot provide unlinkability.
 
 \begin{figure}[h!]
-  \caption{Externally Secure CC Protocol}
+  \caption{Secure CC Protocol}
   \centering
     \includegraphics{img/secure_ccp.eps}
-  \label{fig:external_ccp_recall}
+  \label{fig:secure_ccp_recall}
 \end{figure}
 
 

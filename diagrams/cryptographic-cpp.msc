@@ -1,0 +1,11 @@
+# Cryptographic Unlinkable CC Protocol
+msc {
+ arcgradient = 0;
+
+ a [label="Bank"],b [label="Point of Sale"],c [label="Cryptographic\nVirtual Card"];
+
+ b=>c [label="solicitation"];
+ c=>b [label="card information\nT = Enc(cc#, exp, iCVV)"];
+ b=>a [label="charge request\n(T, $)"];
+ a=>b [label="approve?\n(Y / N)"];
+}

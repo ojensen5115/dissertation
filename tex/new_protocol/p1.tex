@@ -21,6 +21,7 @@ The protocol then operates as follows, and is illustrated in Figure \ref{fig:unl
 \item The Wallet Server then generates a random 93-bit token \emph{T}, and associates it with card \emph{ID}.
     It responds to the Wallet Application with \emph{T}.
 \item The Wallet Application now begins listening for Solicitation messages.
+\item The point of sale displays the price to charge (\$d) on its screen.
 \item The point of sale sends a Solicitation message to the Wallet Application over the NFC channel.
 \item The Wallet Application looks up the 93-bit token which was issued for the card selected by the customer.
     It then converts the stored token into a 28-digit number \emph{k}

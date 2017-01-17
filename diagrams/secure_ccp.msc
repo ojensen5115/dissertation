@@ -2,7 +2,7 @@
 msc {
  arcgradient = 0;
 
- a [label="Bank"],b [label="Point of Sale"],c [label="Card"],d [label="Customer"];
+ a [label="Bank"],b [label="Point of Sale"],c [label="Virtual Card"],d [label="Customer"];
 
  b=>d [label="price display ($d)"];
  |||;

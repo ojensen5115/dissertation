@@ -3,7 +3,7 @@ msc {
  arcgradient = 0;
 
 
- a [label="Bank"],b [label="Point-of-Sale"],c [label="Proxy"], d [label="Relay"], e [label="Credit Card"];
+ a [label="Bank"],b [label="Point of Sale"],c [label="Proxy"], d [label="Relay"], e [label="Credit Card"];
 
 
  b=>c [label="solicitation"];

@@ -1,0 +1,27 @@
+# Electrnoic Wallet
+msc {
+ arcgradient = 0;
+
+
+ a [label="Bank"],b [label="Wallet Server"], c [label="Point of Sale"],d [label="Virtual Card"],e [label="Customer with\nElectronic Wallet"];
+
+ |||;
+ e rbox e [label="select card: ID"];
+ e=>b [label="request token\n(ID)"];
+ b rbox b [label="generate 93-bit token T, and associate it with card ID"];
+ b=>e [label="token\n(T)"];
+ |||;
+ |||;
+ c=>e [label="price display ($)"];
+ |||;
+ |||;
+ e>>d [label="enable device\n(T)"];
+ c=>d [label="solicitation"];
+ d rbox d [label="encode T as pseudo card info"];
+ d=>c [label="card information\n(pseudo info)"];
+ c=>b [label="charge request\n(pseudo info)"];
+ b rbox b [label="reconstruct T, then look up pre-registered info"];
+ b=>a [label="charge request\n(registered info)"];
+ a=>b [label="approve?\n(Y / N)"];
+ b=>c [label="approve?\n(Y / N)"];
+}
