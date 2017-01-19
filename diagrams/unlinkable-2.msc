@@ -6,13 +6,14 @@ msc {
  a [label="Bank"],b [label="Wallet Server"], c [label="Point of Sale"],d [label="Virtual Card"],e [label="Customer with\nElectronic Wallet"];
 
  |||;
- e rbox e [label="select card: ID"];
- e=>b [label="request token\n(ID)"];
- b rbox b [label="generate 80-bit token T, and associate it with card ID"];
+ e rbox e [label="select card: Ident"];
+ e=>b [label="token request\n(Ident)"];
+ b rbox b [label="generate 80-bit token T, and associate it with card Ident"];
  b=>e [label="token\n(T)"];
  |||;
  |||;
  c=>e [label="price display ($d)"];
+ e rbox e [label="customer inputs price ($c) to Wallet Application"];
  |||;
  |||;
  e>>d [label="enable device\n(T, $c)"];
