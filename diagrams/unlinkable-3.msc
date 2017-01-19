@@ -5,24 +5,23 @@ msc {
 
  a [label="Bank"],b [label="Wallet Server"], c [label="Point of Sale"],d [label="Virtual Card"],e [label="Customer with\nElectronic Wallet"];
 
+
  |||;
- e rbox e [label="select card: Ident"];
- e=>b [label="token request\n(Ident)"];
- b rbox b [label="generate 80-bit token T, and associate it with card Ident"];
- b=>e [label="token\n(T)"];
- |||;
- |||;
+ e rbox e [label="select card"];
  c=>e [label="price display ($d)"];
  e rbox e [label="input price ($c) to Wallet Application"];
  |||;
  |||;
- e>>d [label="enable device\n(T, $c)"];
+ e>>d [label="enable device\n($c)"];
  c=>d [label="solicitation"];
- d rbox d [label="encode T and price hash as pseudo card info"];
+ d rbox d [label="calculate T and price hash, and encode these values as pseudo card info"];
  d=>c [label="card information\n(pseudo info)"];
  c=>b [label="charge request\n(pseudo info)"];
  b rbox b [label="reconstruct T, verify price hash, then look up pre-registered info"];
  b=>a [label="charge request\n(registered info)"];
  a=>b [label="approve?\n(Y / N)"];
+ b rbox b [label="if approved, increment txn counter and calculate next value of T"];
  b=>c [label="approve?\n(Y / N)"];
+ e >> d [label="txn approved?\n(Y / N)"];
+ d rbox d [label="if approved, increment txn counter"];
 }
