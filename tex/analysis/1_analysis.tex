@@ -1,0 +1,45 @@
+\section{Analysis of the Unlinkable Wallet Protocol}
+\label{sec:analysis}
+
+Simply by using an Electronic Wallet, the customer is protected from skimmers and relay attackers ``for free'',
+    because the phone must be unlocked and ready to transmit in order to respond to a Solicitation message.
+The Unlinkable Wallet Protocol provides protection against eavesdroppers and compromised points of sale,
+    because each message consists of two single-use tokens which lose all value after the transaction takes place.
+
+Due to the inclusion of the price validation hash (the last 13 bits of the 93-bit message),
+    the Unlinkable Wallet Protocol also defends against Malicious Retailers by binding the charge token to a price confirmed by the customer.
+
+Furthermore, the Unlinkable Wallet Protocol provides the customer with the privacy property of \emph{Unlinkability} from the retailer.
+In this protocol, retailers lose the ability to use credit card numbers as a method to correlate purchases and track customer purchasing profiles through purchase records.
+
+In our initial publications \cite{sccp} \cite{???}, we considered Unlinkability an explicit non-goal:
+  for deployment, the protocol required extensive cooperation from retailers who currently enjoy this property.
+The Unlinkable Wallet Protocol requires no such cooperation from retailers on the payment industry,
+    which means that bowing to retailers' wishes is not necessary.
+
+Note that the information correlating an individual credit card to an individual purchase is not lost:
+    it is now learned by the Wallet Server provider instead.
+This is potentially valuable information, and thus is a strong incentive to be in the position of Electronic Wallet provider.
+
+Indeed, Electronic Wallet providers find themselves in a very privileged position:
+    by inserting themselves between retailers and banks, they appropriate knowledge from retailers regarding transaction correlation
+    and they appropriate knowledge from banks regarding transaction locations\footnote{
+This appears to be consistent with the operation of Electronic Wallet applications like Android Pay and Apple Wallet:
+    Android Pay has announced partnerships with some banks,
+    which results in your credit card's purchases through Android Pay continuing to earn rewards normally offered by your credit card
+    (e.g. 5 points per dollar spent on gas, 3 points per dollar spent on groceries, etc.).
+    This suggests that, lacking a partnership with Electronic Wallet providers, banks lose information on the nature and location of purchases.}.
+
+Even so, the Unlinkable Wallet Protocol described in Chapter \ref{cha:unlinkable} protects consumer privacy
+    by separating knowledge of itemized purchases and correlation between purchases.
+It is potentially valuable for an entity to be able to answer the questions \emph{Where do you spend your money? What do you spend it on?}
+
+Currently, your bank has complete information on where you spend your money,
+    and a retailer at which you shop has complete information on what you spend your money on (at that retailer).
+The Unlinkable Wallet Protocol breaks part of this information away from both parties:
+    all purchases appear to the bank as being made out to the Electronic Wallet service, and
+    all purchases appear to the retailer as being made by a unique credit card.
+
+In all scenarios, customer's privacy is bolstered, as it is now more difficult and more expensive for any entity to track the customer's purchases.
+Banks and retailers can potentially partner with the Electronic Wallet provider in order to regain access to this information,
+    but doing so requires effort and cost, thereby raising the bar on who will choose to actually do so.

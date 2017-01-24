@@ -1,0 +1,29 @@
+\subsection{Collision Mitigation and Simulation}
+\label{sec:collisions_and_simulations}
+
+Every transaction processed by the Electronic Wallet service updates a card's Account Hash to a new 80-bit value.
+If at any time two cards possess the same Account Hash, the Electronic Wallet can no longer process purchases for either card, as a Charge Request message cannot uniquely identify a card.
+While hash functions such as those in the SHA-2 family are collision resistant, this does not mean that collisions cannot occur.
+Furthermore, truncating the Account Hash down to 80 bits greatly increases the probability of collisions.
+
+We wrote a simulator to model Wallet Server behavior, in order to ensure that messages contained sufficient information for the protocol to succeed, and to monitor for collisions.
+We seeded it with 10 million credit cards, and processing several million transactions.
+During the simulation, no collisions were observed.
+
+Modeling this behavior mathematically, we note that the Birthday Paradox plays a role in determining the number of credit cards that a database can contain before expecting a hash collision:
+the expected number cards registered before observing a collision is approximately
+$\sqrt{\frac{\pi}{2} \cdot 2^{80}} \approx 1.4 \cdot 10^{12}$.
+However, registering a credit card is by definition an event in which the Electronic Wallet is connected to the Internet (and thus to the Wallet Server).
+As such, collisions during registration are not a concern, as a differing seed or counter value can simply be chosen and synchronized between the Wallet and the Server.
+As a result, provided that there are fewer than $2^{79}$ (approximately $6.04 * 10^{24}$) credit cards registered, card registration is computationally easy (expecting no more than two attempts) without causing a collision.
+
+A credit card transaction is then modeled by selecting a single hash and replacing it.
+In such a transaction, the Birthday Paradox is not relevant:
+intuitively, updating Hash number 83 cannot cause Hashes 12 and 41 to collide.
+As a result, given a database of $n$ Account Hashes, the expected number of transactions before a collision occurs is
+$\frac{2^{80}}{n}$.
+Using the 10 million cards from our simulation, this implies that the expected number of transactions before a collision occurs is
+$\frac{2^{80}}{10,000,000} \approx 1.2 \cdot 10 ^ {17}$, or approximately 120 million billion transactions.
+It is thus hardly surprising that no collisions were observed in simulation.
+
+As such, the inconvenience of rendering both cards inoperative until at least one of them reconnects to the Internet is not particularly onerous.
