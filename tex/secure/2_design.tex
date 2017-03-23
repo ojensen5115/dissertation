@@ -65,8 +65,8 @@ Besides noting this particular case, we emphasize that issues such as these are 
 \subsection{Defending Against the Over-charge Attack}
 
 The Secure CC Protocol prevents the Over-charge attack against Customers using a virtual credit card.
-In step 3, the Customer verifies that \$d = \$s through visual comparison.
-Due to theinclusion of \$s in the hash when generating token \emph{T}, we gain the assurance that for any charge accepted by the bank, \$s = \$r.
+In step 3, the Customer verifies that \linebreak \$d = \$s through visual comparison.
+Due to the inclusion of \$s in the hash when generating token \emph{T}, we gain the assurance that for any charge accepted by the bank, \$s = \$r.
 
 Thus, through a transitive argument, the Customer can be assured that for any successful charge, \$d = \$r.
 Should the malicious retailer attempt to issue a charge request with some $\text{\$r} \neq \text{\$d}$, then $T_{\text{bank}} \neq T$ and the charge will be declined by the bank.
