@@ -1,0 +1,44 @@
+\subsection{Worst Case Analysis}
+\label{sec:analysis_worstcase}
+
+A point of sale may do rudimentary checking on a Card Information message before issuing a Charge Request message.
+In practice, 28 numeric digits does not imply $10^{28}$ possible messages, due to several constraints which may be verified without involving the bank.
+
+\subsubsection*{Constraint: Luhn Algorithm Checksum}
+
+Credit card numbers include a checksum formula known as the Luhn algorithm, commonly used to check for typographical errors when entering credit card details.
+This constrains the final digit of a 16-digit credit card.
+As such, a point of sale may choose to reject a Card Information message whose last digit of its credit card number does match.
+This reduces the number of admissible Card Information messages by a factor of 10.
+
+\subsubsection*{Constraint: Valid Expiration Dates}
+
+A credit card's expiration date is not valid if it is in the past.
+Furthermore, credit cards are not typically issued with an expiration date further than four years into the future.
+As such, a point of sale may choose to reject a Card Information message whose 4-digit expiration date is not one of 48 possible month/year combinations.
+This reduces the number of admissible Card Information messages by a factor of $\frac{10^4}{48} \approx 208$.
+
+\subsubsection*{Constraint: BIN}
+
+The first 4-6 digits of a credit card are typically reserved as a numeric bank identifier number, commonly referred to as a BIN.
+This information may be considered redundant to a certain degree, since NFC Card Information messages contain the bank name.
+Nonetheless, the point of sale may impose constraints on these six digits.
+In the worst case, let us assume that there is only one permissible BIN usable by the Unlinkable CC Protocol.
+This reduces the number of admissible Card Information messages by a factor of $10^6$.
+
+\subsubsection*{Remaining Message Space}
+
+As a result of the above constraints, worst-case assumptions leave us with a total of $48 * 10^{17}$ possible Card Information messages.
+Each Card Information message may then encode just 62 bits, as compared to 98 bits when Card Information messages are unconstrained.
+By shrinking the Price Hash component to 10 bits (representing a one-in-1024 chance for a malicious retailer to alter a price),
+  we are left with a Price Hash of 50 bits.
+
+Repeating the same analysis with a 50-bit price hash, a Wallet Server may support up to $2^49$ (approximately 560 trillion) credit cards
+  while keeping card registration computationally easy as defined in Section \ref{sec:analysis}.
+Once more assuming 10 million registered cards, the expected number of transactions before a collision occurs is $\frac{2^{50}}{10^8}$,
+  or approximately 112 million transactions.
+
+This figure is no longer negligible, highlighting the importance of supporting a collision mitigation strategy.
+However, the impact remains small:
+  a collision affect only those two cards with colliding account hash values,
+  and results in both cards becoming inoperative until at least one of the requisite Electronic Wallet applications regains access to the Internet.
