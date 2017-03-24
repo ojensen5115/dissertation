@@ -18,11 +18,11 @@ The steps involved in this protocol, illustrated in Figure \ref{fig:insecure-ccp
 \begin{enumerate}
 \item The point of sale displays the price of the purchase on its screen, while simultaneously attempting to establish communication over NFC.
 \item If the customer agrees with the displayed price, he brings his credit card within 4 centimeters of the point of sale and communication between the point of sale and the credit card is established.
-\item The point of sale sends a \emph{solicitation} message to the credit card.
-\item The credit card responds to the solicitation message with a \emph{card information} message, supplying the point of sale with the necessary information to initiate a transaction,
+\item The point of sale sends a Solicitation message to the credit card.
+\item The credit card responds to the solicitation message with a Card Information message, supplying the point of sale with the necessary information to initiate a transaction,
 	and identifying the credit card's issuing bank.
-\item Then the point of sale sends a \emph{charge request} message to the bank. This message is sent securely over the Internet.
-\item The bank verifies the details of the charge request, and responds to the point of sale with a \emph{approval} message, indicating whether the Charge Request has been accepted.
+\item Then the point of sale sends a Charge Request message to the bank. This message is sent securely over the Internet.
+\item The bank verifies the details of the charge request, and responds to the point of sale with a Approval message, indicating whether the Charge Request has been accepted.
 \end{enumerate}
 
 

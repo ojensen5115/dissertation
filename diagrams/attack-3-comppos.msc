@@ -9,5 +9,6 @@ msc {
  d=>c [label="card information"];
  c=>b [label="charge request"];
  b=>c [label="approve?\n(Y / N)"];
+ |||;
  c=>a [label="card information"];
 }
