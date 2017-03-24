@@ -1,43 +1,31 @@
-The protocol in use today for contactless (NFC) credit card transactions is insecure.
-
-Use of the NFC channel is a natural choice for a contactless payment protocol:
+The protocol in use today by contactless credit cards is insecure.
+Making use of the NFC channel is a natural choice for a contactless payment protocol:
     NFC is a wireless channel, has a very short range, permits for arbitrary computation, while needing no power source on the card.
 However, over-reliance on NFC's short range has led to unfortunate assumptions in the contactless credit card protocol.
 For example, a contactles credit card assumes (sometimes incorrectly) that its ability to receive a solicitation implies that its cardholder has made a conscious effort to enable communication.
 
-In this dissertation, we begin by examining the contactless credit card protocol in detail.
-We determine that contactless credit card transactions are vulnerable to four broad categories of ``outsider'' attacks:
-    \emph{eavesdropping}, wherein a malicious actor places a listening device within range of legitimate transmissions;
-    \emph{skimming attacks}, wherein a malicious actor initiates a transaction with a credit card without its cardholder's knowledge or consent;
-    \emph{relay attacks}, wherein two malicious actors relay information out-of-band, bypassingn the proximity assurance of NFC;
-    \emph{attacks facilitated by compromised points of sale}, where a point of sale has been compromised and transmits sensitive information to a third party.
-We discuss these four classes of attacks in some detail, then construct a replacement protocol which defends against them.
-
-Each of these attacks can be prevented through the use of a challenge-response protocol, and such protocols are not new.
+In this dissertation, we begin by examining the contactless credit card protocol currently in use.
+We conclude that transactions are vulnerable to four broad categories of ``outsider'' attacks:
+  eavesdropping, skimming attacks, relay attacks, attacks facilitated by compromised points of sale.
+Each of these attacks can be prevented through the use of a challenge-response protocol,
+    which typically relies on some form of cryptographic hash function.
 However, contactless credit cards operate within a strong set of constraints:
     in order to combat credit card fraud, cards need to be disposably cheap to manufacture.
-Most challenge-response protocols rely on some form of cryptographic hash function.
-By contrast, construct a challenge response protocol which minimizes computation which occurs on the card,
-    considering even hash functions to be prohibitively expensive.
+Thus, we consider a hash function to be prohibitively expensive.
+Instead, we use stepwise refinement to construct a challenge response protocol which minimizes computation that occurs on the card.
 
-Next, we consider the problem posed by malicious retailers.
-Being in control of the device with which credit cards interface, malicious retailers are in a unique position to carry out their own attacks:
-  at the most basic level, a retailer may increase the price of a transaction without informing the customer;
-  more advanced, a retailer and an accomplice may form a communication bridge between a victim credit card and a victim point of sale.
-While the former attack must eschew detection to be successful, the latter is particularly insidioius as the malicious parties leave no traces with either of the victims.
-
+Next, we consider malicious retailers.
+Malicious retailers are in control of the device with which credit cards interface,
+    and we identify and discuss two attacks which may be carried out.
 Both of these attacks are predicated on the customer's lack of involvement in the protocol, beyond simply allowing it to occur.
-We recognize the entrance of electronic wallet applications such as Android Pay and Apple Wallet, which may provide a communication interface between customer and card,
-  allowing for customer participation and defense agains these two attacks.
-This augmented protocol remains backwards compatible: while users of physical contactless credit cards do not gain protection against malicious retailers,
-    they may still participate in the protocol and enjoy protection from malicious outsiders.
+The emergence of Electronic Wallet applications (such as Android Pay and Apple Wallet) provide an interface between customer and card,
+    which we make use of to involve the customer in the protocol, defend against malicious retailers.
+This protocol is backwards compatible with physical credit cards, which do not gain protection from malicious retailers,
+    but may still participate in the protocol and enjoy protection from malicious outsiders.
 
-Finally, we determine three desirable properties of a contactless credit card protocol beyond simply preventing fraud:
-    \emph{unlinkability}, bolstering consumer privacy by preventing retailers from correlating purchases as having made by the same card;
+Finally, we determine three desirable properties of a credit card protocol beyond preventing fraud:
+    \emph{unlinkability}, preventing retailers from linking purchases made by the same card;
     \emph{use of existing infrastructure}, without requiring retailers to replace or modify their points of sale;
     \emph{use of any credit card}, without requiring any special cards or participation from the issuing bank.
-We design the Unlinkable CC Protocol for electronic wallets, which provides
-    protection from malicious outsiders,
-    protection from malicious retailers,
-    and upholds unlinkability between purchases,
-    all while using existing point of sale infrastructure and allowing for the use of any credit card.
+We design the Unlinkable Protocol for Electronic Wallets, which provides protection from malicious outsiders as well as malicious retailers,
+    while upholding unlinkability, using existing point of sale infrastructure, and allowing for the use of any credit card.
