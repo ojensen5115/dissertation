@@ -20,11 +20,14 @@ The Insecure CC Protocol, from the perspective of the point of sale, is illustra
 	\item a 4-digit expiration date
 	\item an 8-digit iCVV
 	\end{itemize}
-	In practice, this is an opaque 28-digit numeric value (16 + 4 + 8).
-	This data is accompanied by the bank name.
-	(note that there are some constraints on these values -- for example, an expiration date of ``8321'' does not need to be verified by a bank to be declared invalid.
-	Similarly, there are constraints on credit card numbers as well.
-	We ignore these restrictions for simplicity, but will later account for them.)
+	In practice, this is an opaque\footnote{
+        There are some constraints on this value.
+        For example, an expiration date of ``8321'' does not need to be verified by a bank to be declared invalid.
+        Similarly, there are constraints on credit card numbers as well.
+        These have little effect on our approach, so we ignore them for simplicity.
+    }
+    28-digit numeric value (16 + 4 + 8).
+    This data is accompanied by the bank name.
 \item After receiving the Card Information message,
 	the point of sale issues a Charge Request message to the bank specified by the bank name field in the Card Information message.
 	The Charge Request message consists of the card's credit card number, expiration date, iCVV, and the price to charge.

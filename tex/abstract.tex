@@ -7,21 +7,18 @@ For example, a contactles credit card assumes (sometimes incorrectly) that its a
 In this dissertation, we begin by examining the contactless credit card protocol currently in use.
 We conclude that transactions are vulnerable to four broad categories of ``outsider'' attacks:
   eavesdropping, skimming attacks, relay attacks, attacks facilitated by compromised points of sale.
-Each of these attacks can be prevented through the use of a challenge-response protocol,
-    which typically relies on some form of cryptographic hash function.
 However, contactless credit cards operate within a strong set of constraints:
     in order to combat credit card fraud, cards need to be disposably cheap to manufacture.
-Thus, we consider a hash function to be prohibitively expensive.
-Instead, we use stepwise refinement to construct a challenge response protocol which minimizes computation that occurs on the card.
+Thus, while a standard challenge-response protocol would defend against these attacks,
+    the underlying cryptographic hash functions are prohibitively expensive in this context.
+Instead, we use stepwise refinement to construct a protocol using single-use ``charge tokens'' verifiable by the bank, while minimizing computation that occurs on the card.
 
 Next, we consider malicious retailers.
-Malicious retailers are in control of the device with which credit cards interface,
-    and we identify and discuss two attacks which may be carried out.
+Retailers are in control of the device with which credit cards communicate,
+    and we identify and discuss two attacks which may be carried out by a malicious retailer.
 Both of these attacks are predicated on the customer's lack of involvement in the protocol, beyond simply allowing it to occur.
-The emergence of Electronic Wallet applications (such as Android Pay and Apple Wallet) provide an interface between customer and card,
-    which we make use of to involve the customer in the protocol, defend against malicious retailers.
-This protocol is backwards compatible with physical credit cards, which do not gain protection from malicious retailers,
-    but may still participate in the protocol and enjoy protection from malicious outsiders.
+The emergence of Electronic Wallet applications (such as Android Pay and Apple Wallet) provide a channel between customer and card.
+We use this channel to confirm the purchase price, binding it to the charge token to prevent both malicious retailer attacks.
 
 Finally, we determine three desirable properties of a credit card protocol beyond preventing fraud:
     \emph{unlinkability}, preventing retailers from linking purchases made by the same card;
