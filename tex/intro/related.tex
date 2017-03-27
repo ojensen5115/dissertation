@@ -58,3 +58,55 @@ Furthermore, the \emph{lack} of unlinkability of current credit card transaction
 As such, a clean-slate unlinkable protocol is unlikely to see adoption for contactless credit card processing.
 
 \todo{add references for works related to NFC, not necessarily security and privacy}
+
+
+\subsubsection*{Software card emulation in NFC-enabled mobile phones: great advantage or security nightmare}
+\cite{roland2012software}
+pros and cons of mobile devices emulating NFC cards
+mentions relay attacks, cites several others that demonstrate it (8, 11, 14, 15, 1, 6, 7)
+software card emulation (7 (5, 13)) mostly in the context of blackberry
+"it's difficult to imagine a Google Wallet and Isis wallet residing on the same phone -- especially if they are anchored to the same secure element" [2]
+store sensitive information remotely, accessed via relay application
+
+\subsubsection*{Practical relay attack on contactless transactions by using nfc mobile phones}
+\cite{markantonakis2012practical}
+followup to francis2010practical which demonstrates bluetooth nfc relay
+presents a practical NFC relay of credit card transactions using only mobile phones
+suggests countermeasures:
+  from reader: measuring timing, distance bounding
+  from card: location information, relay resistance at the communication layer (thwarted by randomization of NFC UID), application restrictions
+
+\subsubsection*{Applying relay attacks to Google Wallet}
+\cite{roland2013applying}
+evaluates feasibility of software based relay attack on google wallet
+relay over TCP connection
+countermeasures:
+  POS timeouts (assumed in our work)
+  Wallet Application pin verification (assumed in our work)
+  limit capabilities of applications interfacing with RF interface
+google wallet fixes this by disabling access to credit card secure element via app processor (sol. 3)
+
+\subsubsection*{A Survey on Near Field Communication (NFC) Technology}
+\cite{Coskun2013}
+Early look at where NFC technology was hoped to go:
+useful for myriad of purposes from unlocking locks, payment systems, etc.
+end-goal: your cell phone replaces everything you would otherwise need to use
+compares NFC to bluetooth and zigbee
+
+\subsubsection*{Dhwani: secure peer-to-peer acoustic NFC}
+\cite{nandakumar2013dhwani}
+Not actually NFC, but done via speaker / microphone
+very interesting "self-jamming" technique to prevent eavesdropping
+does not prevent any of the other attacks, of course
+
+\subsubsection*{On the security issues of NFC enabled mobile phones}
+\cite{francis2010security}
+Discusses the ability for NFC mobile phones to operate as skimming platforms.
+Proposes countermeasures to prevent NFC mobile phones from being used as such.
+
+\subsubsection*{Using 3G network components to enable NFC mobile transactions and authentication}
+\cite{chen2010using}
+Does not consider using NFC to perform *credit card* transactions.
+Explores using security mechanisms built into 3G (challenge-resp authentication) for payment authentication
+Proposes payment protocol, analyzes risks
+Involves mutual authentication and customer price confirmation (communicated to the phone from the POS via nfc)
