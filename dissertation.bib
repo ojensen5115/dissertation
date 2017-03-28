@@ -1,46 +1,22 @@
-@inproceedings{sccp,
-  author =       {Jensen, Oliver and Gouda, Mohamed and Qiu, Lili},
-  title =        {A Secure Credit Card Protocol over NFC},
-  crossref =     {ICDCN:15},
-  doi =          {10.1145/2833312.2833319},
-  keywords =     {credit card payments, secure mobile payments, Near Field Communication (NFC), authentication, privacy},
+@inproceedings{jensen1,
+  title={A secure credit card protocol over NFC},
+  author={Jensen, Oliver and Gouda, Mohamed and Qiu, Lili},
+  booktitle={Proceedings of the 17th International Conference on Distributed Computing and Networking},
+  pages={32},
+  year={2016},
+  organization={ACM}
 }
 
-@proceedings{ICDCN:15,
-  editor =       {Mun Choon Chan and Gopal Pandurangan},
-  title =        "International Conference on Distributed Computing and Networking",
-  booktitle =    "International Conference on Distributed Computing and Networking",
-  publisher =    {ACM},
-  venue =        {Singapore},
-  month =        jan,
-  year =         {2016},
-  isbn =         {1-4503-4032-8},
+@inproceedings{jensen2,
+  title={Securing NFC Credit Card Payments Against Malicious Retailers},
+  author={Jensen, Oliver and O'Meara, Tyler and Gouda, Mohamed},
+  booktitle={International Conference on Networked Systems},
+  pages={214--228},
+  year={2016},
+  organization={Springer}
 }
 
 
-@MANUAL{nfcspec,
-	TITLE = "Near Field Communication - Interface and Protocol",
-	ORGANIZATION = "ECMA",
-	EDITION = {3},
-	NUMBER = {340},
-	MONTH = "June",
-	YEAR = {2013}
-}
-
-@MANUAL{nfciso,
-   NUMBER = {14443},
-   ORGANIZATION = "ISO 14443",
-   title = {{Identification cards - Contactless integrated circuit(s) cards - Proximity cards}},
-   year = {2000},
-}
-
-@MANUAL{paypass,
-   ORGANIZATION = "MasterCard",
-   VERSION= {1.3},
-   MONTH = "November",
-   YEAR = {2007},
-   title = {{PayPass - Mag Stripe - Security Architecture}}
-}
 
 @inproceedings{kortvedt2009eavesdropping,
   title={Eavesdropping near field communication},
@@ -76,15 +52,6 @@
   publisher={IEEE}
 }
 
-@incollection{francis2010practical,
-  title={Practical NFC peer-to-peer relay attack using mobile phones},
-  author={Francis, Lishoy and Hancke, Gerhard and Mayes, Keith and Markantonakis, Konstantinos},
-  booktitle={Radio Frequency Identification: Security and Privacy Issues},
-  pages={35--49},
-  year={2010},
-  publisher={Springer}
-}
-
 
 @inproceedings{madlmayr2008nfc,
   title={NFC devices: Security and privacy},
@@ -116,6 +83,28 @@
   howpublished = {\url{http://krebsonsecurity.com/2014/06/p-f-changs-breach-likely-began-in-sept-2013/}},
   note = {Accessed: 2014-11-10}
 }
+
+@misc{targethack,
+  author = {Robin Sidel, Danny Yadron, Sara Germano},
+  title = {Target Hit by Credit-Card Breach},
+  howpublished = {\url{http://online.wsj.com/articles/SB10001424052702304773104579266743230242538}},
+  note = {Accessed: 2014-11-10}
+}
+
+@misc{homedepothack,
+  author = {Robin Sidel},
+  title = {Home Depot's 56 Million Card Breach Bigger Than Target's},
+  howpublished = {\url{http://online.wsj.com/articles/home-depot-breach-bigger-than-targets-1411073571}},
+  note = {Accessed: 2014-11-10}
+}
+
+@misc{neimanmarcushack,
+  author = {Elizabeth Harris, Nicole Perlroth, Natheniel Popper},
+  title = {Neiman Marcus Data Breach Worse Than First Said},
+  howpublished = {\url{http://www.nytimes.com/2014/01/24/business/neiman-marcus-breach-affected-1-1-million-cards.html}},
+  note = {Accessed: 2014-11-10}
+}
+
 
 @ARTICLE{diffiehellman,
 author={Diffie, W. and Hellman, M.E.},
@@ -158,6 +147,12 @@ ISSN={0018-9448},}
   year={2012}
 }
 
+@inproceedings{roland2013cloning,
+  title={Cloning Credit Cards: A Combined Pre-play and Downgrade Attack on EMV Contactless.},
+  author={Roland, Michael and Langer, Josef},
+  booktitle={WOOT},
+  year={2013}
+}
 
 @article{uuid,
   title={A universally unique identifier (uuid) urn namespace},
@@ -207,12 +202,29 @@ ISSN={0018-9448},}
    year = {2000},
 }
 
+@MANUAL{emv,
+ ORGANIZATION = {EMVCo. LLC},
+ VERSION= {2.6},
+ title = {EMV Contactless Specifications for Payment Systems - Contactless Communication Protocol},
+ url = {http://www.emvco.com/},
+ YEAR = {2016},
+ MONTH = "March"
+}
+
 @MANUAL{paypass,
    ORGANIZATION = "MasterCard",
    VERSION= {1.3},
    MONTH = "November",
    YEAR = {2007},
-   title = {{PayPass - Mag Stripe - Security Architecture}}
+   title = {PayPass - Mag Stripe - Security Architecture}
+}
+
+@MANUAL{paywave,
+  author = {Visa},
+  title = {Visa Contactless Payment Specification},
+  VERSION={2.2},
+  MONTH="Janary",
+  YEAR={2016},
 }
 
 
@@ -249,14 +261,6 @@ misc{lee2012nfc,
   publisher={DEFCON}
 }
 
-incollection{francis2010practical,
-  title={Practical NFC peer-to-peer relay attack using mobile phones},
-  author={Francis, Lishoy and Hancke, Gerhard and Mayes, Keith and Markantonakis, Konstantinos},
-  booktitle={Radio Frequency Identification: Security and Privacy Issues},
-  pages={35--49},
-  year={2010},
-  publisher={Springer}
-}
 
 
 inproceedings{madlmayr2008nfc,
@@ -268,26 +272,6 @@ inproceedings{madlmayr2008nfc,
   organization={IEEE}
 }
 
-@misc{targethack,
-  author = {Robin Sidel, Danny Yadron, Sara Germano},
-  title = {Target Hit by Credit-Card Breach},
-  howpublished = {\url{http://online.wsj.com/articles/SB10001424052702304773104579266743230242538}},
-  note = {Accessed: 2014-11-10}
-}
-
-@misc{homedepothack,
-  author = {Robin Sidel},
-  title = {Home Depot's 56 Million Card Breach Bigger Than Target's},
-  howpublished = {\url{http://online.wsj.com/articles/home-depot-breach-bigger-than-targets-1411073571}},
-  note = {Accessed: 2014-11-10}
-}
-
-@misc{neimanmarcushack,
-  author = {Elizabeth Harris, Nicole Perlroth, Natheniel Popper},
-  title = {Neiman Marcus Data Breach Worse Than First Said},
-  howpublished = {\url{http://www.nytimes.com/2014/01/24/business/neiman-marcus-breach-affected-1-1-million-cards.html}},
-  note = {Accessed: 2014-11-10}
-}
 
 ARTICLE{diffiehellman,
 author={Diffie, W. and Hellman, M.E.},
@@ -365,21 +349,11 @@ url="http://dx.doi.org/10.1007/s11277-012-0935-5"
   year={2012}
 }
 
-@article{markantonakis2012practical,
-  title={Practical relay attack on contactless transactions by using nfc mobile phones},
-  author={Markantonakis, Konstantinos and Francis, Lishoy and Hancke, Gerhard and Mayes, Keith},
-  journal={Radio Frequency Identification System Security: RFIDsec},
-  volume={12},
-  pages={21},
-  year={2012}
-}
-
 @inproceedings{nandakumar2013dhwani,
   title={Dhwani: secure peer-to-peer acoustic NFC},
   author={Nandakumar, Rajalakshmi and Chintalapudi, Krishna Kant and Padmanabhan, Venkat and Venkatesan, Ramarathnam},
   booktitle={ACM SIGCOMM Computer Communication Review},
   volume={43},
-  number={4},
   pages={63--74},
   year={2013},
   organization={ACM}
@@ -396,6 +370,24 @@ url="http://dx.doi.org/10.1007/s11277-012-0935-5"
   publisher={Inderscience Publishers}
 }
 
+@incollection{francis2010practical,
+  title={Practical NFC peer-to-peer relay attack using mobile phones},
+  author={Francis, Lishoy and Hancke, Gerhard and Mayes, Keith and Markantonakis, Konstantinos},
+  booktitle={Radio Frequency Identification: Security and Privacy Issues},
+  pages={35--49},
+  year={2010},
+  publisher={Springer}
+}
+
+@article{markantonakis2012practical,
+  title={Practical relay attack on contactless transactions by using nfc mobile phones},
+  author={Markantonakis, Konstantinos and Francis, Lishoy and Hancke, Gerhard and Mayes, Keith},
+  journal={Radio Frequency Identification System Security: RFIDsec},
+  volume={12},
+  pages={21},
+  year={2012}
+}
+
 @inproceedings{chen2010using,
   title={Using 3G network components to enable NFC mobile transactions and authentication},
   author={Chen, Wei-Dar and Hancke, GP and Mayes, KE and Lien, Y and Chiu, JH},
@@ -404,4 +396,10 @@ url="http://dx.doi.org/10.1007/s11277-012-0935-5"
   pages={441--448},
   year={2010},
   organization={IEEE}
+}
+
+@article{lifchitz2012hacking,
+  title={Hacking the NFC credit cards for fun and debit},
+  author={Lifchitz--BT, Renaud},
+  year={2012}
 }
