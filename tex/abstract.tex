@@ -6,27 +6,27 @@ In this dissertation, we begin by examining the protocol currently in use,
     and present a family of replacement protocols to defend against its deficiencies.
 
 We first consider ``outsider'' attacks, and determine that transactions are vulnerable to
-    eavesdropping, skimming attacks, relay attacks, attacks facilitated by compromised points of sale.
+    eavesdropping, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale.
 While standard cryptographic approaches could defend against these attacks,
-    increasing computational power on credit cards leads to higher manufacturing costs.
-Furthermore, altering the protocol structure requires retailer cooperation,
-    and so preserving \emph{linkability} (retailers' ability to identify purchases made with the same card) is an explicit goal.
-We use stepwise refinement to construct the Externally Secure CC Protocol using single-use ``charge tokens'' verifiable by the bank and recognizable by the retailer,
+    cryptographic operations are comparatively expensive, and increasing computational power on credit cards leads to higher manufacturing costs.
+We use stepwise refinement to construct the Externally Secure CC Protocol using single-use ``charge tokens'' verifiable by the bank,
     while minimizing computation that occurs on the card.
 
-Next, we consider malicious retailers.
-Retailers are in control of the device with which credit cards communicate,
-    and we identify and discuss two attacks which may be carried out by a malicious retailer.
-Both of these attacks rely on charging the customer a different price than is displayed,
+Next we consider retailers, who are in control of the point of sale with which credit cards communicate.
+We identify two attacks which may be carried out by a malicious retailer:
+    overcharge attacks, and transparent bridge attacks.
+Both of these attacks rely on the card being charged a different price than the one displayed by the point of sale,
     and are predicated on the customer's lack of involvement in the protocol beyond simply allowing it to occur.
 The emergence of Electronic Wallet applications (such as Android Pay and Apple Wallet) provide a channel between customer and card.
-We use this channel to construct the Secure CC Protocol,
-    allowing the customer to confirm the purchase price and binding it to the charge token.
+We augment the Externally Secure CC Protocol using this channel to construct the Secure CC Protocol,
+    allowing the customer to bind a particular price to the charge token thus stimying these attacks.
 
-Finally, we determine three desirable properties of a credit card protocol beyond preventing fraud:
-    \emph{unlinkability}, preventing retailers from identifying purchases made by the same card;
-    \emph{use of existing infrastructure}, without requiring retailers to replace or modify their points of sale;
-    \emph{use of any credit card}, without requiring any special cards or participation from the issuing bank.
+The Secure CC Protocol supports the property known as \emph{linkability}:
+    while only the bank can verify charge tokens, tokens from the same credit card can be recognized as such by the retailer.
+Preserving linkability was an explicit goal, since this protocol alters the message structure and thus relies on retailer cooperation.
+However, linkability has serious consumer privacy consequences, so we consider the converse property of
+    \emph{unlinkability}, where a retailer loses the ability to identify purchases made by the same card.
+To be viable, an unlinkable protocol should make use of existing infrastructure, so as not to require retailer cooperation.
 In response, we design the Unlinkable Electronic Wallet Protocol,
     leveraging techniques from the Secure CC Protocol to guard against malicious outsiders and retailers,
     while tunneling unlinkable charge tokens through the protocol in use today.
