@@ -1,16 +1,16 @@
-The protocol in use today by contactless credit cards is insecure.
+The contactless credit card protocol in use today is insecure.
 The credit card industry has chosen to use the NFC channel for contactless transactions.
 However, reliance on NFC's short range has led to unfortunate assumptions in the contactless credit card protocol.
 For example, the card assumes (sometimes incorrectly) that its ability to receive a solicitation implies the cardholder's intent to purchase.
-In this dissertation, we begin by examining the protocol currently in use,
+In this dissertation, we examine the protocol currently in use,
     and present a family of three replacement protocols to defend against its deficiencies.
 
-We first consider ``outsider'' attacks (e.g. eavesdropping, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale)
+First, we consider ``outsider'' attacks (e.g. eavesdropping, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale)
     and design our first protocol to defend against these attacks.
 We call this protocol the Externally Secure CC Protocol, and design it using stepwise refinement.
-This protocol makes use of single-use ``charge tokens'' verifiable by the bank, while minimizing computation that occurs on the card.
+This protocol makes use of single-use ``charge tokens'' verifiable by the bank, while minimizing computation that neesd to occur on the card.
 
-Second we consider retailers, and we identify two attacks which may be carried out by malicious retailers:
+Second, we identify two attacks which may be carried out by malicious retailers:
     overcharge attacks, and transparent bridge attacks.
 Both attacks are predicated on the customer's lack of participation in the protocol,
     and involve modifying or replacing a charge after it has been confirmed by the customer.
@@ -21,8 +21,8 @@ We augment the Externally Secure CC Protocol using this channel to construct the
 The Secure CC Protocol supports a property known as \emph{linkability}:
     while only the bank can verify charge tokens, tokens from the same card can be recognized as such by the retailer.
 This property is enjoyed by retailers for marketing purposes.
-Since our protocol alters message structure, it relies on retailer cooperation, so preserving linkability is important.
-However, linkability has serious privacy consequences, so we consider the converse property of
+The Secure CC Protocol relies on retailer cooperation, so preserving linkability is important.
+However, linkability has serious consumer privacy consequences, so we consider the converse property of
     \emph{unlinkability}, where a retailer cannot identify purchases made by the same card.
 To be viable, an unlinkable protocol should make use of existing infrastructure, so as not to require retailer cooperation.
 In response, we design the Unlinkable Electronic Wallet Protocol,
