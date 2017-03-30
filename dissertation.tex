@@ -7,13 +7,23 @@
 %############
 
 \usepackage{amsmath,amsthm,amsfonts,amscd} % Math stuff
-\usepackage{citesort} % Makes citing a little nicer
-\usepackage{eucal} 	 	% Euler fonts
+\usepackage{boxedminipage}
+%\usepackage{citesort} % Better citations
+\usepackage{epsfig,endnotes} % Better figures?
+\usepackage{enumitem} % Better lists
+\usepackage{float} % Precise positioning of floats
+\restylefloat{table} % "
 \usepackage{graphicx} % Better graphics or something
+\usepackage[hyphens]{url}	% Fancy URLs
+\usepackage[hidelinks]{hyperref} % Better page numbering
+%\usepackage{latexsym} % More symbols
 \usepackage{makeidx} % Package to make an index.
-\usepackage{url}		% Allows good typesetting of web URLs.
-\usepackage{verbatim}      	% Allows quoting source with commands.
+\usepackage{multirow}
+\usepackage{subcaption} % Captions to subfigures
+\usepackage{tabularx} % Custom table columns
 \usepackage{xcolor} % Color for grumbler
+%\usepackage{verbatim} % Allows quoting source with commands.
+%\usepackage{wrapfig} % Wraps figure
 
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 
@@ -32,54 +42,100 @@
 
 % User notes
 \newcommand{\grumbler}[2]{\textcolor{red}{\bf #1: #2}}
+\newcommand{\vs}[1]{\grumbler{Vitaly}{#1}}
+\newcommand{\rfm}[1]{\grumbler{Richard}{#1}}
+\newcommand{\jess}[1]{\grumbler{Jess}{#1}}
 \newcommand{\citeme}{\textcolor{blue}{$^{\text{[citation needed]}}$}}
 \newcommand{\todo}[1]{\textcolor{orange}{\large \bf TODO: #1}}
+
+% Bold paragraph headings
+\newcommand{\paragraphbe}[1]{\vspace{0.7ex}\noindent{\bf \em #1} }
+
+% Math
+\newcommand{\getsr}{{\;{\leftarrow{\hspace*{-2pt}\raisebox{.75pt}{$\scriptscriptstyle\$$}}}\;}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Colon}{:\:}
+\newcommand{\Ch}{\mathbf{Ch}}
+\newcommand{\Adv}{\mathcal{A}}
+\newcommand{\AdvB}{\mathcal{B}}
+\newcommand{\MKSetup}{\textnormal{MK.Setup}}
+\newcommand{\MKKeygen}{\textnormal{MK.Kg}}
+\newcommand{\MKEnc}{\textnormal{MK.Enc}}
+\newcommand{\MKDelta}{\textnormal{MK.Delta}}
+\newcommand{\MKToken}{\textnormal{MK.Token}}
+\newcommand{\MKAdjust}{\textnormal{MK.Adjust}}
+\newcommand{\MKMatch}{\textnormal{MK.Match}}
+\newcommand{\params}{\mathsf{pars}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\Ob}{\mathcal{O}}
+
+
+% Spacing
+\newenvironment{newitemize}{%
+\begin{list}{\mbox{}\hspace{0pt}$\bullet$\hfill}{\labelwidth=10pt%
+\labelsep=0pt \leftmargin=10pt \topsep=1pt%
+\setlength{\listparindent}{\saveparindent}%
+\setlength{\parsep}{\saveparskip}%
+\setlength{\itemsep}{1pt} }}{\end{list}}
+
+\newenvironment{newenum}{%
+\begin{list}{{\rm (\arabic{ctr})}\hfill}{\usecounter{ctr} \labelwidth=17pt%
+\labelsep=0pt \leftmargin=22pt \topsep=1pt%
+\setlength{\listparindent}{\saveparindent}%
+\setlength{\parsep}{\saveparskip}%
+\setlength{\itemsep}{1pt} }}{\end{list}}
+
+% Custom table columns
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1\textwidth}}
+\newcolumntype{L}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1\textwidth}}
+
+% custom hline width
+\makeatletter
+\def\hlinewd#1{%
+\noalign{\ifnum0=`}\fi\hrule \@height #1 %
+\futurelet\reserved@a\@xhline}
+\makeatother
+
+% Tighter bibliography without using natbib packages
+%% \let\oldthebibliography=\thebibliography
+%% \let\endoldthebibliography=\endthebibliography
+%% \renewenvironment{thebibliography}[1]{%
+%%   \begin{oldthebibliography}{#1}%
+%%     \setlength{\parskip}{0ex}%
+%%     \setlength{\itemsep}{0ex}%
+%% }%
+%% {%
+%%   \end{oldthebibliography}%
+%% }
 
 
 %############
 %  METADATA
 %############
 
-% Fill this secontion out with your info. Or not.
-
-
 \author{Oliver Christopher Jensen}
-\address{\textit{ojensen@utexas.edu}}
-
-% You need to put all of your degrees or UT gets upset
+\address{\todo{how long do I get to keep this address?}\textit{ojensen@cs.utexas.edu}}
 \previousdegrees{B.A., M.S.Comp.Sci.}
 
 \title{Secure Protocols for Contactless Credit Cards and Electronic Wallets}
 
-% For supervisor and committee members, there always has to be one in square
-% brackets. Everyone else goes first in square brackets.
 
-% With a co-supervisor
-%% \supervisor
-%% 	[Hubert J. Farnsworth]
-%% 	{Amy Wong}
-
-% Without a co-supervisor
 \supervisor
-	{Mohamed Gouda
-}
+	{Mohamed G. Gouda}
 
-% Put everyone else here
 \committeemembers
-	[Lorenzo Alvisi]
+  [Lorenzo Alvisi]
 	[Lili Qiu]
-  {Vijay Garg}
-
+	{Vijay Garg}
 
 \graduationmonth{May}
 \graduationyear{2017}
 
 \typist{the author}
 
-% Uncomment singlespacing if you like single space for editing.
-% DO NOT SUBMIT WITHOUT THE FOLLOWING COMMENTED OUT
-%\singlespacing
-
+%\singlespacing % COMMENT OUT BEFORE SUBMITING
 \oneandonehalfspacequote
 
 \topmargin 0.125in
@@ -135,14 +191,9 @@
 \indent
 \input{./tex/abstract}
 
-% These will get filled out automatically
 \tableofcontents
 %\listoftables
 \listoffigures
-
-
-
-
 
 \chapter{Introduction}
 \label{cha:intro}
@@ -185,6 +236,7 @@
 \input{./tex/goals/1_infrastructure}
 \input{./tex/goals/2_anycard}
 
+
 \chapter{Design of the Unlinkable CC Protocol}
 \label{cha:unlinkable_design}
 
@@ -202,15 +254,7 @@
 
 \chapter{Concluding Remarks and Future Work}
 \label{cha:conclusion}
-\todo{conclusion etc.}
-
-
-
-
-
-%\appendix
-%\index{Appendix}%
-%\include{appendix}
+\input{./tex/conclusion/0_intro}
 
 \bibliographystyle{plain}
 \bibliography{dissertation}

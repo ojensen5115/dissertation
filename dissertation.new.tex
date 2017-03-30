@@ -1,0 +1,225 @@
+\documentclass[12pt]{report}
+\usepackage{utdiss2}
+
+
+%############
+%  PACKAGES
+%############
+
+\usepackage{amsmath,amsthm,amsfonts,amscd} % Math stuff
+\usepackage{citesort} % Makes citing a little nicer
+\usepackage{eucal} 	 	% Euler fonts
+\usepackage{graphicx} % Better graphics or something
+\usepackage{makeidx} % Package to make an index.
+\usepackage{url}		% Allows good typesetting of web URLs.
+\usepackage{verbatim}      	% Allows quoting source with commands.
+\usepackage{xcolor} % Color for grumbler
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+% Better URL line breaks...
+\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
+  \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
+  \do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t%
+  \do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D%
+  \do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
+  \do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
+  \do\Y\do\Z\do\0\do\1\do\2\do\3\do\4\do\5\do\6\do\7\do\8\do\9}
+
+%##################
+% CUSTOM COMMANDS
+%##################
+
+% User notes
+\newcommand{\grumbler}[2]{\textcolor{red}{\bf #1: #2}}
+\newcommand{\citeme}{\textcolor{blue}{$^{\text{[citation needed]}}$}}
+\newcommand{\todo}[1]{\textcolor{orange}{\large \bf TODO: #1}}
+
+
+%############
+%  METADATA
+%############
+
+% Fill this secontion out with your info. Or not.
+
+
+\author{Oliver Christopher Jensen}
+\address{\textit{ojensen@utexas.edu}}
+
+% You need to put all of your degrees or UT gets upset
+\previousdegrees{B.A., M.S.Comp.Sci.}
+
+\title{Secure Protocols for Contactless Credit Cards and Electronic Wallets}
+
+% For supervisor and committee members, there always has to be one in square
+% brackets. Everyone else goes first in square brackets.
+
+% With a co-supervisor
+%% \supervisor
+%% 	[Hubert J. Farnsworth]
+%% 	{Amy Wong}
+
+% Without a co-supervisor
+\supervisor
+	{Mohamed Gouda
+}
+
+% Put everyone else here
+\committeemembers
+	[Lorenzo Alvisi]
+	[Lili Qiu]
+  {Vijay Garg}
+
+
+\graduationmonth{May}
+\graduationyear{2017}
+
+\typist{the author}
+
+% Uncomment singlespacing if you like single space for editing.
+% DO NOT SUBMIT WITHOUT THE FOLLOWING COMMENTED OUT
+%\singlespacing
+
+\oneandonehalfspacequote
+
+\topmargin 0.125in
+
+
+%################
+%  STYLE MACROS
+%################
+
+\newcommand{\latexe}{{\LaTeX\kern.125em2%
+                      \lower.5ex\hbox{$\varepsilon$}}}
+
+\newcommand{\amslatex}{\AmS-\LaTeX{}}
+
+\chardef\bslash=`\\	% \bslash makes a backslash (in tt fonts)
+			%	p. 424, TeXbook
+
+\newcommand{\cn}[1]{\texttt{\bslash #1}}
+
+\makeatletter		% Starts section where @ is considered a letter
+			% and thus may be used in commands.
+\def\square{\RIfM@\bgroup\else$\bgroup\aftergroup$\fi
+  \vcenter{\hrule\hbox{\vrule\@height.6em\kern.6em\vrule}%
+                                              \hrule}\egroup}
+\makeatother		% Ends sections where @ is considered a letter.
+			% Now @ cannot be used in commands.
+
+\makeindex    % Make the index
+
+%############
+%  DOCUMENT
+%############
+
+\begin{document}
+
+\copyrightpage
+\commcertpage
+\titlepage
+
+\begin{dedication}
+\index{Dedication@\emph{Dedication}}%
+%This thesis is dedicated to blahblah.
+\todo{dedication}
+\end{dedication}
+
+\begin{acknowledgments}		% Optional
+\index{Acknowledgments@\emph{Acknowledgments}}%
+\input{./tex/acknowledgments}
+\end{acknowledgments}
+
+\utabstract
+\index{Abstract}
+\indent
+\input{./tex/abstract}
+
+% These will get filled out automatically
+\tableofcontents
+%\listoftables
+\listoffigures
+
+
+
+
+
+\chapter{Introduction}
+\label{cha:intro}
+\input{./tex/intro/0_intro}
+\input{./tex/intro/1_related}
+
+\chapter{The Insecure CC Protocol}
+\label{cha:insecure}
+\input{./tex/insecure/0_intro}
+\input{./tex/insecure/1_goals}
+\input{./tex/insecure/2_design}
+\input{./tex/insecure/3_attacks}
+
+\chapter{The Externally Secure CC Protocol}
+\label{cha:external}
+\input{./tex/external/0_intro}
+\input{./tex/external/1_goals}
+\input{./tex/external/2_design}
+
+\chapter{The Secure CC Protocol}
+\label{cha:secure}
+\input{./tex/secure/0_intro}
+\input{./tex/secure/1_goals}
+\input{./tex/secure/2_design}
+
+\chapter{Virtual Credit Cards and Electronic Wallets}
+\label{cha:electronic}
+\input{./tex/electronic/main}
+
+\chapter{Protecting Customer Privacy: Unlinkability}
+\label{cha:unlinkability}
+\input{./tex/unlinkability/0_intro}
+\input{./tex/unlinkability/1_unlinkability}
+\input{./tex/unlinkability/2_simple_protocol}
+
+\chapter{Additional Goals for the Unlinkable CC Protocol}
+\label{cha:unlinkable_goals}
+
+\input{./tex/goals/0_intro}
+\input{./tex/goals/1_infrastructure}
+\input{./tex/goals/2_anycard}
+
+\chapter{Design of the Unlinkable CC Protocol}
+\label{cha:unlinkable_design}
+
+\input{./tex/new_protocol/intro}
+\input{./tex/new_protocol/p1}
+\input{./tex/new_protocol/p2}
+\input{./tex/new_protocol/p3}
+
+\chapter{Analysis of the Unlinkable Wallet Protocol}
+\label{cha:simulation}
+\input{./tex/analysis/0_intro}
+\input{./tex/analysis/1_analysis}
+\input{./tex/analysis/2_simulation}
+%\input{./tex/analysis/3_worst_case}
+
+\chapter{Concluding Remarks and Future Work}
+\label{cha:conclusion}
+\input{./tex/conclusion/0_intro}
+
+
+
+
+
+%\appendix
+%\index{Appendix}%
+%\include{appendix}
+
+\bibliographystyle{plain}
+\bibliography{dissertation}
+\index{Bibliography@\emph{Bibliography}}
+
+\printindex
+
+\begin{vita}
+\input{./tex/vita}
+\end{vita}
+
+\end{document}

@@ -1,5 +1,28 @@
-\subsection{overview of contributions}
-\subsection{executive summary of each chapter}
-\subsection{summarize main points}
-\subsection{limitations}
-\subsection{future work}
+\subsection*{executive summary of each chapter, overall executive summary}
+...
+
+\subsection*{overview of contributions}
+The primary contribution of this work is the construction of a family of three protocols for secure contactless credit card transactions.
+Each protocol use useful for different reasons:
+\begin{itemize}
+    \item ESCCP for protecting from malicious outsiders and minimizing computation on the card (no hash functions)
+    \item SCCP for augmenting ESCCP protection to add malicious retailers, at the expense of increased computation (hash functions)
+    \item UEWP for augmenting SCCP protection to add privacy protections and use of any card, at the expense of running it on an EW application
+\end{itemize}
+
+\subsection*{limitations}
+\begin{itemize}
+    \item ESCCP and SCCP require large changes to infrastructure
+    \item UEWP requires much index rebuilding on the EW server (potential performance bottleneck)
+    \item Potential legal issues with regard to credit card fraud, chargeback eligibility, etc.
+    \item Potential customer confusion:
+        bank statements no longer as useful,
+        will not work with systems that require you to e.g. swipe the credit card you used to identify yourself (ticketing systems)
+\end{itemize}
+
+\subsection*{future work}
+\begin{itemize}
+    \item Resync protocols for when iCVV and/or Account Hash gets out of sync
+    \item UEWP better datastructure for EW server to minimize performance hit on rebuilding the index
+    \item ...?
+\end{itemize}
