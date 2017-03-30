@@ -1,10 +1,11 @@
 Near Field Communication (NFC) is short-range wireless channel which permits two devices to communicate wirelessly,
-  allowing for arbitrary computation on both devices,
-  even when one lacks a power source of its own \cite{nfcspec}.
-As a result, contactless integrated circuit cards (often termed ``Proximity Cards'') typically make use of the NFC channel \cite{nfciso}.
+    allowing for arbitrary computation on both devices.
+A distinctive feature of NFC is that one of the two devices may eschew having its own power source (termed a ``passive device''),
+    drawing power from the other device in order to perform computation and respond \cite{nfcspec}.
+This makes it particularly useful for use in contactless integrated circuit cards (often termed ``Proximity Cards'') \cite{nfciso},
+    where a person may authenticate through demonstrating ownership of a physical token (by bringing it close to a reader).
+Such applications are commonly used for access control to buildings, parking garages, and public transit \cite{finvzgar2011use, roberts2006radio, tamrakar2011identity, weinstein2005rfid}.
 
-These properties also make it attractive for contactless payment protocols,
-  and thus it is also the channel used in EMV's Contactless Specifications for Payment Systems \cite{emv}.
-Common implementations of this specification are Mastercard's PayPass\textsuperscript{TM} \cite{paypass} and Visa's payWave\textsuperscript{TM} \cite{paywave}.
-
-While much work that has been done attacking these systems, there is a dearth of academic literature attempting to secure it.
+These same properties also make NFC an attractive channel for use in contactless payment protocols,
+    of which common examples include Mastercard's PayPass\textsuperscript{TM} \cite{paypass} and Visa's payWave\textsuperscript{TM} \cite{paywave}.
+Use of NFC has also been standardized more generally in EMV's Contactless Specifications for Payment Systems \cite{emv}.
