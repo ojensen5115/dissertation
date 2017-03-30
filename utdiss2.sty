@@ -5,11 +5,15 @@
 %     By Young U. Ryu
 % and some fixes by Miguel A. Lerma (malerma@math.utexas.edu)
 % and some more fixes by Craig McCluskey (mccluskey@mail.utexas.edu).
+% and a few more fixes by Richard McPhersonn (richardmcpherson@utexas.edu)
 %
 % This file was first modified in October, 2001 by Craig W. McCluskey
 % to meet the Graduate School requirements of March, 2001. The name of
 % the file was changed to utdiss2.sty to distinguish it from the
 % original utdiss.sty of June 1991 and Miguel A. Lerma's utdiss1.sty.
+%
+% It was later modified in December, 2016 by Richard McPheron to meet the
+% requirements of December, 2016.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -34,7 +38,8 @@
 \typeout{* Spring 1996, Summer 1996, Spring 1997, Summer 1997, Spring 1998.}
 \typeout{*}
 \typeout{* Modified to new Graduate School standards Fall 2001}
-\typeout{* 	by Craig McCluskey	mccluskey@mail.utexas.edu }
+\typeout{* 	by Craig McCluskey	mccluskey@mail.utexas.edu with some more
+\typeout(* fixes by Richard McPheron Fall 2016}
 \typeout{* 		- this is utdiss2-05.sty}
 \typeout{*}
 
@@ -685,7 +690,7 @@
 	\leftline{\hbox to 2.53in{}{\supervisorb, Co-Supervisor}}
      \fi
      \ifnum\supervisornumbercounter=3
-	\leftline{\hbox to 2.53in{}{\supervisorc, Supervisor}}
+	\leftline{\hbox to 2.53in{}{\supervisorc, Co-Supervisor}}
      \fi
      \repeat}
      %
@@ -915,7 +920,7 @@
     \short@page
     \setcounter{regular@short}{1}
     \pagestyle{plain}
-    \shortchapter*{Secure Protocols for Contactless Credit Cards and Electronic Wallets} % RICHARD
+    \shortchapter*{Secure Protocols for Contactless Credit Cards and Electronic Wallets} % OLIVER
     \addcontentsline{toc}{chapter}{Abstract}
     \vspace{-2.5cm} % RICHARD
     \baselineskip 14pt plus .5pt minus .2 pt

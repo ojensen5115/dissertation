@@ -8,6 +8,8 @@
 *.out
 *.toc
 
+*.tex.bkp
+
 *.pdf
 *.sublime-project
 *.sublime-workspace
