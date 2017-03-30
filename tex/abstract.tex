@@ -1,6 +1,6 @@
 The contactless credit card protocol in use today is insecure.
 The credit card industry has chosen to use the NFC channel for contactless transactions.
-However, reliance on NFC's short range has led to unfortunate assumptions in the contactless credit card protocol.
+However, reliance on NFC's short range has led to poor assumptions in the contactless credit card protocol.
 For example, the card assumes (sometimes incorrectly) that its ability to receive a solicitation implies the cardholder's intent to purchase.
 In this dissertation, we examine the protocol currently in use,
     and present a family of three replacement protocols to defend against its deficiencies.
@@ -20,11 +20,11 @@ We augment the Externally Secure CC Protocol using this channel to construct the
 
 The Secure CC Protocol supports a property known as \emph{linkability}:
     while only the bank can verify charge tokens, tokens from the same card can be recognized as such by the retailer.
-This property is enjoyed by retailers for marketing purposes.
-The Secure CC Protocol relies on retailer cooperation, so preserving linkability is important.
+This property is also supported by the (insecure) protocol in use today,
+    and is commonly used by retailers to construct marketing profiles on their customers.
 However, linkability has serious consumer privacy consequences, so we consider the converse property of
-    \emph{unlinkability}, where a retailer cannot identify purchases made by the same card.
-To be viable, an unlinkable protocol should make use of existing infrastructure, so as not to require retailer cooperation.
+    \emph{unlinkability}, where a retailer cannot identify different purchases as having been made by the same card.
+We require that our unlinkable protocol make use of existing infrastructure, so as not to require retailer cooperation.
 In response, we design the Unlinkable Electronic Wallet Protocol,
     leveraging techniques from the Secure CC Protocol to guard against malicious outsiders and retailers,
     while tunneling unlinkable charge tokens through the protocol in use today.
