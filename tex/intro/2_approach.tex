@@ -1,2 +1,58 @@
-\section{Secure Credit Card Protocols}
-\label{sec:intro-approach}
+\section{Security for Credit Card Protocols}
+\label{sec:intro-approach-security}
+
+The attacks on the existing contactless credit card protocol rely on a relatively small number of design flaws in the existing contactless credit card protocol.
+With these weaknesses in mind, we determine several properties which a secure payment protocol should maintain:
+
+\begin{description}
+    \item[Transmitted data should have limited utility.]
+        In the existing protocol, any NFC-capable device may claim to be a point of sale, and solicit a credit card for its details.
+        It is infeasible for a credit card to authenticate every point of sale,
+        Thus, a secure protocol should ensure that credit card responses cannot be replayed to a true point of sale.
+    \item[No sensitive information should be transmitted in cleartext.]
+        In the existing protocol, any NFC antenna within a small (but non-negligible) range of a legitimate transaction may capture sensitive credit card information.
+        Furthermore, if a point of sale has been compromised, physical proximity is no longer a concern.
+        Thus, a secure protocol should ensure that no data with a lifetime extending beyond this particular transaction be transmitted.
+    \item[Transmitted data should authorize a specific purchase.]
+        In the existing protocol, a credit card response can be considered as a key to authorize an arbitrary purchase.
+        A retailer may alter the price before issuing the bank, or may even pass the response to another party entirely.
+        Thus, a secure protocol should ensure that credit card response data can be used only for the authorized charge amount.
+\end{description}
+
+Our first protocol, described in Chapter \ref{cha:external} and called the Externally Secure CC Protocol, takes the first two properties into account,
+    drawing much inspiration from challenge-response protocols which achieve similar results.
+Two additional considerations render a standard challenge-response unsuitable.
+First, limited computational abilities on a credit card render typical response-generating functions
+    (such as cryptographic hash functions) computationally infeasible.
+Second, while it is the point of sale which issues (and thus generates) the challenge, it is not itself capable of validating credit card data.
+We use stepwise refinement to determine necessary properties for a response function, and propose an implementation making use of only minimal computaiton on the card.
+By ensuring that transmitted data has limited utility and that no sensitive information is transmitted in cleartext,
+    the Externally Secure CC Protocol defends against outsider attacks.
+
+Our second protocol, described in Chapter \ref{cha:secure} and termed the Secure CC Protocol, adds consideration to the third attribute above.
+Designed for Electronic Wallet applications such as Android Pay or Apple Wallet, it is backwards-compatible with physical contactless credit cards.
+By leveraging the more powerful computational abilities of Electronic Wallet applications, the computational restrictions precluding cryptographic hash functions are relaxed.
+Furthermore, the interactive interface allows the cardholder and (virtual) credit card to communicate.
+We therefore augment the Externally Secure CC Protocol to confirm the purchase price with the cardholder,
+    and bind the price to the card's response using a cryptographic hash function.
+By ensuring that transmitted data authorizes only a purchase of a confirmed given price,
+    the Secure CC Protocol defends against malicious retailer attacks.
+
+\section{Privacy for Credit Card Protocols}
+\label{sec:intro-approach-privacy}
+
+In Chapter \ref{cha:unlinkability}, we discuss the the benefits and drawbacks associated with an additional property: \emph{linkability}.
+This property allows a retailer to identify multiple purchases made with the same credit card.
+Naturally, any protocol which transmits a credit card number (or any other unique and constant identifier) maintains this property.
+This includes all protocols discussed thus-far.
+
+Linkability is valuable to retailers, as it enables the construction of purchasing profiles,
+    which can then be used for marketing purposes or sold to interested third parties.
+However, this behavior may be undesirable to consumers concerned about their privacy:
+    purchasing habits can reveal extremely sensitive information \cite{targetpregnant}.
+
+Our third protocol, described in Chapter \ref{cha:unlinkable_design} and termed the Unlinkable Electronic Wallet Protocol,
+    renders retailers unable to identify purchases made using the same credit card (in addition to protecting customers from malicious outsiders and malicious retailers).
+While the Externally Secure CC Protocol and the Secure CC Protocol require significant retailer cooperation (in modifying or replacing all point of sale devices),
+    the Unlinkable Electronic Wallet protocol makes use of existing point of sale infrastructure,
+    requiring no modification to point of sale devices and thus no retailer cooperation.
