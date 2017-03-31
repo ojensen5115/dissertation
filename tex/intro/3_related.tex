@@ -3,7 +3,17 @@
 
 %Contactless credit card security spans a large number of topics, from NFC channel security, to the danger of off-the-shelf mobile phones being used as skimming platforms.
 
-\subsubsection*{--- NFC}
+Related work in this area falls into a number of broad categories:
+%\begin{itemize}
+     the security of the NFC channel itself,
+     breaking the distance and range assumptions built into NFC,
+     the legitimate use of phones as credit card payment devices,
+     the malicious use of phones as NFC relay or credit card skimming and cloning devices,
+     and other NFC payment or communication research.
+%\end{itemize}
+
+
+%\subsubsection*{--- NFC}
 
 Relating to channel security, Haselsteine and Breitfu{\ss} in \cite{haselsteiner2006security} provide a broad survey
     of various attacks and defenses applicable to protocols built on the NFC channel.
@@ -23,7 +33,7 @@ These works \cite{haselsteiner2006security, kortvedt2009securing, madlmayr2008nf
 However, confidentiality and integrity of the channel cannot provide authentication or assurance of correct operation of the receiver.
 As such, these approaches are not effective at protecting NFC credit card payments.
 
-\subsubsection*{--- Breaking distance assumptions}
+%\subsubsection*{--- Breaking distance assumptions}
 
 Hanke discusses in \cite{hancke2005practical} a practical relay attack against ISO 14443 (NFC ``proximity cards''),
     demonstrating that such attacks are viable and can be invisible to the application layer.
@@ -37,7 +47,7 @@ Similarly, Brown et al. explore maximizing eavesdropping range \cite{brown2013ev
 They find that with proper equipment, range appears to be determined primarily by background noise,
     and achieve an eavesdropping range of 90cm, representing a much larger sphere volume in which an eavesdropping node may be located.
 
-\subsubsection*{--- Phones as legitimate devices}
+%\subsubsection*{--- Phones as legitimate devices}
 
 On the topic of using mobile phones legitimately for contactless credit card transactions (i.e. the concept of an Electronic Wallet),
     Roland et al. in \cite{roland2012software} and \cite{roland2012practical} discuss the relative merits and weaknesses inherent when mobile devices emulate NFC cards.
@@ -52,7 +62,7 @@ In subsequent work \cite{roland2013applying}, Roland et al. investigate the feas
 They relay transmissions out-of-band over a TCP connection, and suggest three primary countermeasures:
     short point of sale timeouts, Wallet Application PIN verification, and strong limits on the capabilities afforded to applications interfacing with the NFC interface.
 
-\subsubsection*{--- Phones as NFC relay devices}
+%\subsubsection*{--- Phones as NFC relay devices}
 
 Drimer and Murdoch \cite{Drimer:2007:KYE:1362903.1362910} present an attack on credit card payment systems,
     which we described in Section \ref{sec:transparent-bridge} as the Transparent Bridge attack.
@@ -93,7 +103,7 @@ In contrast our approach does not seek to detect or prevent attacks relying on t
 Instead, our protocol aims to render such attacks harmless.
 
 
-\subsubsection*{--- Phones as credit card skimming devices}
+%\subsubsection*{--- Phones as credit card skimming devices}
 
 Indeed, in \cite{lee2012nfc}, Lee provides some analysis of relay and skimming attacks on NFC credit card transactions.
 The stated goal of this work is to demonstrate the simplicity of performing these attacks,
@@ -106,7 +116,7 @@ Subsequently, Lifchitz performs a more detailed exploration of the NFC credit ca
 Roland et al. then demonstrate in \cite{roland2013cloning} how such attacks may be used to clone contactless credit cards.
 
 
-\subsubsection*{--- Other NFC payment / security ideas}
+%\subsubsection*{--- Other NFC payment / security ideas}
 
 In \cite{chen2010using}, Chen et al. explore using the challege-response mechanism built into 3G to perform authentication for payment protocols.
 They propose such a protocol for contactless payments (albeit not for credit card payments), and analyze the risks inherent to using this authentication method.
