@@ -11,7 +11,7 @@ With these weaknesses in mind, we determine several properties which a secure pa
         Thus, a secure protocol should ensure that credit card responses cannot be replayed to a true point of sale.
     \item[No sensitive information should be transmitted in cleartext.]
         In the existing protocol, any NFC antenna within a small (but non-negligible) range of a legitimate transaction may capture sensitive credit card information.
-        Furthermore, if a point of sale has been compromised, physical proximity is no longer a concern.
+        With specialized equipment, this area is significantly bigger\cite{brown2013evaluating}.
         Thus, a secure protocol should ensure that no data with a lifetime extending beyond this particular transaction be transmitted.
     \item[Transmitted data should authorize a specific purchase.]
         In the existing protocol, a credit card response can be considered as a key to authorize an arbitrary purchase.

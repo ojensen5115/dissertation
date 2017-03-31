@@ -27,10 +27,15 @@ As such, these approaches are not effective at protecting NFC credit card paymen
 
 Hanke discusses in \cite{hancke2005practical} a practical relay attack against ISO 14443 (NFC ``proximity cards''),
     demonstrating that such attacks are viable and can be invisible to the application layer.
-Kfir et al. \cite{kfir2005picking} explore maximizing the distance over which a relay attack may occur using only readily-available equipment.
+
+Kfir et al. explore maximizing the distance over which a relay attack may occur using only readily-available equipment \cite{kfir2005picking}.
     They explore the problem from both sides, focusing on increasing the distance between the two relay devices and their subsequent communication endpoints.
 For example, increasing the latter distance between the relay and the tag (in our case, the credit card)
     increases the distance from which credit card information may be skimmed.
+
+Similarly, Brown et al. explore maximizing eavesdropping range \cite{brown2013evaluating}.
+They find that with proper equipment, range appears to be determined primarily by background noise,
+    and achieve an eavesdropping range of 90cm, representing a much larger sphere volume in which an eavesdropping node may be located.
 
 \subsubsection*{--- Phones as legitimate devices}
 

@@ -2,7 +2,7 @@
 \label{sec:intro-problem}
 
 The protocol in use by contactless credit cards falls short of addressing even basic security issues.
-It employs no authentication, allowing any device to effectively pose as a Point of Sale.
+It employs no authentication, allowing any device to effectively pose as a point of sale.
 Furthermore, it transmits sensitive information (the credit card number, expiration date, etc.) wirelessly in cleartext.
 This transmission of data is then considered sufficient to allow an arbitrary charge to occur.
 This leads to a number of potential security vulnerabilities.
@@ -15,12 +15,12 @@ This skimmed data can then be replayed to a real point of sale in order to perfo
 Eavesdropping is likewise easy.
 NFC range is quite short, greatly limiting the possible location of an eavesdropper.
 However, constructing an eavesdropping antenna out of an inexpensive NFC tag is a simple procedure, as described in Section \ref{sec:insecure-attacks}.
-Concealing such an antenna within a few centimeters (or even attached to) of a Point of Sale is sufficient to harvest credit card information,
+Concealing such an antenna within a few centimeters (or even attached to) of a point of sale is sufficient to harvest credit card information,
     due to the plaintext nature of the messages being sent.
 
-A credit card's response to a solicitation is likewise over-broad in how it may be used:
-    while a Point of Sale may display a given price to the customer, there is no protocol-level assurance that the card will be charged the price on the screen.
+A credit card's response to a solicitation is likewise overly permissive in how it may be used:
+    while a point of sale may display a given price to the customer, there is no protocol-level assurance that the card will be charged the price on the screen.
 Instead, a credit card's response provides a point of sale with the ability to charge any arbitrary single purchase to the credit card.
-This charge need not even come from the same retailer or establishment.
+This charge need not even come from the same retailer or establishment which solicited it.
 
 A more in-depth analysis of this protocol and the attacks to which it is vulnerable is provided in Chapter \ref{cha:insecure}.
