@@ -8,7 +8,7 @@ In this dissertation, we examine the protocol currently in use,
 First, we consider ``outsider'' attacks (e.g. eavesdropping, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale)
     and design our first protocol to defend against these attacks.
 We call this protocol the Externally Secure CC Protocol, and design it using stepwise refinement.
-This protocol makes use of single-use ``charge tokens'' verifiable by the bank, while minimizing computation that neesd to occur on the card.
+This protocol makes use of single-use ``charge tokens'' verifiable by the bank, while minimizing computation that needs to occur on the card.
 
 Second, we identify two attacks which may be carried out by malicious retailers:
     overcharge attacks, and transparent bridge attacks.
@@ -16,7 +16,7 @@ Both attacks are predicated on the customer's lack of participation in the proto
     and involve modifying or replacing a charge after it has been confirmed by the customer.
 We look to Electronic Wallet applications (such as Android Pay and Apple Wallet), which provide a channel between customer and card.
 We augment the Externally Secure CC Protocol using this channel to construct the Secure CC Protocol,
-    binding charge tokens to a given price, and thus stimying both outsider and malicious retailer attacks.
+    binding charge tokens to a given price, and thus stymieing both outsider and malicious retailer attacks.
 
 The Secure CC Protocol supports a property known as \emph{linkability}:
     while only the bank can verify charge tokens, tokens from the same card can be recognized as such by the retailer.

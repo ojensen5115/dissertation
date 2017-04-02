@@ -63,7 +63,7 @@ The protocol, illustrated in Figure \ref{fig:unlinkable-3}, operates as follows:
     If exactly one token is not found, the Wallet Server sends a ``declined'' Approval message to the point of sale, and aborts the protocol.
     Otherwise, the secret key \emph{SK} is retrieved from the Wallet Server's database, and the Wallet Server calculates its own version of the price hash
         using the price indicated by the point of sale in the Charge Request message.
-    If the Wallet Server's price hash does not match the price hash in the Charge Request mesage,
+    If the Wallet Server's price hash does not match the price hash in the Charge Request message,
         the Wallet Server sends a ``declined'' Approval message to the point of sale and aborts the protocol.
     Otherwise, the stored card information is retrieved from the Wallet Server's database.
     The Wallet Server sends a \emph{visual} Charge Request to the card's bank with the following fields:

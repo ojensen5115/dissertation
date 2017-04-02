@@ -2,7 +2,7 @@
 \label{sec:unlinkable-simple}
 
 In considering a cryptographic approach to creating an Unlinkable Credit Card Protocol, let us first consider the simpler approach of using symmetric cryptography.
-In a cryptographic scheme employing symetric cryptography,
+In a cryptographic scheme employing symmetric cryptography,
     the original sender (the credit card) and the final destination (the bank) share a secret key used for both encryption and decryption.
 While symmetric cryptography can provide confidentiality of a message from the card to the bank, it cannot provide unlinkability.
 This is because the message received by the bank must include some method for determining which of its customer's keys the bank should use to decrypt the message.
@@ -16,7 +16,7 @@ We thus present the Simple Unlinkable Wallet Protocol, employing asymmetric encr
 This protocol is illustrated in Figure \ref{fig:simple-cpp}, and operates as follows:
 
 \begin{figure}[h]
-  \caption{Simple Unlinkable EW Protocol}
+  \caption{Simple Unlinkable Wallet Protocol}
   \centering
     \includegraphics{img/simple-unlinkable-cpp.eps}
   \label{fig:simple-cpp}
@@ -24,7 +24,7 @@ This protocol is illustrated in Figure \ref{fig:simple-cpp}, and operates as fol
 
 \begin{enumerate}
     \item The point of sale sends a Solicitation message to the customer's (virtual) credit card.
-    \item The customer's card encrypts its credit card information (consiting of the credit card number, expiration date, and iCVV) using the bank's public key,
+    \item The customer's card encrypts its credit card information (consisting of the credit card number, expiration date, and iCVV) using the bank's public key,
         and sends this data (along with the bank name) as a Card Information message.
     \item The point of sale receives the Card Information message, appends the price to charge, and sends this data to the bank indicated in the Card Information message.
     \item The bank decrypts the Card Information data to recover the customer's credit card number, expiration date, and iCVV.
