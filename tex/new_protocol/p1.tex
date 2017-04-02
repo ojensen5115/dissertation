@@ -1,4 +1,4 @@
-\section{Basic Unlinkable CC Protocol}
+\section{Basic Unlinkable Wallet Protocol}
 \label{sec:unlinkable-design-1}
 
 When the Wallet Server receives a Registration message,
@@ -8,7 +8,7 @@ The Wallet Application stores this value securely, associating it with the credi
 The protocol, illustrated in Figure \ref{fig:unlinkable-1}, operates as follows:
 
 \begin{figure}[h!]
-  \caption{Basic Unlinkable CC Protocol}
+  \caption{Basic Unlinkable Wallet Protocol}
   \centering
     \includegraphics{img/unlinkable-1.eps}
   \label{fig:unlinkable-1}
@@ -25,7 +25,7 @@ The protocol, illustrated in Figure \ref{fig:unlinkable-1}, operates as follows:
 \item The Wallet Server then generates a random 93-bit token \emph{T}, and associates it with the card identified by \emph{Ident}.
     The Wallet Server responds to the Wallet Application with a Token message containing \emph{T}.
 
-\item The point of sale displays the price to charge (\$) on its screen.
+\item The point of sale displays the price to charge (\val{\$}) on its screen.
 
 \item The Wallet Application now enables the virtual credit card, initializing it with token \emph{T}.
     The virtual credit card begins listening for Solicitation messages.
@@ -43,14 +43,14 @@ The protocol, illustrated in Figure \ref{fig:unlinkable-1}, operates as follows:
     \item \textbf{Pseudo Bank name:} the Wallet Server
    	\end{itemize}
 
-\item The point of sale constructs an Charge Request message from the (pseudo) Card number, Expiration date, iCVV, and the price it wishes to charge.
+\item The point of sale constructs an Charge Request message from the (pseudo) card number, expiration date, iCVV, and the price it wishes to charge.
     This message is sent to the bank named in the Card Information message.
     As a result, the Charge Request message is directed to the Wallet Server and \emph{not} an actual bank.
     Note that from the perspective of the point of sale, the Wallet Server appears to be a bank like any other.
 
 \item The Wallet Server reconstructs \emph{k} from the Charge Request message, and computes the 93-bit token it represents.
     The Wallet Server then searches its database for this token, to identify the card used in this transaction.
-    If the token is not found, the Wallet Server sends a ``declined'' Acceptance message to the point of sale, and aborts the protocol.
+    If the token is not found, the Wallet Server sends a ``declined'' Approval message to the point of sale, and aborts the protocol.
     Otherwise, the stored card details are retrieved from the Wallet Server's database.
     The Wallet Server then invalidates the token, and sends a \emph{visual} Charge Request to the card's bank with the following fields:
     \begin{itemize}
@@ -63,9 +63,9 @@ The protocol, illustrated in Figure \ref{fig:unlinkable-1}, operates as follows:
         acquired by the Wallet Server during the card registration.
 
 \item The bank receives the \emph{visual} Charge Request from the Wallet Server, and processes this transaction as normal.
-    It then responds to the Wallet Server with an Acceptance message indicating whether the charge has been accepted.
+    It then responds to the Wallet Server with an Approval message indicating whether the charge has been accepted.
 
-\item The Wallet Server forwards the bank's Acceptance message to the point of sale.
+\item The Wallet Server forwards the bank's Approval message to the point of sale.
 \end{enumerate}
 
 Note that in this protocol, the Wallet Server has a dual role:

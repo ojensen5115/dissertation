@@ -1,19 +1,19 @@
 \section{Security Analysis of the Protocol}
 \label{sec:analysis}
 
-The Unlinkable Wallet protocol is secure against malicious outsiders.
+The Unlinkable Wallet Protocol is secure against malicious outsiders.
 Simply by using an Electronic Wallet, the customer is protected from skimmers and relay attackers ``for free'',
     because the phone must be unlocked and ready to transmit in order to respond to a Solicitation message.
 The Unlinkable Wallet Protocol provides protection against eavesdroppers and compromised points of sale,
     because each message consists of two single-use tokens which lose all value after the transaction takes place.
 
 Due to the inclusion of the price validation hash (the last 13 bits of the 93-bit message),
-    the Unlinkable Wallet Protocol defends against Malicious Retailers by binding the charge token to a price confirmed by the customer.
+    the Unlinkable Wallet Protocol defends against malicious retailers by binding the charge token to a price confirmed by the customer.
 
 Furthermore, the Unlinkable Wallet Protocol provides the customer with the privacy property of \emph{Unlinkability} from the retailer.
 In this protocol, retailers lose the ability to use credit card numbers as a method to correlate purchases and track customer purchasing profiles through purchase records.
 
-In \cite{jensen1} and \cite{jensen2}, we considered Unlinkability an explicit non-goal:
+In \cite{jensen1} and \cite{jensen2}, we considered unlinkability an explicit non-goal:
   for deployment, the protocol required extensive cooperation from retailers who currently enjoy this property.
 The Unlinkable Wallet Protocol requires no such cooperation from retailers or the payment industry,
     which means that bowing to retailers' wishes is not necessary.

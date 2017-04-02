@@ -11,7 +11,7 @@ In this section, we describe these attacks in detail.
 \label{sec:insecure-eavesdropper}
 The goal of an eavesdropper is to gain the victim's credit card number and expiration date.
 Eavesdropping is a passive attack, where the eavesdropper hears all communication between the point of sale and the credit card.
-(Communication between the Cank and the point of sale is securely transmitted over the Internet.)
+(Communication between the bank and the point of sale is securely transmitted over the Internet.)
 An outline of this attack is shown in Figure \ref{fig:insecure-eavesdropper}.
 
 \begin{figure}
@@ -61,11 +61,11 @@ An outline of this attack is shown in Figure~\ref{fig:insecure-skimmer}.
 \end{figure}
 
 This attack can be performed using a smart-phone with NFC capabilities.
-An Android application called \emph{NFCProxy}\footnote{\emph{NFCProxy}\cite{NFCProxy}, presented at Defcon 20, can be downloaded here: \url{http://sourceforge.net/projects/nfcproxy/}} automates this attack, and is freely available online.
+An Android application called \emph{NFCProxy}\footnote{\emph{NFCProxy}\cite{NFCProxy}, presented at Defcon 20, can be downloaded here:\newline\url{http://sourceforge.net/projects/nfcproxy/}} automates this attack, and is freely available online.
 While \emph{NFCProxy} is not listed in the Google Play store, it can be downloaded from SourceForge and installed on the phone in a matter of minutes.
 
-With \emph{NFCProxy} running, the skimmer brings his phone briefly within range of an NFC credit card to acquire the credit card information and  the iCVV.
-When the skimmer wishes to perform the illegitimate purchase on behalf of the victim, the skimmer moves their phone within range of a point of sale as though it were a credit card.
+With \emph{NFCProxy} running, the skimmer brings its phone briefly within range of an NFC credit card to acquire the credit card information and  the iCVV.
+When the skimmer wishes to perform the illegitimate purchase on behalf of the victim, the skimmer moves its phone within range of a point of sale as though it were a credit card.
 
 In the Insecure CC Protocol, a skimmer may perform a single purchase (limited by the lack of subsequent iCVVs).
 The skimmer must take care to perform this purchase before the credit card holder makes a purchase of their own, as this would invalidate the skimmed iCVV.
@@ -80,7 +80,7 @@ The skimmer must take care to perform this purchase before the credit card holde
 \label{sec:insecure-relay}
 
 Much like the skimmer, the goal of the relay attacker is to perform purchases on behalf of the victim, without the victim's knowledge or consent.
-Multiple devices may be used to relay skimmed credit card information across a separate channel, effectively breaking down the assumption of proximity built into NFC.
+Multiple devices may be used to relay skimmed credit card information across a separate channel, effectively breaking the assumption of proximity built into NFC.
 This attack can also be performed using the \emph{NFCProxy} Android application, described in Section \ref{sec:insecure-skimmer}.
 An outline of this attack is shown in Figure \ref{fig:insecure-relay}.
 
@@ -93,10 +93,10 @@ An outline of this attack is shown in Figure \ref{fig:insecure-relay}.
 
 In implementation, a relay attack is very similar to a skimming attack, with the exception that the skimmer is separated into two entities, called ``proxy'' and ``relay''.
 These two entities are spatially disparate, but are connected through an out-of-band communication channel.
-The relay positions his phone near the victim's credit card, while the proxy approaches a point of sale.
+The relay positions its phone near the victim's credit card, while the proxy approaches a point of sale.
 Whenever the proxy is ready to make a purchase, it sends a message to the relay requesting fresh values from the victim's credit card.
 
-The relay skims the credit card, and forwards the card's information back to the proxy, enabling it to make a purchase on behalf of the victim.
+The relay skims the credit card and forwards the card's information back to the proxy, enabling the proxy to make a purchase on behalf of the victim.
 These messages may be transmitted over any communication channel, but are most easily sent over a wireless LAN.
 
 In the Insecure CC Protocol, a proxy may perform multiple purchases if the relay remains in proximity of the victim's credit card, querying it for fresh iCVVs for every purchase.
@@ -111,10 +111,10 @@ In the Insecure CC Protocol, a proxy may perform multiple purchases if the relay
 The Insecure CC Protocol implicitly trusts the ability of a retailer to keep its data secure.
 By allowing persistent sensitive information (e.g. the credit card number and expiration date) to be transmitted to a device under the retailer's control,
   this protocol invites attacks on the retailer's own systems.
-We use this category of attacks to refer to any attacks which involve the point of sale or merchant performing (possibly unintentional) actions leading to credit card theft\footnote{
-	In the Compromised point of sale model we consider only devices which correctly adhere to the protocol.
+We use this category of attacks to refer to any attack which involves the point of sale or merchant performing (possibly unintentional) actions leading to credit card theft\footnote{
+	When discussing compromised points of sale, we consider only devices which correctly adhere to the protocol.
 	We explicitly exclude what we term \emph{malicious} points of sale, those which may perform arbitrary actions such as refusing to randomize random values, etc.
-	Defending against a malicious point of sale in any payment setting is much more involved, and is discussed later.
+	Defending against a malicious point of sale in any payment setting is much more involved, and is discussed in Chapter \ref{cha:secure}.
 }.
 For example, a point of sale might be compromised and re-programmed to transmit credit card information to an attacker after every successful purchase.
 An outline of this attack is shown in Figure~\ref{fig:insecure-compromised}.
@@ -126,7 +126,7 @@ An outline of this attack is shown in Figure~\ref{fig:insecure-compromised}.
   \label{fig:insecure-compromised}
 \end{figure}
 
-The compromise of points of sale is far from a theoretical threat:
+Point of sale compromise is far from a theoretical threat:
 these attacks have become alarmingly commonplace, to the point that they have been covered by mainstream news sources including the New York Times \cite{neimanmarcushack} and the Wall Street Journal \cite{targethack}\cite{homedepothack}.
 
 In November through December 2013, unauthorized access was gained to an estimated 40,000 points of sale used by U.S. retailer Target.
@@ -136,7 +136,7 @@ More recently, in September 2014, Home Depot confirmed a similar data breach.
 According to subsequent investigations, it appears that the same malware as was used against Target was at the heart of the Home Depot breach.
 During this breach, attackers stole \emph{56 million} credit and debit cards, also as reported in the Wall Street Journal \cite{homedepothack}.
 
-Other recent victims of Compromised points of sale include other retailers
+Other recent victims of compromised points of sale include other retailers
 	(e.g. Neiman Marcus in July through October of 2013, in which attackers stole an estimated 1.1 million credit and debit cards)\cite{neimanmarcushack},
 	grocery stores (e.g. Supervalu in June through July of 2014, in which it is estimated that attackers stole ``millions'' of credit and debit cards\cite{supervaluhack}),
 	as well as restaurants (e.g. P.F. Chang's in September 2013 through June 2014, in which attackers stole an estimated 7 million credit and debit cards\cite{pfchanghack}).

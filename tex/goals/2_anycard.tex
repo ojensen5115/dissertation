@@ -3,18 +3,17 @@
 
 Few credit cards today support NFC transactions natively.
 As a result, the majority of credit cards available to customers cannot generate valid iCVVs.
-The Unlinkable CC Protocol should allow the use of any credit card, including those for which no valid iCVVs exist.
+The Unlinkable Wallet Protocol should allow the use of any credit card, including those for which no valid iCVVs exist.
 
 This matter is complicated by our goal of using existing point of sale infrastructure:
     current point of sale devices require an iCVV as part of an NFC Card Information message.
 To get around this, we can leverage the architecture of credit cards themselves.
 
 Each credit card is a collection of independent interfaces.
-The common interfaces seen on credit cards today include:
+Common interfaces seen on credit cards today include:
 
 \begin{itemize}
 \item \textbf{visual}: the data which can be visually read from the card
-\item \textbf{embossed}: the data physically embossed on the card
 \item \textbf{magstripe}: the data encoded on the magnetic strip
 \item \textbf{NFC}: the data and computation involved in contactless payments
 \item \textbf{chip}: the data and computation involved in chip payments

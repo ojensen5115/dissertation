@@ -2,10 +2,11 @@
 \label{sec:secure-goals}
 
 Recall that when making a payment, the customer first views the price about to be charged on the screen of the retailer's point of sale.
-Using this information, the customer makes his one and only decision: whether to allow the payment protocol to occur, or not.
-The underlying assumption that the customer makes is that the price displayed on the screen is equal to the price which will be charged to his credit card.
-This need not be the case: the information displayed on a screen is merely an assurance in the informal sense:
-	the numbers displayed to the customer \emph{should} reflect the dollar amount which will subsequently be sent with the Charge Request message to the bank,
+Using this information, the customer makes its one and only decision: whether to allow the payment protocol to occur, or not.
+The underlying assumption that the customer makes is that the price displayed on the screen is equal to the price which will be charged to the credit card.
+This need not be the case.
+The information displayed on a screen is merely an assurance in the informal sense:
+    the numbers displayed to the customer \emph{should} reflect the dollar amount which will subsequently be sent with the Charge Request message to the bank,
     but there is no mechanism in place to require this.
 Two attacks emerge as a result.
 The goal of the Secure CC Protocol presented in this chapter is to extend the protection provided by the Externally Secure CC Protocol to defend against these two attacks.
@@ -15,7 +16,7 @@ The goal of the Secure CC Protocol presented in this chapter is to extend the pr
 An Over-charge attack, illustrated in Figure \ref{fig:attack_overcharge}, is characterized by the malicious point of sale displaying one price to the customer
 	and then sending a higher price to the bank
 	(in the Charge Request message of the CC Protocols).
-As a result, the customer believes himself to have been charged one amount, but is instead charged an arbitrarily higher amount.
+As a result, the customer authorizes and expects to be charged one amount, but is instead charged an arbitrarily higher amount.
 Since the customer is uninvolved in the protocol besides the initial step of allowing the protocol to occur,
 	there is no mechanism ensuring that the price displayed to the customer matches the price that the (malicious) point of sale sends to the bank.
 
@@ -26,7 +27,7 @@ Since the customer is uninvolved in the protocol besides the initial step of all
   \label{fig:attack_overcharge}
 \end{figure}
 
-Should a customer become aware of an over-charge when reviewing his monthly statement, he may file a charge-back request with his bank, nullifying the payment as fraudulent.
+Should a customer become aware of an over-charge when reviewing the credit card's monthly statement, the customer may file a charge-back request with his bank, nullifying the payment as fraudulent.
 As a result, while the amount by which the customer may be overcharged is unconstrained by the protocol, it should be relatively small for the attack to ultimately be successful.
 For example, it is easy to notice a gas station charge for \$500.00 instead of \$21.87 on a monthly statement, and the resulting investigation would be uncomplicated.
 However, should the struggling business choose to increase charges by 5\%, the resulting gas station charge of \$22.96 could very easily be overlooked.
@@ -73,5 +74,5 @@ The amount which can be successfully stolen by the malicious retailer is unconst
 	if the discrepancy is noticed and the victim customer files a charge-back request, it will be against the victim retailer (and not the malicious retailer).
 As such, detected or not, it is one of the two victims that will be left facing the bill, making the Transparent Bridge attack significantly more dangerous than the Over-charge attack described earlier.
 
-Drimer et al. propose a defense against this attack in the context of EMV credit cards (colloquially known as ``chip and pin'').
+Drimer et al. propose a defense against this attack in the context of EMV ``chip'' cards.
 However, this solution is not applicable to contactless credit cards.

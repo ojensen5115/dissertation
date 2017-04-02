@@ -17,11 +17,12 @@ the expected number cards registered before observing a collision is approximate
 $\sqrt{\frac{\pi}{2} \cdot 2^{80}} \approx 1.4 \cdot 10^{12}$.
 However, registering a credit card is by definition an event in which the Wallet Application is connected to the Internet (and thus to the Wallet Server).
 As such, collisions during registration are not a concern, as a differing seed or counter value can simply be chosen and synchronized between the Wallet and the Server.
-As a result, provided that there are fewer than $2^{79}$ (approximately $6.04 * 10^{24}$) credit cards registered, card registration is computationally easy (expecting no more than two attempts) without causing a collision.
+Provided that there are fewer than $2^{79}$ (approximately $6.04 * 10^{24}$) credit cards registered,
+    card registration is computationally easy (expecting no more than two attempts without causing a collision).
 
 A credit card transaction is then modeled by selecting a single hash and replacing it.
 In such a transaction, the Birthday Paradox is not relevant:
-intuitively, updating Hash number 83 cannot cause Hashes 12 and 41 to collide.
+intuitively, updating Account Hash number 83 cannot cause Account Hashes 12 and 41 to collide with each other.
 As a result, given a database of $n$ Account Hashes, the expected number of transactions before a collision occurs is
 $\frac{2^{80}}{n}$.
 Using the 10 million cards from our simulation, this implies that the expected number of transactions before a collision occurs is

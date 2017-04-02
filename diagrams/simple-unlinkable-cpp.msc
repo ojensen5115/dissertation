@@ -7,5 +7,6 @@ msc {
  b=>c [label="solicitation"];
  c=>b [label="card information\nT = Enc(cc#, exp, iCVV)"];
  b=>a [label="charge request\n(T, $)"];
+ a rbox a [label="decrypt T,\nverify details"];
  a=>b [label="approve?\n(Y / N)"];
 }
