@@ -1,5 +1,5 @@
 \section{Security Concerns}
-\label{sec:intro-problem}
+\label{sec:intro-security}
 
 The protocol in use by contactless credit cards falls short of addressing even basic security issues.
 It employs no authentication, allowing any device to effectively pose as a point of sale.
@@ -28,4 +28,15 @@ A credit card's response to a solicitation is likewise overly permissive in how 
 Instead, a credit card's response provides a point of sale with the ability to charge any arbitrary single purchase to the credit card.
 This charge need not even come from the same retailer or establishment which solicited it.
 
-A more in-depth analysis of this protocol and the attacks to which it is vulnerable is provided in Chapter \ref{cha:insecure}.
+In this dissertation, we present a family of three replacement protocols to defend against these deficiencies.
+
+In Chapter \ref{cha:external}, we tackle the problems raised by malicious outsiders: parties external to the customer and the retailer.
+We find that the contactless credit card protocol in use today is vulnerable to eavesdroppers, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale.
+We construct a replacement protocol to transmit single-use charge tokens which leak no sensitive information, nullifying their value outside of the current transaction.
+These charge tokens are also bound to a randomized challenge included in the solicitation, and thus cannot be skimmed ahead of time.
+
+In Chapter \ref{cha:secure}, we explore the overly permissive nature of the credit card's response, and approach the protocol from the perspective of a malicious retailer.
+We enumerate two attacks which a malicious retailer may perform: over-charge attacks and transparent bridge attacks.
+These attacks affect both the contactless credit card protocol in use today, as well as the Externally Secure CC Protocol described in Chapter \ref{cha:external}.
+Both attacks involve using the credit card's response to authorize a purchase which differs from the one accepted by the customer.
+We extend the Externally Secure CC Protocol to limit the utility of charge tokens for use outside of the current (confirmed) transaction.
