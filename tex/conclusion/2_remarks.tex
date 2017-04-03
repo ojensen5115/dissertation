@@ -1,0 +1,21 @@
+\section{Concluding Remarks}
+
+The family of protocols presented in this dissertation are a strong step forwards from the status quo.
+Protecting the protocol from malicious outsiders should be considered an urgent priority.
+Protecting the protocol from malicious retailers is less urgent, but is nonetheless important given the severity of the attacks which may be carried out.
+Whether to adopt unlinkability should be a customer choice:
+    we do not presume to dictate the best move for the industry in this regard, but should a customer be privacy conscious, we seek to place this decision in the customer's hands.
+That being said, the protocols do carry limitations.
+
+The Externally Secure CC Protocol and the Secure CC Protocol both require large changes to existing point of sale infrastructure.
+This poses a significant barrier to adoption, as adopting either of these protocols requires replacing all point of sale devices across all retailers.
+They also represent a significant change in a generally change-averse industry.
+
+The Unlinkable Wallet Protocol operates using existing point of sale infrastructure.
+However, the Wallet Server must maintain an index of current Account Hash values into its credit card database.
+This requires rebuilding indexes over the database on every transaction, which may result in a performance bottleneck.
+The Unlinkable Wallet Protocol may also yield some customer confusion:
+    bank statements are no longer as useful, as all transactions will appear to be made out to the Wallet Server service.
+Furthermore, this protocol hampers any systems which require customers to identify themselves via their credit card,
+    commonly seen in airline check-in, where the customer is expected to swipe the credit card previously used to make the purchase.
+Using the Unlinkable Wallet Protocol renders this action impossible.
