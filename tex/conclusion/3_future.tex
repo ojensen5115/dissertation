@@ -1,17 +1,17 @@
 \section{Future Work}
 
-Currently, there are no re-synchronization protocols for when the iCVV gets out of sync.
+Currently, there are no re-synchronization protocols for when an iCVV gets out of sync.
 The contactless credit card protocol in use today can tolerate a few skipped iCVVs, due to the bank storing several of the subsequently expected tokens,
-    but a card may be rendered inoperative simply by sending a sufficient number of Card Information messages that do not reach the bank.
+    but a card may be rendered inoperative simply by generating a sufficient number of Card Information messages that do not reach the bank.
 If this occurs, the card must be replaced in order to restore contactless functionality.
 This issue affects the Externally Secure CC Protocol and the Secure CC Protocol in the same manner.
 
-In the Unlinkable Wallet Protocol, a similar synchronization issue can occur with regard to the Account Hash.
+In the Unlinkable Wallet Protocol, a similar synchronization issue can occur with regard to the token.
 In this protocol however, even working around a small number of lost messages is computationally expensive:
-    each admissible Account Hash represents an independent index into the database, which may require being rebuilt on every transaction.
+    each admissible token represents an independent index into the database, which may have to be rebuilt on every transaction.
 Thus, a re-synchronization protocol would alleviate the need to replace out-of-sync physical cards in any of the CC protocols,
     while affording a significant performance gain to the Unlinkable Wallet Protocol.
 
-Even with just a single Account Hash indexing into the table of registered cards,
+Even with the Unlinkable Wallet Protocol storing just a single token indexing into the table of registered cards,
     updating this index on every transaction may not scale well with a large number of credit cards and frequent transactions.
 Thus, another improvement to the Unlinkable Wallet Protocol would be the construction or use of a better data-structure on the Wallet Server.

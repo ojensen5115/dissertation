@@ -1,33 +1,9 @@
-The contactless credit card protocol in use today neglects even basic protections.
-In Chapter \ref{cha:insecure}, we examine the protocol in detail, and find it vulnerable to several broad categories of attacks.
-
-In particular, the contactless credit card protocol relies entirely on NFC's short range to prevent eavesdropping attaks,
-    wherein an attacker listens on the NFC channel to acquire credit card information sent as part of a legitimate transaction,
-    transmitting sensitive information including the customer's credit card number and expiration date in plaintext.
-The protocol provides no protection whatasoever from skimming attacks,
-    allowing any device to solicit a contactless credit card, which happily responds with information which may be replayed to a legitimate point of sale to perform an unauthorized purchase.
-Relay attacks are likewise possible, wherein multiple attackers relay messages to break the proximity assumption built into NFC.
-Compromising a point of sale device is likewise devastating, since it learns significant amounts of reusable sensitive information with each transaction.
-
-The current contactless credit card protocol is likewise vulnerable to attacks perpetrated by malicious retailers as discussed in Chapter \ref{cha:secure},
-    providing no protection to customers from retailers wishing to take advantage of them.
-In addition, it poses significant privacy risks to customers as discussed in Chapter \ref{cha:unlinkability}, allowing retailers to correlate purchases made using the same credit card.
-
-In response, we design a family of replacement protocols to guard against its deficiencies.
-We begin by constructing a protocol which defends against malicious outsiders, guarding against the external attacks listed above.
-We then augment this protocol to defend against malicious retailers, safeguarding customers from insider attacks.
-Finanlly, we construct a protocol for use with Electronic Wallet applications, protecting customer privacy from curious retailers and banks.
-
 % chapter 3
 
-Our first replacement protocol is called the Externally Secure CC Protocol, and is described in Chapter \ref{cha:external}.
-The primary goals of this protocol are to defend against malicious outsiders.
-In particular, we focus on the four categories of attacks to which the current contactless credit card protocol is vulnerable:
-    eavesdropping, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale.
-
+The Externally Secure CC Protocol is described in Chapter \ref{cha:external}.
 We take particular note of the fact that in the existing contactless credit card protocol, no cryptographic operations are in use.
-We hypothesize that this is to keep manufacturing costs down, such that it can be replaced on suspicion of theft or misuse.
-As such, we design a protocol that seeks not to increase computational requirements on the credit card itself from the status quo.
+We hypothesize that this is to keep manufacturing costs of these cards down, such that they can be inexpensively replaced on suspicion of theft or misuse.
+As such, the Externally Secure CC Protocol seeks not to increase computational requirements on the credit card itself from the status quo.
 We make use of the existing iCVV generation algorithm as our source of entropy, and eschew using any other expensive operations (such as hash functions).
 
 We design the Externally Secure CC Protocol to incorporate a challenge-response structure,
@@ -35,7 +11,7 @@ We design the Externally Secure CC Protocol to incorporate a challenge-response 
 We determine that while a cryptographic hash function would suffice, such functions are comparatively expensive and provide properties unneeded for this application.
 
 Thus, we begin by determining what properties are required of function \emph{H} to prevent the outsider attacks described.
-We then decompose \emph{H} into simpler sub-functions \emph{F} and \emph{G}, and map the determined properties of \emph{H} onto \emph{F} and \emph{G}.
+We then decompose \emph{H} into simpler sub-functions \emph{F} and \emph{G}, and map the determined properties of \emph{H} onto corresponding properties of \emph{F} and \emph{G}.
 We provide inexpensive implementations of functions \emph{F} and \emph{G} using only indexing and \texttt{XOR},
     and show that these implementations satisfy the necessary properties of \emph{F} and \emph{G}.
 In so doing, we provide a concrete implementation of function \emph{H} which uses minimal computation,
@@ -43,7 +19,7 @@ In so doing, we provide a concrete implementation of function \emph{H} which use
 
 % chapter 4
 
-Our second replacement protocol is called the Secure CC Protocol, and is described in Chapter \ref{cha:secure}.
+The Secure CC Protocol is described in Chapter \ref{cha:secure}.
 We begin by exploring possibilities for retailers to behave maliciously, and describe two attacks which a retailer may carry out:
     an Over-charge attack, and a Transparent Bridge attack.
 Both attacks take advantage of the fact that a credit card's response to a solicitation
@@ -69,28 +45,28 @@ In either case, one of the two victims is left facing the (fraudulent) bill.
 
 We note that both of these attacks are predicated on the customer's lack of participation in the protocol (beyond simply allowing it to occur),
     and involve modifying or replacing a charge after it has been confirmed by the customer.
-To defend against this attack, we leverage the use of Electronic Wallets, which are applications like Android Pay or Apple Wallet, which allow a smart phone to emulate a contactless credit card.
-In particular, design the Secure CC Protocol to allow the customer to confirm the purchase price on a device under the customer's control:
+To defend against these attacks, we leverage the use of Electronic Wallets.
+Electronic Wallets are applications like Android Pay or Apple Wallet, which allow a smart phone to emulate a contactless credit card.
+In particular, we design the Secure CC Protocol to allow the customer to confirm the purchase price on a device under the customer's control:
     we augment the Solicitation message to include the price to be charged, and the customer's credit card then binds this price to the charge token.
 
-If the customer uses an Electronic Wallet (a smart phone application like Android Pay or Apple Wallet),
-    this application (running on the customer's device) requests that the customer confirm the purchase price.
-The charge token is then bound to this price, and cannot be used to complete a more expensive purchase.
+If the customer uses an Electronic Wallet, this application (running on the customer's device) requests that the customer confirm the purchase price.
+The resulting charge token is then bound to this price, and cannot be used to complete a more expensive purchase.
 As such, while the Secure CC Protocol does not outright prevent the Transparent Bridge attack, it renders the attack mostly harmless.
 
 If the customer does not use an Electronic Wallet and is instead using a physical credit card,
-    there is no interface on which the customer may confirm a price.
+    there is no interface on which the customer may confirm a price, and so the card needs to assume confirmation for any price.
 As such, users of physical credit cards do not gain protection from malicious retailers.
 Nonetheless, they remain protected from malicious outsiders when using this protocol.
 
 % chapter 5
 
 In Chapter \ref{cha:electronic} we discuss the use of Electronic Wallets in more detail.
-An electronic wallet is simply a collection of (virtualized) credit cards, emulated by a smart phone.
-This provides a significant advantage over physical credit cards:
-    they may virtualize an unlimited number of credit cards precluding a bulky wallet,
-    they do not respond to solicitations while the phone is locked and unattended,
-    and they provide a rich interface with which the customer may communicate with the (virtual) credit card.
+An Electronic Wallet is a collection of (virtualized) credit cards, emulated by a smart phone.
+This model provides a significant advantage over physical credit cards:
+    the wallet may virtualize an unlimited number of credit cards precluding a bulky wallet,
+    virtualized cards do not respond to solicitations while the phone is locked and unattended,
+    the wallet provides a rich interface with which the customer may communicate with a (virtual) credit card.
 
 % chapter 6
 
@@ -101,14 +77,14 @@ This ability is valuable to retailers, because it allows them to construct purch
 These profiles can then be used for more effective marketing, or can be sold outright to interested third parties.
 
 Purchasing habits can reveal very sensitive information about a customer,
-    and thus some customer may wish to prevent retailers from constructing such profiles on them.
-Currently, the only way in which to do so is to eschew the use of credit cards at all.
-Thus, we consider how to approach constructing an unlinkable payment protocol for customers concerned with their privacy.
+    and thus some customers may wish to prevent retailers from constructing such profiles on them.
+Currently, the only way in which to do so is to eschew the use of credit cards entirely.
+We consider how to approach constructing an unlinkable payment protocol for customers concerned about their privacy.
 
 To construct an unlinkable protocol, we must transmit identifying information from the credit card to the bank,
-    by way of a carrier (the retailer) who must not learn the contents of the message.
+    by way of a carrier (the retailer) who may not learn the contents of the message.
 As such, employing cryptography is a natural approach.
-Symmetric cryptography cannot yield an unlinkable protocol:
+However, symmetric cryptography cannot yield an unlinkable protocol:
     the card must identify to the bank which customer's key to use to decrypt the message, and so the retailer may simply identify cards based on this key identifier.
 By contrast, asymmetric cryptography provides sufficient primitives to construct an unlinkable protocol, since all cards can encrypt their messages using the same key (the bank's public key).
 
@@ -116,7 +92,7 @@ By contrast, asymmetric cryptography provides sufficient primitives to construct
 
 However, as described in Chapter \ref{cha:unlinkable_goals}, we espouse two additional goals when constructing an unlinkable credit card protocol:
     being able to use any credit card, and making use of existing point of sale infrastructure.
-The latter is particularly important, as requiring modification to points of sale would require retailer cooperation,
+The latter goal is particularly important, as requiring modification to points of sale would require retailer cooperation,
     and one cannot expect retailer cooperation when removing a feature valuable to retailers.
 Furthermore, using existing infrastructure alleviates significant barriers to adoption, in that one doesn't need to replace all points of sale across all retailers to use the new protocol.
 
@@ -126,8 +102,8 @@ Asymmetric cryptography requires block sizes of thousands of bits in order to be
 
 % chapter 8
 
-Our third replacement protocol is called the Unlinkable Wallet Protocol, and is described in Chapter \ref{cha:unlinkable_design}.
-This protocol is designed for Electronic Wallet applications, rather than physical credit cards, but can be used by privacy conscious customers to virtualize any credit card.
+The Unlinkable Wallet Protocol is described in Chapter \ref{cha:unlinkable_design}.
+This protocol is designed for Electronic Wallet applications rather than physical credit cards, and can be used by privacy conscious customers to virtualize any credit card.
 We take advantage of the fact that the Card Information message indicates the destination of the subsequent Charge Request message to construct a tunneled protocol.
 We construct the protocol in three phases, reminiscent of the stepwise refinement process we used in Chapter \ref{cha:external}.
 
@@ -139,17 +115,17 @@ These pseudo-values are then sent in the Card Information message, and indicates
 The Wallet Server decodes the pseudo values to reconstruct the 93-bit token, and looks up which of its registered cards is associated with this token.
 Upon finding it, the Wallet Server then issues a \emph{visual} Charge Request to the issuing bank
     (consisting of the information one would normally type into an online form to make a purchase on the Internet),
-    relaying the response back to the point of sale.
-Since the credit card information consists of randomized data, it is clearly unlinkable
+    relaying the bank's Approval message back to the point of sale.
+Since the pseudo card information consists of randomized data, this protocol is unlinkable
 
 The second iteration of this protocol (described in Section \ref{sec:unlinkable-design-2}) erodes the assumption that retailers are non-malicious.
-In this protocol, the agreed upon token is merely 80 bits, leaving 13 bits left over.
-We use these remaining 13 bits as a ``price hash'',
-    consisting of an HMAC of the 80-bit token, concatenated with the price, and keyed with a key known only to the (virtual) card and the Wallet Server.
+In this version, the agreed upon token consists of only 80 bits, leaving 13 bits left over.
+We use these remaining 13 bits to contain a ``price hash'',
+    consisting of an HMAC over the 80-bit token concatenated with the price, keyed with a key known only to the (virtual) card and the Wallet Server.
 This price hash binds the token to a particular price, employing a defense much like in the Secure CC Protocol described in Chapter \ref{cha:secure}.
 
 The third and final iteration of this protocol (described in Section \ref{sec:unlinkable-design-3}) erodes the assumption that the (virtual) card is connected to the Internet at all times.
-Instead of receiving a token from the Wallet Server, both the Application and the Server generate this token independently.
+Instead of the Wallet Application receiving a token from the Wallet Server, both the Application and the Server generate this token independently.
 The Wallet Server and the Wallet Application both maintain a successful transaction counter.
 To generate a token for use in a transaction, both parties calculate the HMAC of this counter, keyed with the same key used to calculate the price hash.
 
@@ -157,8 +133,8 @@ To generate a token for use in a transaction, both parties calculate the HMAC of
 
 Since tokens are now generated rather than chosen, some care must be taken to deal with collisions and synchronization issues.
 Thus, it is necessary to construct a collision mitigation strategy.
-while the Unlinkable Wallet Protocol does suffer from potential collisions,
-    a collision merely renders two individual virtual credit cards inoperative, until either of the respective Wallet Applications regains access to the Internet.
+While the Unlinkable Wallet Protocol does suffer from potential collisions,
+    a collision merely renders two individual virtual credit cards inoperative, until one of the respective Wallet Applications regains access to the Internet.
 This may be mildly inconvenient, but does not pose a significant problem, and cannot result in mis-routed charges.
 We analyze the expected frequency of such collisions in Chapter \ref{cha:analysis}, working both mathematically and in simulation.
 The expected frequency of such collisions is very low, to the point where they are expected not to occur in practice.

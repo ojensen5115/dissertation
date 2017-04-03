@@ -1,0 +1,17 @@
+The contactless credit card protocol in use today neglects even basic protections.
+In Chapter \ref{cha:insecure}, we examine the protocol in detail, and show that it is vulnerable to four broad categories of outsider attacks:
+  eavesdropping, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale.
+The current contactless credit card protocol is likewise vulnerable to attacks perpetrated by malicious retailers as discussed in Chapter \ref{cha:secure},
+    providing no protection to customers from retailers wishing to take advantage of them.
+In addition, the contactless credit card protocol poses significant privacy risks to customers as discussed in Chapter \ref{cha:unlinkability},
+    allowing retailers to correlate purchases made using the same credit card.
+
+In response, we design a family of three replacement contactless credit card protocols, to guard against the deficiencies in the current protocol:
+\begin{enumerate}
+    \item the Externally Secure CC Protocol
+    \item the Secure CC Protocol
+    \item the Unlinkable Wallet Protocol
+\end{enumerate}
+The Externally Secure CC Protocol guards against the outsider attacks listed above.
+The Secure CC Protocol guards against both outsiders and malicious retailers.
+The Unlinkable Wallet Protocol guards against both outsiders and malicious retailers, while protecting customer privacy from curious retailers and banks.
