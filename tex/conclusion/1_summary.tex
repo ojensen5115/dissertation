@@ -1,11 +1,22 @@
-\todo{
-    \begin{itemize}
-    \item 1 page to describe the problem
-    \item 1 page executive summary
-    \end{itemize}
-}
+The contactless credit card protocol in use today neglects even basic protections.
+In Chapter \ref{cha:insecure}, we examine the protocol in detail, and find it vulnerable to four categories of outsider attacks:
+\begin{enumerate}
+    \item eavesdropping, wherein an attacker listens on the NFC channel to acquire credit card information sent as part of legitimate transactions.
+    \item skimming attacks, wherein an attacker poses as a point of sale to query a card for its information,
+        then replays this information to a legitimate point of sale to perform an unauthorized purchase.
+    \item relay attacks, wherein two colluding attackers relay messages from a contactless credit card,
+        essentially skimming ``on demand''.
+    \item attacks facilitated by compromised points of sale, wherein a compromised point of sale relays information it learns to an outside party.
+\end{enumerate}
 
-% summary, 2p per chapter
+It is likewise vulnerable to attacks perpetrated by malicious retailers,
+    providing no protection to customers from retailers wishing to take advantage of them.
+In addition, it poses privacy risks, allowing retailers to correlate purchases made using the same credit card.
+
+In response, we design a family of replacement protocols to guard against its deficiencies.
+We begin by constructing a protocol which defends against malicious outsiders, guarding against the external attacks listed above.
+We then augment this protocol to defend against malicious retailers, safeguarding customers from insider attacks.
+Finanlly, we construct a protocol for use with Electronic Wallet applications, protecting customer privacy from curious retailers and banks.
 
 % chapter 3
 
