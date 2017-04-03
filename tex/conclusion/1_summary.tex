@@ -1,17 +1,17 @@
 The contactless credit card protocol in use today neglects even basic protections.
-In Chapter \ref{cha:insecure}, we examine the protocol in detail, and find it vulnerable to four categories of outsider attacks:
-\begin{enumerate}
-    \item eavesdropping, wherein an attacker listens on the NFC channel to acquire credit card information sent as part of legitimate transactions.
-    \item skimming attacks, wherein an attacker poses as a point of sale to query a card for its information,
-        then replays this information to a legitimate point of sale to perform an unauthorized purchase.
-    \item relay attacks, wherein two colluding attackers relay messages from a contactless credit card,
-        essentially skimming ``on demand''.
-    \item attacks facilitated by compromised points of sale, wherein a compromised point of sale relays information it learns to an outside party.
-\end{enumerate}
+In Chapter \ref{cha:insecure}, we examine the protocol in detail, and find it vulnerable to several broad categories of attacks.
 
-It is likewise vulnerable to attacks perpetrated by malicious retailers,
+In particular, the contactless credit card protocol relies entirely on NFC's short range to prevent eavesdropping attaks,
+    wherein an attacker listens on the NFC channel to acquire credit card information sent as part of a legitimate transaction,
+    transmitting sensitive information including the customer's credit card number and expiration date in plaintext.
+The protocol provides no protection whatasoever from skimming attacks,
+    allowing any device to solicit a contactless credit card, which happily responds with information which may be replayed to a legitimate point of sale to perform an unauthorized purchase.
+Relay attacks are likewise possible, wherein multiple attackers relay messages to break the proximity assumption built into NFC.
+Compromising a point of sale device is likewise devastating, since it learns significant amounts of reusable sensitive information with each transaction.
+
+The current contactless credit card protocol is likewise vulnerable to attacks perpetrated by malicious retailers as discussed in Chapter \ref{cha:secure},
     providing no protection to customers from retailers wishing to take advantage of them.
-In addition, it poses privacy risks, allowing retailers to correlate purchases made using the same credit card.
+In addition, it poses significant privacy risks to customers as discussed in Chapter \ref{cha:unlinkability}, allowing retailers to correlate purchases made using the same credit card.
 
 In response, we design a family of replacement protocols to guard against its deficiencies.
 We begin by constructing a protocol which defends against malicious outsiders, guarding against the external attacks listed above.
@@ -131,7 +131,7 @@ This protocol is designed for Electronic Wallet applications, rather than physic
 We take advantage of the fact that the Card Information message indicates the destination of the subsequent Charge Request message to construct a tunneled protocol.
 We construct the protocol in three phases, reminiscent of the stepwise refinement process we used in Chapter \ref{cha:external}.
 
-The first iteration of this protocol begins with two strong assumptions:
+The first iteration of this protocol (described in Section \ref{sec:unlinkable-design-1}) begins with two strong assumptions:
     that retailers are not malicious, and that the customer's Wallet Application has access to the Internet at all times.
 Before each transaction, the Wallet Application and the Wallet Server agree on a 93-bit token.
 When the (virtual) credit card sends a Card Information message, it encodes this 93-bit token into a 28-digit value and splits this into pseudo-values for a credit card number, expiration date and iCVV.
@@ -142,13 +142,13 @@ Upon finding it, the Wallet Server then issues a \emph{visual} Charge Request to
     relaying the response back to the point of sale.
 Since the credit card information consists of randomized data, it is clearly unlinkable
 
-The second iteration of this protocol erodes the assumption that retailers are non-malicious.
+The second iteration of this protocol (described in Section \ref{sec:unlinkable-design-2}) erodes the assumption that retailers are non-malicious.
 In this protocol, the agreed upon token is merely 80 bits, leaving 13 bits left over.
 We use these remaining 13 bits as a ``price hash'',
     consisting of an HMAC of the 80-bit token, concatenated with the price, and keyed with a key known only to the (virtual) card and the Wallet Server.
 This price hash binds the token to a particular price, employing a defense much like in the Secure CC Protocol described in Chapter \ref{cha:secure}.
 
-The third and final iteration of this protocol erodes the assumption that the (virtual) card is connected to the Internet at all times.
+The third and final iteration of this protocol (described in Section \ref{sec:unlinkable-design-3}) erodes the assumption that the (virtual) card is connected to the Internet at all times.
 Instead of receiving a token from the Wallet Server, both the Application and the Server generate this token independently.
 The Wallet Server and the Wallet Application both maintain a successful transaction counter.
 To generate a token for use in a transaction, both parties calculate the HMAC of this counter, keyed with the same key used to calculate the price hash.
