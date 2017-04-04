@@ -45,8 +45,7 @@ The protocol, illustrated in Figure \ref{fig:unlinkable-3}, operates as follows:
 
 \item The point of sale sends a Solicitation message to the virtual credit card over the NFC channel.
 
-\item
-    The virtual credit card calculates token \emph{T} by calculating the HMAC of the transaction counter keyed with \emph{SK} and selecting the first 80 bits.
+\item The virtual credit card calculates token \emph{T} by calculating the HMAC of the transaction counter keyed with \emph{SK} and selecting the first 80 bits.
     The virtual credit card then proceeds as before.
     It calculates the price hash by combining \emph{T} with price \val{\$c} and calculating the HMAC of this value with key \emph{SK}, then selecting the first 13 bits.
     It then combines the 80-bit token \emph{T} with this 13-bit price hash to acquire a 93-bit value.
