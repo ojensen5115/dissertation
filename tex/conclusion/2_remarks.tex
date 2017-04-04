@@ -1,22 +1,26 @@
 \section{Concluding Remarks}
 
-The family of protocols presented in this dissertation are a strong step above the status quo.
-Protecting the contactless credit card protocol from malicious outsiders should be considered an urgent priority.
-Protecting the protocol from malicious retailers is less urgent, but is nonetheless important given the severity of the attacks which may be carried out.
-Whether to adopt unlinkability should be a customer choice:
-    while we do not presume to dictate the best move for the industry in this regard,
-    we seek to place the decision of a customer's privacy in the customer's hands rather than those of the retailers.
-That being said, though the protocols achieve these goals, they do carry limitations.
+In this dissertation we present a family of protocols which protect contactless credit card customers from
+    outsider attacks, malicious retailers attacks, and consumer privacy invasions by curious retailers.
+Though the protocols achieve these goals, they do carry limitations.
 
 The Externally Secure CC Protocol and the Secure CC Protocol both require large changes to existing point of sale infrastructure.
 This poses a significant barrier to adoption, as both of these protocols require replacing all point of sale devices across all retailers.
 
-The Unlinkable Wallet Protocol operates using existing point of sale infrastructure.
-However, the Wallet Server must maintain an index of the next expected token value for each card into its credit card database,
+By contrast, the Unlinkable Wallet Protocol operates using existing point of sale infrastructure.
+However, the Wallet Server needs to maintain an index of the next expected token value for each card into its credit card database,
     and the token is updated with each successful transaction.
-This requires rebuilding indexes over the database on every transaction, which may result in a performance bottleneck.
+If implemented as currently described, this requires modifying indexes over the database on every transaction, which may result in a performance bottleneck.
+
 The Unlinkable Wallet Protocol may also yield some customer confusion:
     bank statements are no longer as useful, as all transactions will appear to be made out to the Wallet Server service.
 Furthermore, this protocol hampers any systems which require customers to identify themselves via previously used credit card,
     commonly seen with retail returns and ticket collection kiosks.
 The Unlinkable Wallet Protocol renders this form of identification impossible by design.
+
+That being said, the family of protocols presented in this dissertation are a strong step above the status quo.
+We consider protection from malicious outsiders to be an urgent priority.
+Protecting customers from malicious retailers is less urgent, but is nonetheless important given the severity of the attacks which may be carried out.
+Whether to adopt unlinkability should be a customer choice:
+    while we do not presume to dictate the best move for the industry in this regard,
+    we seek to place the decision of a customer's privacy in the customer's hands rather than those of the retailers.
