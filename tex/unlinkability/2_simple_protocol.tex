@@ -26,16 +26,16 @@ This protocol is illustrated in Figure \ref{fig:simple-cpp}, and operates as fol
     \item The point of sale sends a Solicitation message to the customer's (virtual) credit card.
     \item The customer's card encrypts its credit card information (consisting of the credit card number, expiration date, and iCVV) using the bank's public key,
         and sends this data (along with the bank name) as a Card Information message.
-    \item The point of sale receives the Card Information message, appends the price to charge, and sends this data to the bank indicated in the Card Information message.
+    \item The point of sale receives the Card Information message, appends the price to charge, and sends this data to the bank named in the Card Information message.
     \item The bank decrypts the Card Information data to recover the customer's credit card number, expiration date, and iCVV.
         It then continues exactly as before in the Insecure CC Protocol described in Chapter \ref{cha:insecure}, responding to the point of sale with an Approval message.
 \end{enumerate}
 
-In this protocol, the Card Information message consists of an encrypted blob, and the bank name in cleartext.
-The point of sale learns nothing about the customer, besides the name of the card's issuing bank.
+In this protocol, the Card Information message consists of an encrypted blob, and the bank name in plaintext.
+The point of sale learns nothing about the customer besides the name of the card's issuing bank.
 As a result, this protocol is unlinkable.
 
 Barring any other requirements, asymmetric cryptography provides sufficient primitives for constructing an unlinkable payment protocol.
-However, asymmetric cryptography requires comparatively large (2048 bit) keys to be secure, and results in ciphertexts at least as long as the key.
+However, asymmetric cryptography requires comparatively large (2048 bit) keys to be secure and results in ciphertexts at least as long as the key.
 For reasons to be discussed shortly in Section \ref{sec:goals-infrastructure}, our goals for an Unlinkable Wallet Protocol require much shorter message lengths.
 As a result, using asymmetric cryptography in a secure manner is incompatible with our goals for a new Unlinkable Wallet Protocol.

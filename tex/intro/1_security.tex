@@ -3,16 +3,16 @@
 
 The protocol in use by contactless credit cards falls short of addressing even basic security issues.
 It employs no authentication, allowing any device to effectively pose as a point of sale.
-Furthermore, it transmits sensitive information (the credit card number, expiration date, etc.) wirelessly in cleartext.
+Furthermore, it transmits sensitive information (the credit card number, expiration date, etc.) wirelessly in plaintext.
 This transmission of data is then considered sufficient to allow an arbitrary charge to occur.
 This leads to a number of potential security vulnerabilities.
 
-The contactless credit card protocol equates ability to communicate with an intent to pay.
+The contactless credit card protocol equates the ability to communicate with an intent to pay.
 Relying on NFC's short range, this is intended as a stand-in for equating \emph{proximity} with intent to pay.
 However, much work has been done to dissociate the two concepts \cite{brown2013evaluating, Drimer:2007:KYE:1362903.1362910, francis2010practical, hancke2005practical, markantonakis2012practical}, such as by proxying and relaying communications over greater distances.
 
 Even the notion that proximity is tantamount to an intention to pay is flawed when used in a protocol without authentication.
-For example, skimming a contactless credit card is easy, because a phone can be briefly moved close to a pocket containing a credit card.
+For example, skimming a contactless credit card is easy, because a phone can be moved close to a pocket containing a credit card.
 Simply instruct an NFC-capable phone to send out solicitation messages claiming to be a point of sale, and any contactless credit cards within range will respond with their information.
 Indeed, there is an Android application \cite{NFCProxy} which simplifies this process down to clicking a button.
 This skimmed data can then be replayed to a real point of sale in order to perform a purchase on behalf of the skimmed credit card.
@@ -20,9 +20,10 @@ This skimmed data can then be replayed to a real point of sale in order to perfo
 Eavesdropping is likewise easy.
 NFC range is quite short, greatly limiting the possible location of an eavesdropper.
 However, constructing an eavesdropping antenna out of an inexpensive NFC tag is a simple procedure, as described in Section \ref{sec:insecure-attacks}.
-Furthermore, work has also been done to increase the range at which NFC communication may be captured \cite{brown2013evaluating, kfir2005picking}.
 Concealing such an antenna within a few centimeters (or even attached to) of a point of sale is sufficient to harvest credit card information,
     due to the plaintext nature of the messages being sent.
+Furthermore, work has also been done to increase the range at which NFC communication may be captured \cite{brown2013evaluating, kfir2005picking},
+    exacerbating the issue.
 
 A credit card's response to a solicitation is likewise overly permissive in how it may be used:
     while a point of sale may display a given price to the customer, there is no protocol-level assurance that the card will be charged the price on the screen.

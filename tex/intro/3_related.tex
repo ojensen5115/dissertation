@@ -15,18 +15,17 @@ Related work in this area falls into a number of broad categories:
 
 %\subsubsection*{--- NFC}
 
-Relating to channel security, Haselsteine and Breitfu{\ss} in \cite{haselsteiner2006security} provide a broad survey
-    of various attacks and defenses applicable to protocols built on the NFC channel.
+Relating to channel security, Haselsteine and Breitfu{\ss} provide a broad survey of various attacks and defenses applicable to protocols built on the NFC channel \cite{haselsteiner2006security}.
 Their focus is on channel-layer defenses, shielding NFC communication itself from attackers,
-    and suggesting that NFC participants perform a key-exchange protocol such as Diffie-Hellman \cite{diffiehellman}
+    and suggesting that NFC participants perform a key-exchange protocol such as Diffie-Hellman \cite{diffiehellman},
     then using this key to encrypt subsequent communication.
 
 Similarly, Madlmayr et al. analyze the state of NFC communication \cite{madlmayr2008nfc},
-    focusing not only the security and privacy of communications, but also the continued operability of device and host controller.
-They enumerate and discuss the viability and consequences of a number of attacks, but the discussion pertains only to channel security.
+    focusing on not only the security and privacy of communications, but also the continued operability of device and host controller.
+They enumerate and discuss the viability and consequences of a number of attacks, limiting discussion to channel security.
 Kortvedt further explores the problem of eavesdropping on NFC communications \cite{kortvedt2009securing},
-    suggesting various improvements such as a symmetric encryption solution with a strong mutual authentication,
-    using ``Over-the-Air Programming'' (OTA) as a solution for key management.
+    suggesting various improvements such as using a symmetric encryption solution with strong mutual authentication,
+    with ``Over-the-Air Programming'' (OTA) as a solution for key management.
 
 These works \cite{haselsteiner2006security, kortvedt2009securing, madlmayr2008nfc} focus on channel security,
     and thus are effective against channel attacks such as eavesdropping.
@@ -35,52 +34,52 @@ As such, these approaches are not effective at protecting NFC credit card paymen
 
 %\subsubsection*{--- Breaking distance assumptions}
 
-Hanke discusses in \cite{hancke2005practical} a practical relay attack against ISO 14443 (NFC ``proximity cards''),
+Hanke discusses a practical relay attack against ISO 14443 (NFC ``proximity cards'') \cite{hancke2005practical},
     demonstrating that such attacks are viable and can be invisible to the application layer.
 
-Kfir et al. explore maximizing the distance over which a relay attack may occur using only readily-available equipment \cite{kfir2005picking}.
+Kfir et al. explore maximizing the distance over which a relay attack may occur using only readily available equipment \cite{kfir2005picking}.
     They explore the problem from both sides, focusing on increasing the distance between the two relay devices and their subsequent communication endpoints.
-For example, increasing the latter distance between the relay and the tag (in our case, the credit card)
+For example, increasing the distance between the relay and the tag (in our case, the credit card)
     increases the distance from which credit card information may be skimmed.
 
 Similarly, Brown et al. explore maximizing eavesdropping range \cite{brown2013evaluating}.
-They find that with proper equipment, range appears to be determined primarily by background noise,
-    and achieve an eavesdropping range of 90cm, representing a much larger sphere volume in which an eavesdropping node may be located.
+They find that range appears to be determined primarily by background noise, and that with proper equipment they can achieve an eavesdropping range of 90cm.
+This represents a much larger sphere volume in which an eavesdropping node may be located.
 
 %\subsubsection*{--- Phones as legitimate devices}
 
 On the topic of using mobile phones legitimately for contactless credit card transactions (i.e. the concept of an Electronic Wallet),
-    Roland et al. in \cite{roland2012software} and \cite{roland2012practical} discuss the relative merits and weaknesses inherent when mobile devices emulate NFC cards.
+    Roland et al. discuss the relative merits and weaknesses inherent when mobile devices emulate NFC cards in \cite{roland2012software} and \cite{roland2012practical}.
 These works discuss several attack vectors (including relay attacks, denial-of-service attacks, and unauthorized usage attacks),
     and analyze APIs provided by mobile phones.
 In particular, multiple Electronic Wallet applications anchored to the same secure element is highlighted as potentially problematic.
 A proposed defense is to store sensitive information remotely, and access this data on demand via an authorized relay application.
 
 In \cite{roland2012relay}, Roland et al. discuss relay attacks targeting Electronic Wallet applications in general,
-    describing a malware attack in which relay attackers need not even be within NFC range of the victim's phone.
+    describing a relay attack involving malware in which relay attackers need not even be within NFC range of the victim's phone.
 In subsequent work \cite{roland2013applying}, Roland et al. investigate the feasibility of relay attacks on Google Wallet (now called Android Pay) in particular.
-They relay transmissions out-of-band over a TCP connection, and suggest three primary countermeasures:
-    short point of sale timeouts, Wallet Application PIN verification, and strong limits on the capabilities afforded to applications interfacing with the NFC interface.
+They relay transmissions out-of-band over a TCP connection and suggest three primary countermeasures:
+    short point of sale timeouts, Wallet Application PIN verification, and strong limits on the capabilities afforded to applications interfacing with the phone's NFC API.
 
 %\subsubsection*{--- Phones as NFC relay devices}
 
-Drimer and Murdoch \cite{Drimer:2007:KYE:1362903.1362910} present an attack on credit card payment systems,
+Drimer and Murdoch present an attack on credit card payment systems \cite{Drimer:2007:KYE:1362903.1362910},
     which we described in Section \ref{sec:transparent-bridge} as the Transparent Bridge attack.
 This attack relies on the ability to perform out-of-band real-time proxying and relaying of messages between two parties.
-Drimer et al. implement this attack against EMV (``Chip and Pin'') credit cards, demonstrating its practicality.
+Drimer et al. implement this attack against EMV ``Chip'' cards, demonstrating its practicality.
 They recommend defending against such attacks via distance bounding protocols.
 Hancke et al. present such a distance bounding protocol for RFID / NFC tags in \cite{hancke2005rfid}.
-    This protocol seeks to infer an upper bound on distance, based on response times and the speed of light.
+This protocol seeks to infer an upper bound on distance between communicating endpoints, based on response times and the speed of light.
 
 Anderson discusses the move towards using mobile phones as payment devices \cite{anderson2007position},
     and predicts that such devices (programmable by the end-user) would make excellent platforms from which to conduct relay attacks on payment protocols.
 In \cite{francis2010security}, Francis et al. discuss the ability for NFC capable mobile phones to operate as skimming platforms,
 They propose countermeasures to prevent NFC mobile phones from being used as such, with the intention of raising the difficulty bar.
 
-In addition, in \cite{francis2010practical}, Francis et al. find that out-of-band real-time proxying and relaying of general NFC communication is possible.
-To demonstrate this, they demonstrate two NFC devices communicating over a distance much larger than NFC range,
+In addition, Francis et al. find that out-of-band real-time proxying and relaying of general NFC communication is possible in \cite{francis2010practical}.
+They demonstrate two NFC devices communicating over a distance much larger than NFC range,
     by using phones to relaying NFC communications over Bluetooth.
-While Drimer et al. demonstrated the Transparent Bridge attack with EMV credit cards,
+While Drimer et al. perform the Transparent Bridge attack with EMV Chip cards,
     this result indicates that the attack applies to contactless credit cards as well.
 
 Francis et al. propose to use location information such as GPS coordinates in order to detect and defend against this relaying of messages,
@@ -94,26 +93,26 @@ They also suggest using the NFC tag's UID token from the communication layer's a
     but acknowledge that tag UIDs are often randomized for privacy reasons.
 Finally, they recommend restricting what mobile phone applications may do with regards to NFC communication.
 
-While the distance bounding approaches suggested by \cite{francis2010practical, markantonakis2012practical, Drimer:2007:KYE:1362903.1362910}
-    are a reasonable when reading responses directly from chip I/O or a dedicated tag,
+While the distance bounding approaches suggested by these works \cite{francis2010practical, markantonakis2012practical, Drimer:2007:KYE:1362903.1362910}
+    are reasonable when reading responses directly from chip I/O or a dedicated tag,
     they do not lend themselves well to a protocol in which Electronic Wallets participate:
 determining an upper-bound to distance based on response times using the speed of light as a metric becomes a very coarse measurement
     when dealing with a multitasking operating system on a smart phone, where delays can be variable, and depend on page faults, context switching, and unrelated software.
-In contrast our approach does not seek to detect or prevent attacks relying on the proxying or relaying of information.
+In contrast, our approach does not seek to detect or prevent attacks relying on the proxying or relaying of information.
 Instead, our protocol aims to render such attacks harmless.
 
 
 %\subsubsection*{--- Phones as credit card skimming devices}
 
-Indeed, in \cite{lee2012nfc}, Lee provides some analysis of relay and skimming attacks on NFC credit card transactions.
+With regard to contactless credit card protocol security, Lee provides some analysis of relay and skimming attacks on NFC credit card transactions \cite{lee2012nfc}.
 The stated goal of this work is to demonstrate the simplicity of performing these attacks,
     emphasizing that they are easily performed by the general public (having little-to-no knowledge of NFC or credit card protocols).
 To this end, he presents an Android application \emph{NFCProxy} \cite{NFCProxy} which implements these attacks.
 The application is easily installed, and transforms contactless credit card skimming into no more than a button-push endeavor.
 
-Subsequently, Lifchitz performs a more detailed exploration of the NFC credit card protocol \cite{lifchitz2012hacking},
+Subsequently, Lifchitz performs a more detailed exploration of the contactless credit card protocol \cite{lifchitz2012hacking},
     and emphasizes the near total lack of security in contactless credit cards.
-Roland et al. then demonstrate in \cite{roland2013cloning} how such attacks may be used to clone contactless credit cards.
+Roland et al. then demonstrate how such attacks may be used to clone contactless credit cards \cite{roland2013cloning}.
 
 
 %\subsubsection*{--- Other NFC payment / security ideas}
@@ -127,17 +126,17 @@ They suggest the creation of an NFC-SEC protocol, complete with key-exchange and
     \emph{unobservability} (an individual transaction may not be distinguishable from other transactions) and
     \emph{unlinkability} (two transactions from the same card may not be identifiable as such), while still maintaining
     \emph{traceability} (it must be possible to ascertain who generated a given set of data in order to troubleshoot problems which may arise).
-Eun et al. approach this problem from a clean slate perspective, and do not constrain themselves to making use of existing infrastructure,
-    imposing a significant barrier to adoption where existing infrastructure has been deployed.
+Eun et al. approach this problem from a clean slate perspective and do not constrain themselves to making use of existing infrastructure,
+    imposing a significant barrier to adoption where infrastructure has already been deployed.
 Furthermore, the \emph{lack} of unlinkability of current credit card transactions is profitable to retailers.
 As such, a clean-slate unlinkable protocol is unlikely to see adoption for contactless credit card processing.
 
-Taking a more general view of using NFC for secure communication,
-    Coskun et al. discuss in \cite{Coskun2013} a general view of where NFC technology is expected to go.
+Taking a more general view of using NFC for secure applications,
+    Coskun et al. discuss a general view of where NFC technology is expected to go \cite{Coskun2013}.
 Comparing NFC to Bluetooth and Zigbee, they suggest that NFC will become the channel of choice for anything from unlocking doors, payment systems, identification, etc.,
-    and posit an end-goal of having your cell phone replaces everything you would otherwise need to use for such purposes.
+    and posit an end-goal of having a mobile phone replace everything one would otherwise need to use for such purposes.
 
-In \cite{nandakumar2013dhwani}, Nandakumar et al. discuss an alternate implementation of NFC-like communication for mobile phones.
+Nandakumar et al. discuss an alternate implementation of NFC-like communication for mobile phones \cite{nandakumar2013dhwani}.
 In particular, this work is directed towards providing NFC-like functionality to phones which do not support NFC.
 Rather than using RF communication, this work explores using the speaker and microphone to transmit data between two phones over short range.
 Of particular interest is their use of a self-jamming signal, effectively preventing eavesdroppers.

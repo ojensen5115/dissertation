@@ -1,7 +1,7 @@
 \section{Use of Any Credit Card}
 \label{sec:goals-anycard}
 
-Few credit cards today support NFC transactions natively.
+Few credit cards today support contactless transactions natively.
 As a result, the majority of credit cards available to customers cannot generate valid iCVVs.
 The Unlinkable Wallet Protocol should allow the use of any credit card, including those for which no valid iCVVs exist.
 
@@ -20,14 +20,13 @@ Common interfaces seen on credit cards today include:
 \end{itemize}
 
 These interfaces operate independently:
-    a transaction involves the use of a single interface, as negotiated by the customer and the retailer.
+    a transaction involves the use of a single interface as negotiated by the customer and the retailer.
 The bank accepts a valid Charge Request over any interface supported by the credit card.
 While some cards support a different set of interfaces than others, an important observation is that \emph{every} credit card supports the visual interface.
 
 Making use of NFC communication is desirable for a new credit card protocol,
     because a smart phone supporting NFC communication enables the customer to send and receive arbitrary messages.
-However, for a charge to be successful, the bank must receive a Charge Request pertaining to a \emph{non-NFC} interface,
-    due to the lack of valid iCVVs associated with non-NFC credit cards.
+However, for a charge to be successful, the bank must receive a Charge Request pertaining to a \emph{non-NFC} interface due to the lack of valid iCVVs associated with non-contactless credit cards.
 
 These two seemingly contradictory requirements suggest the construction of a tunneled protocol:
     if we place an entity between the point of sale and the bank, this entity may receive an NFC Charge Request from the point of sale,

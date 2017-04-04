@@ -2,8 +2,8 @@
 \label{sec:goals-infrastructure}
 
 While constructing new and better protocols is an effective way to defend against attacks,
-	a requirement to modify or update widely established infrastructure imposes a significant barrier to the adoption of this new protocol.
-For example, in order to implement the Secure CC Protocol described previously in Chapter \ref{cha:secure}, every point of sale must be modified or replaced.
+	requiring modification or updates to widely established infrastructure imposes a significant barrier to the adoption of this new protocol.
+For example, in order to implement the Secure CC Protocol described in Chapter \ref{cha:secure}, every point of sale must be modified or replaced.
 In order to sidestep this barrier, we consider the protocol in use today (the Insecure CC Protocol in Chapter \ref{cha:insecure}) from the perspective of a point of sale.
 
 A point of sale may do rudimentary checks on the structure of the Card Information messages that it receives,
@@ -48,6 +48,6 @@ A key observation of the point of sale's behavior is that it consists of relayin
 While the point of sale may interpret the 28-digit data content of the Card Information message as consisting of three fields describing a credit card,
 	the customer may instead use these fields to encode an arbitrary 28-digit message, provided that the recipient of the Charge Request message decodes it accordingly.
 
-We leverage this observation in the construction of the Unlinkable Wallet Protocol to conform to existing point of sale behavior,
-	by using this 28-digit message as a carrier for the data we wish to transmit.
+We leverage this observation in the construction of the Unlinkable Wallet Protocol,
+    conforming to existing point of sale behavior by using this 28-digit message as a carrier for the data we wish to transmit.
 In so doing, we ensure that the point of sale in the Unlinkable Wallet Protocol remains identical to its counterpart in the Insecure CC Protocol.

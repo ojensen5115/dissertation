@@ -11,7 +11,7 @@ We call this protocol the Externally Secure CC Protocol, and design it using ste
 This protocol makes use of single-use ``charge tokens'' verifiable by the bank, while minimizing computation that needs to occur on the card.
 
 Second, we identify two attacks which may be carried out by malicious retailers:
-    overcharge attacks, and transparent bridge attacks.
+    Over-charge attacks and Transparent Bridge attacks.
 Both attacks are predicated on the customer's lack of participation in the protocol,
     and involve modifying or replacing a charge after it has been confirmed by the customer.
 We look to Electronic Wallet applications (such as Android Pay and Apple Wallet), which provide a channel between customer and card.
@@ -27,4 +27,4 @@ However, linkability has serious consumer privacy consequences, so we consider t
 We require that our unlinkable protocol make use of existing infrastructure, so as not to require retailer cooperation.
 In response, we design the Unlinkable Wallet Protocol,
     leveraging techniques from the Secure CC Protocol to guard against malicious outsiders and retailers,
-    while tunneling unlinkable charge tokens through the protocol in use today.
+    while tunneling secure and unlinkable charge tokens through the protocol in use today.

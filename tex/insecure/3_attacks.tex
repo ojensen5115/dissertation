@@ -26,7 +26,7 @@ Similar to the device described in \cite{kortvedt2009eavesdropping}, we modified
 We then measure the voltage induced in the coil.
 
 In Figure \ref{fig:insecure-eavesdropper-antenna}, we show our NFC eavesdropping antenna next to a credit card for scale.
-The resulting antenna is paper thin, flexible, approximately 3cm in diameter and adhesive on one side.
+The resulting antenna is paper thin, flexible, approximately three centimeters in diameter and adhesive on one side.
 As such, it can easily be concealed within range of a point of sale.
 
 \begin{figure}
@@ -36,10 +36,11 @@ As such, it can easily be concealed within range of a point of sale.
   \label{fig:insecure-eavesdropper-antenna}
 \end{figure}
 
-By connecting such a makeshift antenna to a software-defined radio (available very inexpensively online) and recording the captured signal with a program like GNU Radio, an eavesdropper can record all transmissions that occur between the point of sale and credit cards.
+By connecting such a makeshift antenna to a software-defined radio (available very inexpensively online) and recording the captured signal with a program like GNU Radio,
+    an eavesdropper can record all transmissions that occur between the point of sale and credit cards.
 We have written a simple program to read these signal-recordings and decode the messages in each direction.
 
-In the Insecure CC Protocol, an eavesdropper acquires the credit card number, expiration date and the issuing bank name.
+In the Insecure CC Protocol, an eavesdropper acquires the credit card number, expiration date, and the issuing bank name.
 (The eavesdropper also acquires the iCVV, but since this is used immediately in the current transaction, the acquired iCVV is of no value.)
 
 
@@ -50,7 +51,7 @@ In the Insecure CC Protocol, an eavesdropper acquires the credit card number, ex
 \label{sec:insecure-skimmer}
 The goal of a skimmer is to perform a purchase on behalf of the victim, without the victim's knowledge or consent.
 First, the skimmer masquerades as a point of sale to the victim's credit card, acquiring the credit card number, expiration date, issuing bank name, and the next iCVV.
-Subsequently, the skimmer masquerades as a credit card to a legitimate point of sale, making a purchase on behalf of the victim by replaying the skimmed credit card information and the iCVV.
+Subsequently, the skimmer masquerades as a credit card to a legitimate point of sale, making a purchase on behalf of the victim by replaying the skimmed credit card information and iCVV.
 An outline of this attack is shown in Figure~\ref{fig:insecure-skimmer}.
 
 \begin{figure}
@@ -61,7 +62,8 @@ An outline of this attack is shown in Figure~\ref{fig:insecure-skimmer}.
 \end{figure}
 
 This attack can be performed using a smart-phone with NFC capabilities.
-An Android application called \emph{NFCProxy}\footnote{\emph{NFCProxy}\cite{NFCProxy}, presented at Defcon 20, can be downloaded here:\newline\url{http://sourceforge.net/projects/nfcproxy/}} automates this attack, and is freely available online.
+An Android application called \emph{NFCProxy}\footnote{\emph{NFCProxy}\cite{NFCProxy}, presented at Defcon 20, can be downloaded here:\newline\url{http://sourceforge.net/projects/nfcproxy/}}
+    automates this attack and is freely available online.
 While \emph{NFCProxy} is not listed in the Google Play store, it can be downloaded from SourceForge and installed on the phone in a matter of minutes.
 
 With \emph{NFCProxy} running, the skimmer brings its phone briefly within range of an NFC credit card to acquire the credit card information and  the iCVV.
@@ -137,9 +139,9 @@ According to subsequent investigations, it appears that the same malware as was 
 During this breach, attackers stole \emph{56 million} credit and debit cards, also as reported in the Wall Street Journal \cite{homedepothack}.
 
 Other recent victims of compromised points of sale include other retailers
-	(e.g. Neiman Marcus in July through October of 2013, in which attackers stole an estimated 1.1 million credit and debit cards)\cite{neimanmarcushack},
-	grocery stores (e.g. Supervalu in June through July of 2014, in which it is estimated that attackers stole ``millions'' of credit and debit cards\cite{supervaluhack}),
-	as well as restaurants (e.g. P.F. Chang's in September 2013 through June 2014, in which attackers stole an estimated 7 million credit and debit cards\cite{pfchanghack}).
+	(e.g. Neiman Marcus in July through October of 2013, in which attackers stole an estimated 1.1 million credit and debit cards \cite{neimanmarcushack}),
+	grocery stores (e.g. Supervalu in June through July of 2014, in which it is estimated that attackers stole ``millions'' of credit and debit cards \cite{supervaluhack}),
+	as well as restaurants (e.g. P.F. Chang's in September 2013 through June 2014, in which attackers stole an estimated 7 million credit and debit cards \cite{pfchanghack}).
 
 Since 2014, headlines regarding data theft from compromised points of sale have diminished,
     not because the attacks have slowed, but because they have become so prevalent they are no longer headline-worthy.

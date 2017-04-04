@@ -7,7 +7,7 @@ Customer purchasing profiles are valuable to retailers, because they allow for m
 
 Recall that in the Insecure CC Protocol described in Chapter \ref{cha:insecure} (and in widespread use today),
   the credit card discloses its card number, expiration date, and iCVV to the point of sale with every purchase.
-Therefore, a retailer can link purchases that are made by the same credit card simply by comparing the card numbers of these purchases.
+Therefore, a retailer can link purchases that are made using the same credit card simply by comparing the card numbers of these purchases.
 Note that any credit card protocol which gives the retailer access to the card number is linkable by definition.
 
 These purchasing profiles can be unpleasant to the customer from a privacy standpoint:
@@ -17,7 +17,7 @@ Furthermore, a customer cannot opt-out of this profiling except by avoiding the 
 With this in mind, we consider how to provide credit card payments with the converse property: \emph{unlinkability}.
 Informally, if credit card purchases are unlinkable, then retailers cannot use them to construct purchasing profiles efficiently.
 
-While giving the retailer access to the card number is sufficient to undermine unlinkability, it is not necessary.
+While allowing the retailer access to the card number is sufficient to undermine unlinkability, it is not necessary.
 For example, consider the Secure CC Protocol, presented in Chapter \ref{cha:secure} and shown in Figure \ref{fig:secure_ccp_recall} for convenience.
 In this protocol, the credit card number is not disclosed, and all authentication data (contained within the value \emph{T}) is indistinguishable from random to the retailer.
 However, the charge token contains a constant card identifier \emph{ID}, required by the bank in order to identify the customer for which \emph{T} must be verified.

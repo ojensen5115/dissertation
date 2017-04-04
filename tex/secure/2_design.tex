@@ -6,7 +6,7 @@ Since the attacks described in the previous section (allowing a malicious retail
 	our proposed defense against these attacks is built around removing this ability.
 If using a credit card implemented on a smart phone, the phone's interface provides an additional communication channel between the customer and the credit card.
 In this case we refer to the card as a ``virtual'' credit card.
-The communication channel between the smart phone and the customer can be harnessed to allow the customer to participate in the credit card protocol,
+The communication channel between the smart phone and the customer can be harnessed to allow the customer to participate in the credit card protocol
 	beyond simply allowing it to occur.
 
 The Externally Secure CC Protocol described in Chapter \ref{cha:external} defines a function \emph{H},
@@ -31,9 +31,9 @@ We remind the reader of the following terms:
 The Secure CC Protocol, operating between a point of sale and a virtual credit card, is illustrated in Figure \ref{fig:secure-ccp} and proceeds as follows:
 
 \begin{enumerate}
-\item The point of sale displays a price \val{\$d} on its screen, inviting the customer to bring his credit card within NFC range.
+\item The point of sale displays a price \val{\$d} on its screen, inviting the customer to bring a credit card within NFC range.
 \item The point of sale sends a Solicitation message to the credit card, including a fresh random challenge \val{ch} and the price to be charged \val{\$s}.
-	(Recall that if the point of sale is honest, \val{\$s} = \val{\$d})
+	(Recall that if the point of sale is honest, \val{\$s} = \val{\$d}.)
 \item The virtual credit card displays the price \val{\$s} on the smart phone to the customer, who can choose to accept or reject it.
 	Rejecting the price aborts the protocol here.
 \item If the price is accepted by the customer, the virtual credit card calculates
@@ -42,7 +42,7 @@ The Secure CC Protocol, operating between a point of sale and a virtual credit c
 \item The point of sale sends a charge request message to the issuing bank (identified by \val{B}) consisting of (\val{ID}, \val{T}, \val{ch}, \val{\$r}).
 	(Again, if the point of sale is honest, \val{\$r} = \val{\$d})
 \item The bank uses \val{ID} to look up \emph{info\textsubscript{bank}} and then calculates \emph{iCVV\textsubscript{bank}}.
-	It then uses the \val{ch} and \val{\$r} supplied in the charge request message to determine
+	It then uses the \val{ch} and \val{\$r} supplied in the Charge Request message to calculate
 	$$T_{bank} = H(\textrm{\emph{info}}_{bank},~ ch,~ \textrm{\emph{\$r}},~ \textrm{\emph{iCVV}}_{bank})$$
 	If $T \neq T_{\text{bank}}$, the bank will decline the charge, otherwise it approves the charge for \val{\$r}.
 \end{enumerate}
@@ -61,7 +61,7 @@ As a result, while not providing protections from malicious retailers to physica
 
 We note that a naive implementation of the protocol above might require excessively long timeouts between the point of sale sending its solicitation message and receiving the response.
 Should long timeouts not be desired, a simple solution would be for the point of sale to send periodic solicitations (with new challenges).
-The virtual credit card, upon receiving permission from the customer, could then cache this approval and respond immediately to the subsequent solicitation.
+The virtual credit card, upon receiving permission from the customer, could then cache this authorization and respond immediately to the subsequent solicitation.
 Besides noting this particular case, we emphasize that issues such as these are implementation details, the decisions for which are best left to those implementing the protocol.
 
 \subsection{Defending Against the Over-charge Attack}
@@ -85,11 +85,11 @@ When the Secure CC Protocol is used, one of two scenarios occurs:
 
 \begin{enumerate}
 \item The price associated with the malicious customer's purchase differs from (i.e. is greater than) the price of the victim customer's purchase.
-The victim customer compares the price displayed by the point of sale and the price displayed by his virtual credit card.
+The victim customer compares the price displayed by the point of sale and the price displayed by the virtual credit card.
 The would-be victim customer immediately detects the attack and aborts the transaction.
 \item The price associated with the malicious customer's purchase is equal to the price of the victim customer's purchase.
 The victim customer does not detect this attack, and allows the transaction to occur.
-The end result: the victim customer paid for the price of what he received, and the victim retailer received the price of what it sold.
+The end result: the victim customer paid for the price of what it received, and the victim retailer received the price of what it sold.
 \end{enumerate}
 
 As a result, there is no longer any incentive to carrying out this attack, as the only successful instance results in all parties getting paid exactly as much as they would had they been honest.

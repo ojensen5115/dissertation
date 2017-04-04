@@ -1,28 +1,28 @@
 \section{Collision Analysis of the Protocol}
 \label{sec:collisions_and_simulations}
 
-Every transaction processed by the Wallet Server service updates a card's Account Hash to a new 80-bit value.
-If at any time two cards possess the same Account Hash, the Wallet Server can no longer process purchases for either card,
-    as a Charge Request message cannot uniquely identify a card.
+Every transaction processed by the Wallet Server service updates a card's token \val{T} to a new 80-bit value.
+If at any time two cards possess the same token, the Wallet Server can no longer process purchases for either card,
+    as a Charge Request message cannot identify which card to charge.
 While hash functions such as those in the SHA-2 family are collision resistant, this does not mean that collisions cannot occur.
-Furthermore, truncating the Account Hash down to 80 bits greatly increases the probability of collisions.
+Furthermore, truncating the token down to 80 bits greatly increases the probability of collisions.
 
-We wrote a simulator to model Wallet Server behavior, in order to ensure that messages contained sufficient information for the protocol to succeed,
+We wrote a simulator to model Wallet Server behavior in order to ensure that messages contained sufficient information for the protocol to succeed
     and to monitor for collisions.
-We seeded it with 10 million credit cards, and processed several million transactions.
+We seeded it with 10 million credit cards and processed several million transactions.
 During the simulation, no collisions were observed.
 
-Modeling this behavior mathematically, we note that the Birthday Paradox plays a role in determining the number of credit cards that a database can contain before expecting a hash collision:
-the expected number cards registered before observing a collision is approximately
+Modeling this behavior mathematically, we note that the Birthday Paradox plays a role in determining the number of credit cards that a database can contain before expecting a token collision:
+the expected number of cards registered before observing a collision is approximately
 $\sqrt{\frac{\pi}{2} \cdot 2^{80}} \approx 1.4 \cdot 10^{12}$.
 However, registering a credit card is by definition an event in which the Wallet Application is connected to the Internet (and thus to the Wallet Server).
-As such, collisions during registration are not a concern, as a differing seed or counter value can simply be chosen and synchronized between the Wallet and the Server.
+As such, collisions during registration are not a concern, as a differing key \val{SK} or counter value can simply be chosen and synchronized between the Wallet and the Server.
 Provided that there are fewer than $2^{79}$ (approximately $6.04 * 10^{24}$) credit cards registered,
     card registration is computationally easy (expecting no more than two attempts without causing a collision).
 
-A credit card transaction is then modeled by selecting a single hash and replacing it.
+A credit card transaction is then modeled by selecting a single token and replacing it.
 In such a transaction, the Birthday Paradox is not relevant:
-intuitively, updating Account Hash number 83 cannot cause Account Hashes 12 and 41 to collide with each other.
+intuitively, updating the token for card number 83 cannot cause the tokens for cards 12 and 41 to collide with each other.
 As a result, given a database of $n$ Account Hashes, the expected number of transactions before a collision occurs is
 $\frac{2^{80}}{n}$.
 Using the 10 million cards from our simulation, this implies that the expected number of transactions before a collision occurs is

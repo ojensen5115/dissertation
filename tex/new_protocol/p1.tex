@@ -16,13 +16,13 @@ The protocol, illustrated in Figure \ref{fig:unlinkable-1}, operates as follows:
 
 \begin{enumerate}
 
-\item When the customer wishes to use a credit card, the customer selects a credit card in the Wallet Application.
+\item The customer selects a credit card in the Wallet Application.
 
 \item The Wallet Application sends a Token Request message to the Wallet Server.
     This message consists of the card identifier \emph{Ident} associated with the selected card, and is sent securely over the Internet.
-    Note that this message needs to be authenticated, to prevent a customer from requesting a token to a different customer's card.
+    Note that this message should be authenticated to prevent a customer from requesting a token to a different customer's card.
 
-\item The Wallet Server then generates a random 93-bit token \emph{T}, and associates it with the card identified by \emph{Ident}.
+\item The Wallet Server then generates a random 93-bit token \emph{T} and associates it with the card identified by \emph{Ident}.
     The Wallet Server responds to the Wallet Application with a Token message containing \emph{T}.
 
 \item The point of sale displays the price to charge (\val{\$}) on its screen.
@@ -48,11 +48,11 @@ The protocol, illustrated in Figure \ref{fig:unlinkable-1}, operates as follows:
     As a result, the Charge Request message is directed to the Wallet Server and \emph{not} an actual bank.
     Note that from the perspective of the point of sale, the Wallet Server appears to be a bank like any other.
 
-\item The Wallet Server reconstructs \emph{k} from the Charge Request message, and computes the 93-bit token it represents.
-    The Wallet Server then searches its database for this token, to identify the card used in this transaction.
-    If the token is not found, the Wallet Server sends a ``declined'' Approval message to the point of sale, and aborts the protocol.
+\item The Wallet Server reconstructs \emph{k} from the Charge Request message and computes the 93-bit token it represents.
+    The Wallet Server then searches its database for this token, in order to identify the card used in this transaction.
+    If the token is not found, the Wallet Server sends a ``declined'' Approval message to the point of sale and aborts the protocol.
     Otherwise, the stored card details are retrieved from the Wallet Server's database.
-    The Wallet Server then invalidates the token, and sends a \emph{visual} Charge Request to the card's bank with the following fields:
+    The Wallet Server then invalidates the token and sends a \emph{visual} Charge Request to the card's bank with the following fields:
     \begin{itemize}
     \item Cardholder name
     \item Card number
@@ -62,7 +62,7 @@ The protocol, illustrated in Figure \ref{fig:unlinkable-1}, operates as follows:
     Note that unlike the Card Information message sent by the Wallet Application, this data reflects the actual credit card information,
         acquired by the Wallet Server during the card registration.
 
-\item The bank receives the \emph{visual} Charge Request from the Wallet Server, and processes this transaction as normal.
+\item The bank receives the \emph{visual} Charge Request from the Wallet Server and processes this transaction as normal.
     It then responds to the Wallet Server with an Approval message indicating whether the charge has been accepted.
 
 \item The Wallet Server forwards the bank's Approval message to the point of sale.
@@ -74,11 +74,10 @@ to the point of sale, the Wallet Server appears to be a bank, while to the bank,
 Note too that the Wallet Application needs to have a ready connection to the Internet.
 Each transaction requires secure communication with the Wallet Server in order to receive the next token \emph{T}.
 Should a connection to the Internet be unavailable to the Wallet Application,
-    after using \emph{T} the customer is unable to perform subsequent purchases with this virtual credit card until a Token Request exchange can take place.
+    after using \emph{T}, the customer is unable to perform subsequent purchases with this virtual credit card until a Token Request exchange can take place.
 
 This protocol is unlinkable,
     because the information received by the point of sale consists solely of a random value, accompanied by a bank name identifying the Wallet Server.
 Any credit card can be used in this protocol,
     because the bank receives \emph{visual} Charge Request messages, and all credit cards support the visual interface.
-Finally, this protocol uses existing infrastructure,
-    in that the behaviors of the point of sale and the bank are unchanged from those of the Insecure CC Protocol.
+Finally, this protocol uses existing infrastructure in that the behaviors of the point of sale and the bank are unchanged from those of the Insecure CC Protocol.

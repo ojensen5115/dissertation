@@ -2,25 +2,24 @@
 
 The Externally Secure CC Protocol is described in Chapter \ref{cha:external}.
 We take particular note of the fact that in the existing contactless credit card protocol, no cryptographic operations are in use.
-We hypothesize that this is to keep manufacturing costs of these cards down, such that they can be inexpensively replaced on suspicion of theft or misuse.
-As such, the Externally Secure CC Protocol seeks not to increase computational requirements on the credit card itself from the status quo.
+We hypothesize that this is to keep manufacturing costs of these cards down so that they can be inexpensively replaced on suspicion of theft or misuse.
+As such, the Externally Secure CC Protocol seeks not to increase computational requirements on the credit card.
 We make use of the existing iCVV generation algorithm as our source of entropy, and eschew using any other expensive operations (such as hash functions).
 
-We design the Externally Secure CC Protocol to incorporate a challenge-response structure,
-    and base the response-generation function around an abstract function \emph{H}.
+We design the Externally Secure CC Protocol to incorporate a challenge-response structure and base the response-generation function around an abstract function \emph{H}.
 We determine that while a cryptographic hash function would suffice, such functions are comparatively expensive and provide properties unneeded for this application.
 
 Thus, we begin by determining what properties are required of function \emph{H} to prevent the outsider attacks described.
 We then decompose \emph{H} into simpler sub-functions \emph{F} and \emph{G}, and map the determined properties of \emph{H} onto corresponding properties of \emph{F} and \emph{G}.
 We provide inexpensive implementations of functions \emph{F} and \emph{G} using only indexing and \texttt{XOR},
     and show that these implementations satisfy the necessary properties of \emph{F} and \emph{G}.
-In so doing, we provide a concrete implementation of function \emph{H} which uses minimal computation,
+In so doing, we provide a concrete implementation of function \emph{H} which uses minimal computation
     and prove that its use as the response-generation function in our challenge-response protocol is sufficient to defend against outsider attacks.
 
 % chapter 4
 
 The Secure CC Protocol is described in Chapter \ref{cha:secure}.
-We begin by exploring possibilities for retailers to behave maliciously, and describe two attacks which a retailer may carry out:
+We begin by exploring possibilities for retailers to behave maliciously and describe two attacks which a retailer may carry out:
     an Over-charge attack, and a Transparent Bridge attack.
 Both attacks take advantage of the fact that a credit card's response to a solicitation
     (in both the existing contactless credit card protocol, and the Externally Secure CC Protocol)
@@ -28,8 +27,8 @@ Both attacks take advantage of the fact that a credit card's response to a solic
 
 The Over-charge attack is quite simple:
     the retailer displays the correct price to the customer, but then issues a Charge Request accompanied by an arbitrarily higher price to the bank.
-Should the fraud be detected on the victim customer's monthly statement, the customer may declare the charge as fraudulent to his bank and request a charge-back,
-    but small increases are unlikely to be noticed.
+Should the fraud be detected on the victim customer's monthly statement, the customer may declare the charge as fraudulent to his bank and request a charge-back.
+However, small increases are unlikely to be noticed.
 
 The Transparent Bridge attack is more insidious:
     the malicious retailer's point of sale and a malicious accomplice's specialized device work together to relay data out-of-band in real time.
@@ -62,21 +61,21 @@ Nonetheless, they remain protected from malicious outsiders when using this prot
 % chapter 5
 
 In Chapter \ref{cha:electronic} we discuss the use of Electronic Wallets in more detail.
-An Electronic Wallet is a collection of (virtualized) credit cards, emulated by a smart phone.
+An Electronic Wallet is a collection of (virtual) credit cards, emulated by a smart phone.
 This model provides a significant advantage over physical credit cards:
     the wallet may virtualize an unlimited number of credit cards precluding a bulky wallet,
     virtualized cards do not respond to solicitations while the phone is locked and unattended,
-    the wallet provides a rich interface with which the customer may communicate with a (virtual) credit card.
+    and the wallet provides a rich interface with which the customer may communicate with a (virtual) credit card.
 
 % chapter 6
 
 In Chapter \ref{cha:unlinkability}, we discuss the properties known as \emph{linkability} and \emph{unlinkability}.
-All contactless credit card protocols discussed thus-far (including the protocol in use today) are linkable:
+All contactless credit card protocols discussed thus far (including the protocol in use today) are linkable:
     retailers are able to identify multiple purchases made using the same credit card.
 This ability is valuable to retailers, because it allows them to construct purchasing profiles on their customers.
-These profiles can then be used for more effective marketing, or can be sold outright to interested third parties.
+These profiles can then be used for more effective marketing, or can be sold to interested third parties.
 
-Purchasing habits can reveal very sensitive information about a customer,
+Purchasing habits can reveal sensitive information about a customer,
     and thus some customers may wish to prevent retailers from constructing such profiles on them.
 Currently, the only way in which to do so is to eschew the use of credit cards entirely.
 We consider how to approach constructing an unlinkable payment protocol for customers concerned about their privacy.
@@ -90,8 +89,8 @@ By contrast, asymmetric cryptography provides sufficient primitives to construct
 
 % chapter 7
 
-However, as described in Chapter \ref{cha:unlinkable_goals}, we espouse two additional goals when constructing an unlinkable credit card protocol:
-    being able to use any credit card, and making use of existing point of sale infrastructure.
+However, as described in Chapter \ref{cha:unlinkable_goals}, we espouse two additional goals when constructing an unlinkable contactless credit card protocol:
+    being able to use any credit card and making use of existing point of sale infrastructure.
 The latter goal is particularly important, as requiring modification to points of sale would require retailer cooperation,
     and one cannot expect retailer cooperation when removing a feature valuable to retailers.
 Furthermore, using existing infrastructure alleviates significant barriers to adoption, in that one doesn't need to replace all points of sale across all retailers to use the new protocol.
@@ -103,15 +102,15 @@ Asymmetric cryptography requires block sizes of thousands of bits in order to be
 % chapter 8
 
 The Unlinkable Wallet Protocol is described in Chapter \ref{cha:unlinkable_design}.
-This protocol is designed for Electronic Wallet applications rather than physical credit cards, and can be used by privacy conscious customers to virtualize any credit card.
-We take advantage of the fact that the Card Information message indicates the destination of the subsequent Charge Request message to construct a tunneled protocol.
+This protocol is designed for Electronic Wallet applications rather than physical credit cards and can be used by privacy conscious customers to virtualize any credit card.
+We take advantage of the fact that the Card Information message indicates the destination of the subsequent Charge Request message, constructing a tunneled protocol.
 We construct the protocol in three phases, reminiscent of the stepwise refinement process we used in Chapter \ref{cha:external}.
 
 The first iteration of this protocol (described in Section \ref{sec:unlinkable-design-1}) begins with two strong assumptions:
     that retailers are not malicious, and that the customer's Wallet Application has access to the Internet at all times.
 Before each transaction, the Wallet Application and the Wallet Server agree on a 93-bit token.
-When the (virtual) credit card sends a Card Information message, it encodes this 93-bit token into a 28-digit value and splits this into pseudo-values for a credit card number, expiration date and iCVV.
-These pseudo-values are then sent in the Card Information message, and indicates the Wallet Server in the Bank Name field.
+When the (virtual) credit card sends a Card Information message, it encodes this 93-bit token into a 28-digit value and splits it into pseudo-values for a credit card number, expiration date and iCVV.
+These pseudo-values are then sent in the Card Information message, along with the Bank Name field indicating the Wallet Server.
 The Wallet Server decodes the pseudo values to reconstruct the 93-bit token, and looks up which of its registered cards is associated with this token.
 Upon finding it, the Wallet Server then issues a \emph{visual} Charge Request to the issuing bank
     (consisting of the information one would normally type into an online form to make a purchase on the Internet),
@@ -134,8 +133,8 @@ To generate a token for use in a transaction, both parties calculate the HMAC of
 Since tokens are now generated rather than chosen, some care must be taken to deal with collisions and synchronization issues.
 Thus, it is necessary to construct a collision mitigation strategy.
 While the Unlinkable Wallet Protocol does suffer from potential collisions,
-    a collision merely renders two individual virtual credit cards inoperative, until one of the respective Wallet Applications regains access to the Internet.
-This may be mildly inconvenient, but does not pose a significant problem, and cannot result in mis-routed charges.
+    a collision merely renders two individual virtual credit cards inoperative until one of the respective Wallet Applications regains access to the Internet.
+This may be inconvenient, but does not pose a significant problem, and cannot result in mis-routed charges.
 We analyze the expected frequency of such collisions in Chapter \ref{cha:analysis}, working both mathematically and in simulation.
 The expected frequency of such collisions is very low, to the point where they are expected not to occur in practice.
 No collisions were observed in simulation.

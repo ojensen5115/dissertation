@@ -5,11 +5,11 @@ Recall that when making a payment, the customer first views the price about to b
 Using this information, the customer makes its one and only decision: whether to allow the payment protocol to occur, or not.
 The underlying assumption that the customer makes is that the price displayed on the screen is equal to the price which will be charged to the credit card.
 This need not be the case.
-The information displayed on a screen is merely an assurance in the informal sense:
+The information displayed on the screen is merely an assurance in the informal sense:
     the numbers displayed to the customer \emph{should} reflect the dollar amount which will subsequently be sent with the Charge Request message to the bank,
     but there is no mechanism in place to require this.
 Two attacks emerge as a result.
-The goal of the Secure CC Protocol presented in this chapter is to extend the protection provided by the Externally Secure CC Protocol to defend against these two attacks.
+The goal of the Secure CC Protocol presented in this chapter is to extend the protection provided by the Externally Secure CC Protocol to defend against these two additional attacks.
 
 \subsection{The Over-charge Attack}
 \label{sec:overcharge}
@@ -65,14 +65,14 @@ Simultaneously, the malicious customer prepares to make a relatively expensive p
 \end{figure}
 
 In this attack, all messages are transparently relayed between the victim retailer's point of sale and the victim customer's credit card.
-As a result, the victim customer believes himself to be making an inexpensive purchase at the malicious retailer, while he is actually making an expensive purchase at the victim retailer.
+As a result, the victim customer expects to be charged for an inexpensive purchase at the malicious retailer, but is instead charged for an expensive purchase at the victim retailer.
 The malicious retailer loses the inexpensive sale, but acquires the merchandise from an expensive purchase in exchange.
 
-This Transparent Bridge attack is particularly interesting, because the malicious parties leave no trace with either of the victims:
-to the victim customer there is only a record of an expensive purchase at the victim retailer, and to the victim retailer there is only the customer record of the victim customer.
+This Transparent Bridge attack is particularly interesting because the malicious parties leave no trace with either of the victims:
+to the victim customer, there is only a record of an expensive purchase at the victim retailer, and to the victim retailer, there is only the customer record of the victim customer.
 The amount which can be successfully stolen by the malicious retailer is unconstrained, and needs not evade notice:
 	if the discrepancy is noticed and the victim customer files a charge-back request, it will be against the victim retailer (and not the malicious retailer).
 As such, detected or not, it is one of the two victims that will be left facing the bill, making the Transparent Bridge attack significantly more dangerous than the Over-charge attack described earlier.
 
 Drimer et al. propose a defense against this attack in the context of EMV ``chip'' cards.
-However, this solution is not applicable to contactless credit cards.
+However, this solution is not applicable to a contactless credit card protocol.

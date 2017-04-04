@@ -1,8 +1,8 @@
 \section{Design of the Protocol}
 \label{sec:external-design}
 
-In designing the Externally Secure CC Protocol, we do not allow any computationally expensive operations such as signature verification, or even hashing on the credit card:
-	we restrict a credit card to performing only basic arithmetic, indexing, XOR, and similarly inexpensive operations.
+In designing the Externally Secure CC Protocol, we do not add any computationally expensive operations such as signature verification, or even hashing on the credit card:
+    beyond its current function, we restrict a credit card to performing only basic arithmetic, indexing, XOR, and similarly inexpensive operations.
 We design the protocol using a process called \emph{stepwise refinement}:
 \begin{enumerate}
 \item First, we define the protocol in terms of an abstract function \emph{H}.
@@ -10,7 +10,7 @@ We design the protocol using a process called \emph{stepwise refinement}:
 	and show that if function \emph{H} satisfies these two properties,
 	then the protocol is not vulnerable to the four classes of attacks described in Section \ref{sec:insecure-attacks}.
 \item Next, we define function \emph{H} in terms of two abstract functions \emph{F} and \emph{G}.
-We then identify three properties, namely \textbf{F1}, \textbf{F2} and \textbf{G1},
+We then identify three properties, namely \textbf{F1}, \textbf{F2}, and \textbf{G1},
 	and prove that if function \emph{F} satisfies properties \textbf{F1} and \textbf{F2}
 	and function \emph{G} satisfies property \textbf{G1}, then function \emph{H} satisfies the two desired properties \textbf{H1} and \textbf{H2}.
 \item We then propose concrete implementations of functions \emph{F} and \emph{G}.
@@ -19,11 +19,11 @@ We then identify three properties, namely \textbf{F1}, \textbf{F2} and \textbf{G
 \end{enumerate}
 
 In so doing, we provide a concrete implementation of the Externally Secure CC Protocol
-	and show that it is not vulnerable to any of the four classes of attacks described in Section \ref{sec:insecure-attacks}.
+	and show that it is not vulnerable to any of the four classes of outsider attacks described in Section \ref{sec:insecure-attacks}.
 
 The Externally Secure CC Protocol uses the same four messages that are used in the Insecure CC Protocol.
-However the contents of these messages have become more involved.
-In particular, We incorporate a challenge-response mechanism in the Solicitation and Card Information messages.
+However, the contents of these messages have become more involved.
+In particular, we incorporate a challenge-response mechanism in the Solicitation and Card Information messages.
 An outline of this protocol is shown in Figure \ref{fig:external-ccp}.
 
 \begin{figure}[h!]
@@ -37,15 +37,15 @@ The four messages used in the Externally Secure CC Protocol are as follows:
 
 \begin{description}
 \item[Solicitation (\emph{ch}):]
-The point of sale sends a solicitation message much like in the Insecure CC Protocol.
+The point of sale sends a Solicitation message much like in the Insecure CC Protocol.
 However, this message now includes a random challenge \emph{ch}.
 This challenge is used by the credit card when constructing its response.
 
 \item[Card Information (\emph{ID}, \emph{T}):]
-The solicitation response consists of two primary components, ID and T. They are as follows:
+The credit card's response consists of two primary components, ID and T. They are as follows:
 
 \begin{description}
-\item[\emph{ID},]a Universally Unique Identifier \cite{uuid} is used to identify the card, without revealing the card's information to eavesdroppers or any other party.
+\item[\emph{ID},]a Universally Unique Identifier \cite{uuid}, is used to identify the card without revealing the card's information to eavesdroppers or any other party.
 This value is computed by the credit card manufacturer and stored on the card as a constant.
 
 \item[\emph{T = H(info, ch, iCVV)}] is used to authenticate the card's identity.
@@ -53,7 +53,7 @@ This abstract function \emph{H} will be defined later through stepwise refinemen
 	it can be used to verify its arguments while leaking no information about them.
 \end{description}
 
-In so doing, \emph{ID} provides identification, and \emph{T} provides authentication.
+In so doing, \emph{ID} provides identification and \emph{T} provides authentication.
 In addition, this message is accompanied by the bank name \emph{B}, as before, so that the point of sale may route its Charge Request to the proper entity.
 
 \item[Charge Request (\emph{ID}, \emph{T}, \emph{ch}, \emph{\$}):]
@@ -80,12 +80,12 @@ This step is equivalent to verifying the credit card information and iCVV in the
 \subsection{Desired Properties of Function \emph{H}}
 \label{external-h-properties}
 
-We pit the Externally Secure CC Protocol against the attacks described in Section \ref{sec:insecure-attacks},
+We pit the Externally Secure CC Protocol against the attacks described in Section \ref{sec:insecure-attacks}
 	and identify the two properties \textbf{H1} and \textbf{H2} needed from function \emph{H} in order for these attacks to be thwarted.
 
 \subsubsection*{Defending Against Eavesdropping}
 When eavesdropping on a transaction, the eavesdropper learns a valid (\emph{ch}, \emph{ID}, \emph{T}, \emph{B}) tuple.
-The challenge \emph{ch}, the card identifier \emph{ID} and the bank name \emph{B} are all public information, of no value to the eavesdropper.
+The challenge \emph{ch}, the card identifier \emph{ID}, and the bank name \emph{B} are all public information, of no value to the eavesdropper.
 Only $T = H(\textrm{\emph{info}},~ ch,~ iCVV)$ contains authentication information useful to an eavesdropper.
 In order to guarantee that no sensitive information is leaked, we require that function \emph{H} satisfies the following property:
 
@@ -93,7 +93,7 @@ In order to guarantee that no sensitive information is leaked, we require that f
 \item[H1:] If \emph{iCVV} is indistinguishable from random, then $H(\textrm{\emph{info}},~ ch,~ iCVV)$ is indistinguishable from random.
 \end{description}
 
-If function \emph{H} satisfies property \textbf{H1}, then the eavesdropper (ignorant of \emph{iCVV}) cannot distinguish \emph{T} from random, and as such can gain no useful information.
+If function \emph{H} satisfies property \textbf{H1}, then the eavesdropper (ignorant of \emph{iCVV}) cannot distinguish \emph{T} from random and gains no useful information.
 
 
 
@@ -104,12 +104,12 @@ If function \emph{H} satisfies property \textbf{H1}, then the eavesdropper (igno
 
 \subsubsection*{Defending Against Skimming}
 When sending a Solicitation message to a credit card, the skimmer includes a challenge $ch_{skim}$, which the card uses to construct its response.
-From the resulting Card Information message, the skimmer learns \emph{ID}, $T_{skim} = H(\textrm{\emph{info}}, ch_{skim}, iCVV)$ and \emph{bank name}.
+From the resulting Card Information message, the skimmer learns \emph{ID}, $T_{skim} = H(\textrm{\emph{info}}, ch_{skim}, iCVV)$ and \emph{B}.
 When the skimmer attempts to perform a purchase using this information, it will be issued a challenge $ch_{pos}$ by the point of sale.
 In order to prevent the skimmer from correctly responding to this challenge, we require that function \emph{H} satisfies the following property:
 
 \begin{description}
-\item[H2:] Given $H(\textrm{\emph{info}},~ ch,~ iCVV)$, \emph{ch}, and $ch'$ such that $ch \neq ch'$, one cannot infer $H(\textrm{\emph{info}},~ ch,~ iCVV)$.
+\item[H2:] Given $H(\textrm{\emph{info}},~ ch,~ iCVV)$, \emph{ch}, and $ch'$ such that $ch \neq ch'$, one cannot infer $H(\textrm{\emph{info}},~ ch',~ iCVV)$.
 \end{description}
 
 If function \emph{H} satisfies property \textbf{H2}, then the skimmer cannot use the value of $T_{skim}$ in order to construct a response to the point of sale's challenge $ch_{pos}$, and thus cannot perform purchases on behalf of the credit card.
@@ -122,7 +122,7 @@ If function \emph{H} satisfies property \textbf{H2}, then the skimmer cannot use
 \subsubsection*{Defending Against Relay Attacks}
 The relay attack operates similarly to the skimming attack.
 When performing a relay attack, the relay provides challenge $ch_{relay}$ to the card.
-As in the skimming attack, the relay learns \emph{ID}, $T_{relay} = H(\textrm{\emph{info}},~ ch_{relay},~ iCVV)$ and \emph{B}, and then transmits this information to the proxy.
+As in the skimming attack, the relay learns \emph{ID}, $T_{relay} = H(\textrm{\emph{info}},~ ch_{relay},~ iCVV)$, and \emph{B}, and then transmits this information to the proxy.
 When the proxy attempts to perform a purchase, it is issued a challenge $ch_{pos}$ by the point of sale.
 
 Thus, if function \emph{H} satisfies the property \textbf{H2},
@@ -145,7 +145,7 @@ As such, if the function \emph{H} satisfies property \textbf{H1}, then the infor
 
 
 In summary, in order to defend against the four classes of attacks described in Section \ref{sec:insecure-attacks},
-	we require that \emph{iCVV} be a pseudorandom value, and that function \emph{H} upholds the following two properties:
+	we require that the \emph{iCVV} be a pseudorandom value, and that function \emph{H} upholds the following two properties:
 
 \begin{description}
 \item[H1:] If \emph{iCVV} is indistinguishable from random, then $H(\textrm{\emph{info}},~ ch,~ iCVV)$ is indistinguishable from random.
@@ -246,8 +246,8 @@ More generally, our implementation requires that $h_k(\textrm{\emph{info}})$ and
 
 Note that the \texttt{XOR} operation satisfies properties \textbf{F1} and \textbf{F2}, so our implementation of function \emph{F} (trivially) satisfies them as well.
 
-The output of $G(\textrm{\emph{info}}, ch)$ is composed of a number of bits of \linebreak $\textrm{\emph{khi}} = h_k(\textrm{\emph{info}})$ selected by the challenge $ch$.
-If $ch_1 \neq ch_2$, one cannot infer $G(khi, ch_2)$ from $G(khi, ch_1)$ without knowledge of $khi$,
+The output of $G(\textrm{\emph{info}},~ ch)$ is composed of a number of bits of \linebreak $\textrm{\emph{khi}} = h_k(\textrm{\emph{info}})$ selected by the challenge $ch$.
+If $ch_1 \neq ch_2$, one cannot infer $G(khi,~ ch_2)$ from $G(khi,~ ch_1)$ without knowledge of $khi$,
 because the results are composed of different bits of $khi$ selected by the challenges $ch_1$ and $ch_2$.
 These bits are indistinguishable from random to any party without knowledge of $\textrm{\emph{info}}$ and the bank's secret key $k$.
 These bits are then masked by the $iCVV$ and as such are not learned by any party.

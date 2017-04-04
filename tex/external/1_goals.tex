@@ -2,10 +2,11 @@
 \label{sec:external-goals}
 
 The Externally Secure CC Protocol has two goals.
-First, this protocol should defend against the four types of attacks:
-    eavesdropping, skimming, relay attacks, and attacks facilitated by compromised points of sale.
+First, this protocol should defend against the four categories of external attacks:
+    eavesdropping, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale.
 Second, we construct this protocol to minimize the computation which occurs on the card itself.
 
-Contactless credit cards today are capable of only very limited computation, and do not engage in any cryptographic operations.
+Contactless credit cards today are capable of only very limited computation and do not engage in any cryptographic operations.
 We hypothesize that the limited computational power on credit cards is to reduce costs to a minimum:
-	credit cards must be disposably cheap to manufacture, so that they can be immediately replaced on suspicion of compromise.
+    credit cards must be disposably cheap to manufacture so that they can be immediately replaced on suspicion of compromise or theft.
+As a result, we seek to minimize any additional computation required to be executed on the card.
