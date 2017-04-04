@@ -1,0 +1,32 @@
+\section{Future Work}
+
+The work described in this dissertation suggests the following avenues that merit further research:
+
+\begin{enumerate}
+    \item Protocols relying on an iCVV (i.e. the Insecure CC Protocol currently in use, the Externally Secure CC Protocol, and the Secure CC Protocol) may suffer de-synchronization.
+        This happens when Card Information messages are generated and sent by the card, but resulting Charge Request messages not reach the bank
+            (as a result of persistent network failures at the point of sale or as a result of repeated skimming attempts).
+        When the card's internal iCVV has progressed past the number of failures anticipated by the bank, contactless functionality of the card becomes inoperative.
+        The construction of a re-synchronization protocol for iCVV states would alleviate this issue.
+
+    \item The Unlinkable Wallet Protocol involves fast lookup on a table of registered credit card records by the Wallet Server, via the corresponding single-use token.
+        This table contains every credit card registered with the Wallet Server, and may therefore contain millions of rows.
+        Our description of the protocol suggests pre-computing the next expected token for each card, and using this value as an index over the table.
+        This value is replaced on each transaction, and as a consequence results in frequent index rebuilding, which may result in a performance bottleneck at scale.
+        The construction of a better data-structure for use on the Wallet Server to represent registered credit cards,
+            allowing fast record lookup given a frequently changing lookup key, would provide a significant performance gain and allow the system to scale more effectively.
+
+    \item While unlinkable transactions are a significant gain to customer privacy, they present drawbacks in specific scenarios.
+        For example, unlinkable transactions hamper any system in which customers identify themselves via a previously used credit card.
+        This is commonly seen in retail returns and ticket collection kiosks, where the customer presents the credit card used to make the purchase.
+        The Unlinkable Wallet Protocol renders this form of identification impossible by design.
+        The construction of a protocol in which the Wallet Application can allow the customer to choose, on a per-purchase basis,
+            whether the transaction should be linkable or unlinkable provides the flexibility needed to work around this issue.
+\end{enumerate}
+
+The family of protocols presented in this dissertation represents a strong step above the status quo.
+We consider protection from malicious outsiders to be an urgent priority.
+Protecting customers from malicious retailers is less urgent, but is nonetheless important given the severity of attacks which malicious retailers may perpetrate.
+Whether to adopt a protocol providing linkability or unlinkability should be a customer choice:
+    while we do not presume to dictate the best move for the industry in this regard,
+    we place the decision of a customer's privacy in the customer's hands rather than in those of the retailers.
