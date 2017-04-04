@@ -1,7 +1,7 @@
 \section{Security Concerns}
 \label{sec:intro-security}
 
-The protocol in use by contactless credit cards falls short of addressing even basic security issues.
+The protocol in use today by contactless credit cards falls short of addressing even basic security issues.
 It employs no authentication, allowing any device to effectively pose as a point of sale.
 Furthermore, it transmits sensitive information (the credit card number, expiration date, etc.) wirelessly in plaintext.
 This transmission of data is then considered sufficient to allow an arbitrary charge to occur.
@@ -20,7 +20,7 @@ This skimmed data can then be replayed to a real point of sale in order to perfo
 Eavesdropping is likewise easy.
 NFC range is quite short, greatly limiting the possible location of an eavesdropper.
 However, constructing an eavesdropping antenna out of an inexpensive NFC tag is a simple procedure, as described in Section \ref{sec:insecure-attacks}.
-Concealing such an antenna within a few centimeters (or even attached to) of a point of sale is sufficient to harvest credit card information,
+Concealing such an antenna within a few centimeters of (or even attached to) a point of sale is sufficient to harvest credit card information,
     due to the plaintext nature of the messages being sent.
 Furthermore, work has also been done to increase the range at which NFC communication may be captured \cite{brown2013evaluating, kfir2005picking},
     exacerbating the issue.
@@ -31,13 +31,16 @@ Instead, a credit card's response provides a point of sale with the ability to c
 This charge need not even come from the same retailer or establishment which solicited it.
 
 In this dissertation, we present a family of three replacement protocols to defend against the deficiencies of the contactless credit card protocol in use today.
+The first two (described in Chapters \ref{cha:external} and \ref{cha:secure}) answer to security concerns, and the third (described in Chapter \ref{cha:unlinkable_design}) answers to privacy concerns.
 
-In Chapter \ref{cha:external}, we tackle the problems raised by malicious outsiders: parties external to the customer and the retailer.
+In Chapter \ref{cha:external}, we construct the Externally Secure CC Protocol.
+We tackle the problems that are raised by malicious outsiders: parties external to the customer and the retailer.
 We find that the contactless credit card protocol in use today is vulnerable to eavesdroppers, skimming attacks, relay attacks, and attacks facilitated by compromised points of sale.
 We construct a replacement protocol to transmit single-use charge tokens which leak no sensitive information, nullifying their value outside of the current transaction.
 These charge tokens are also bound to a randomized challenge included in the solicitation, and thus cannot be skimmed ahead of time.
 
-In Chapter \ref{cha:secure}, we explore the overly permissive nature of the credit card's response, and approach the protocol from the perspective of a malicious retailer.
+In Chapter \ref{cha:secure}, we construct the Secure CC Protocol.
+We explore the overly permissive nature of the credit card's response, and approach the protocol from the perspective of a malicious retailer.
 We enumerate two attacks which a malicious retailer may perform: over-charge attacks and transparent bridge attacks.
 These attacks affect both the contactless credit card protocol in use today, as well as the Externally Secure CC Protocol described in Chapter \ref{cha:external}.
 Both attacks involve using the credit card's response to authorize a purchase which differs from the one accepted by the customer.
